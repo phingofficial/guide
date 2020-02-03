@@ -354,12 +354,10 @@
 
     -->
     <target name="all">
-        <parallel>
-            <phingcall target="hlpdf"/>
-            <phingcall target="hlhtml"/>
-            <phingcall target="chunk"/>
-            <phingcall target="epub"/>
-        </parallel>
+        <phingcall target="hlpdf"/>
+        <phingcall target="hlhtml"/>
+        <phingcall target="chunk"/>
+        <phingcall target="epub"/>
     </target>
 
 </project>
