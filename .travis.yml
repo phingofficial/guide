@@ -1,0 +1,21 @@
+language: php
+
+php:
+  - 7.4
+
+addons:
+  apt:
+    packages:
+      - dbtoepub
+      - docbook-xsl
+      - fop
+      - libsaxon-java
+      - libxml2-utils
+      - libxslthl-java
+      - xsltproc
+
+install:
+  - wget https://www.phing.info/get/phing-3.0.0-alpha3.phar
+
+script:
+  - php phing-3.0.0-alpha3.phar
