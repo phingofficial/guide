@@ -18,4 +18,4 @@ install:
   - wget https://www.phing.info/get/phing-3.0.0-alpha3.phar
 
 script:
-  - php phing-3.0.0-alpha3.phar
+  - php phing-3.0.0-alpha3.phar -debug
