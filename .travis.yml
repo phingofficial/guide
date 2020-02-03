@@ -14,6 +14,9 @@ addons:
       - libxslthl-java
       - xsltproc
 
+before_script:
+  - rvm implode
+
 install:
   - wget https://www.phing.info/get/phing-3.0.0-alpha3.phar
 
