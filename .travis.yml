@@ -15,7 +15,7 @@ addons:
       - xsltproc
 
 before_script:
-  - rvm implode
+  - rvm use system
 
 install:
   - wget https://www.phing.info/get/phing-3.0.0-alpha3.phar
