@@ -43,6 +43,8 @@
         for the system this build is running on.
         ========================================================================================
     -->
+    <property name="output.dir" value="out"/>
+
     <!-- DocBook Grammar. Used when running validation script -->
     <property name="docbook.relaxngc" value="/usr/share/xml/docbook/schema/rng/5.0/docbookxi.rnc"/>
     <property name="docbook.relaxng" value="/usr/share/xml/docbook/schema/rng/5.0/docbookxi.rng"/>
@@ -119,7 +121,7 @@
         ================================================================================
     -->
     <target name="clean">
-        <delete quiet="yes" dir="output/"/>
+        <delete quiet="yes" dir="${output.dir}/"/>
     	<phingcall target="_clean_fo_images"/>
     </target>
 
@@ -143,15 +145,15 @@
         ================================================================== 
      -->
     <target name="_prepare.output">
-        <mkdir dir="output/${dir}"/>
-        <mkdir dir="output/${dir}/img"/>
+        <mkdir dir="${output.dir}/${dir}"/>
+        <mkdir dir="${output.dir}/${dir}/img"/>
 
         <!-- Copy all figures used in the documentation -->
         <available file="source/figures" property="figures.exist"/>
         <if>
             <equals arg1="figures.exist" arg2="true"/>
             <then>
-                <copy todir="output/${dir}/figures">
+                <copy todir="${output.dir}/${dir}/figures">
                     <fileset dir="source/figures">
                         <include name="*.png"/>
                         <include name="*.jpg"/>
@@ -160,7 +162,7 @@
             </then>
         </if>
 
-        <copy todir="output/${dir}/img">
+        <copy todir="${output.dir}/${dir}/img">
             <fileset dir="${dbcss.dir}/img">
                 <include name="*"/>
             </fileset>
@@ -197,7 +199,7 @@
         ================================================================================
     -->
     <target name="_html">
-        <uptodate property="target.uptodate" targetfile="output/${outdir}/index.html">
+        <uptodate property="target.uptodate" targetfile="${output.dir}/${outdir}/index.html">
             <fileset refid="sources"/>
             <fileset dir="${dbxsl.dir}">
                 <include name="html.xsl"/>
@@ -213,7 +215,7 @@
                 <phingcall target="_prepare.output">
                     <property name="dir" value="${outdir}"/>
                 </phingcall>
-                <copy todir="output/${outdir}/img">
+                <copy todir="${output.dir}/${outdir}/img">
                     <fileset dir="${dbcss.dir}/img">
                         <include name="*"/>
                     </fileset>
@@ -229,8 +231,8 @@
                 </if>
             </then>
         </if>
-        <copy file="${cssfile}" tofile="output/${outdir}/${css.name}"/>
-        <touch file="output/${outdir}/highlight.css"/>
+        <copy file="${cssfile}" tofile="${output.dir}/${outdir}/${css.name}"/>
+        <touch file="${output.dir}/${outdir}/highlight.css"/>
     </target>
 
     <target name="html">
@@ -256,7 +258,7 @@
         ================================================================================        
     -->
     <target name="hlhtml">
-        <uptodate property="target.uptodate" targetfile="output/hlhtml/index.html">
+        <uptodate property="target.uptodate" targetfile="${output.dir}/hlhtml/index.html">
             <fileset refid="sources"/>
             <fileset dir="${dbxsl.dir}">
                 <include name="hl-html.xsl"/>
@@ -275,14 +277,14 @@
                 <!-- We first need to flatten the master file since Saxon doesn't handle XInclude -->
                 <exec command="${xmllint} --xinclude ${master.document} > output/hlhtml/_flatten.xml"/>
 
-                <exec dir="output/hlhtml/"
+                <exec dir="${output.dir}/hlhtml/"
                     command="../../scripts/hlsaxon _flatten.xml ../../${dbxsl.dir}/hl-html.xsl"
                     checkreturn="true"/>
-                <delete file="output/hlhtml/_flatten.xml"/> 
+                <delete file="${output.dir}/hlhtml/_flatten.xml"/> 
             </then>
         </if>
-        <copy file="${css.style}" todir="output/hlhtml"/>
-        <copy file="${css.highlight}" todir="output/hlhtml"/>
+        <copy file="${css.style}" todir="${output.dir}/hlhtml"/>
+        <copy file="${css.highlight}" todir="${output.dir}/hlhtml"/>
     </target>
 
 
@@ -292,7 +294,7 @@
         ================================================================================
     -->
     <target name="hlpdf">
-        <uptodate property="target.uptodate" targetfile="output/hlpdf/manual.pdf">
+        <uptodate property="target.uptodate" targetfile="${output.dir}/hlpdf/manual.pdf">
             <fileset refid="sources"/>
             <fileset dir="${dbxsl.dir}">
                 <include name="hl-fo.xsl"/>
@@ -307,15 +309,15 @@
             </not>
             <then>
 	       <phingcall target="_copy_fo_images"/>
-                <mkdir dir="output/hlpdf"/>
+                <mkdir dir="${output.dir}/hlpdf"/>
                 <exec command="${xmllint} --xinclude ${master.document} > output/hlpdf/_flatten.xml"/>
-                <exec dir="output/hlpdf/"
+                <exec dir="${output.dir}/hlpdf/"
                     command="../../scripts/hlsaxon -o manual.fo _flatten.xml ../../${dbxsl.dir}/hl-fo.xsl"
                     checkreturn="true"/>
-                <exec dir="output/hlpdf/" command="${fop} manual.fo -pdf manual.pdf"
+                <exec dir="${output.dir}/hlpdf/" command="${fop} manual.fo -pdf manual.pdf"
                     checkreturn="true"/>
-                <delete file="output/hlpdf/_flatten.xml"/>
-                <delete file="output/hlpdf/manual.fo"/>
+                <delete file="${output.dir}/hlpdf/_flatten.xml"/>
+                <delete file="${output.dir}/hlpdf/manual.fo"/>
 		<phingcall target="_clean_fo_images"/>
             </then>
         </if>
@@ -329,7 +331,7 @@
         ================================================================================
     -->
     <target name="epub">
-        <uptodate property="target.uptodate" targetfile="output/epub/manual.epub">
+        <uptodate property="target.uptodate" targetfile="${output.dir}/epub/manual.epub">
             <fileset refid="sources"/>
         </uptodate>
         <if>
@@ -337,7 +339,7 @@
                 <isset property="target.uptodate"/>
             </not>
             <then>
-                <mkdir dir="output/epub"/>
+                <mkdir dir="${output.dir}/epub"/>
                 <exec
                     command="${dbtoepub} -o 'output/epub/manual.epub' -s ${dbxsl.dir}/epub.xsl -c ${css.style} ${master.document} "
                     checkreturn="true"
