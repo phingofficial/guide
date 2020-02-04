@@ -221,12 +221,12 @@
                     </fileset>
                 </copy>
                 <exec
-                    command="${xsltproc} --xinclude -o 'output/${outdir}/' ${dbxsl.dir}/${xslformat}.xsl ${master.document}"
+                    command="${xsltproc} --xinclude -o '${output.dir}/${outdir}/' ${dbxsl.dir}/${xslformat}.xsl ${master.document}"
                     checkreturn="true" passthru="true" dir="./"/>
                 <if>
                     <equals arg1="${flag.tidy}" arg2="1"/>
                     <then>
-                        <exec command="${tidy} -m -utf8 output/${outdir}/index.html"/>
+                        <exec command="${tidy} -m -utf8 ${output.dir}/${outdir}/index.html"/>
                     </then>
                 </if>
             </then>
@@ -275,7 +275,7 @@
                     <property name="dir" value="hlhtml"/>
                 </phingcall>
                 <!-- We first need to flatten the master file since Saxon doesn't handle XInclude -->
-                <exec command="${xmllint} --xinclude ${master.document} > output/hlhtml/_flatten.xml"/>
+                <exec command="${xmllint} --xinclude ${master.document} > ${output.dir}/hlhtml/_flatten.xml"/>
 
                 <exec dir="${output.dir}/hlhtml/"
                     command="../../scripts/hlsaxon _flatten.xml ../../${dbxsl.dir}/hl-html.xsl"
@@ -310,7 +310,7 @@
             <then>
 	       <phingcall target="_copy_fo_images"/>
                 <mkdir dir="${output.dir}/hlpdf"/>
-                <exec command="${xmllint} --xinclude ${master.document} > output/hlpdf/_flatten.xml"/>
+                <exec command="${xmllint} --xinclude ${master.document} > ${output.dir}/hlpdf/_flatten.xml"/>
                 <exec dir="${output.dir}/hlpdf/"
                     command="../../scripts/hlsaxon -o manual.fo _flatten.xml ../../${dbxsl.dir}/hl-fo.xsl"
                     checkreturn="true"/>
@@ -341,7 +341,7 @@
             <then>
                 <mkdir dir="${output.dir}/epub"/>
                 <exec
-                    command="${dbtoepub} -o 'output/epub/manual.epub' -s ${dbxsl.dir}/epub.xsl -c ${css.style} ${master.document} "
+                    command="${dbtoepub} -o '${output.dir}/epub/manual.epub' -s ${dbxsl.dir}/epub.xsl -c ${css.style} ${master.document} "
                     checkreturn="true"
                 />
             </then>
