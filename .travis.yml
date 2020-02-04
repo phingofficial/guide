@@ -22,3 +22,12 @@ install:
 
 script:
   - php phing-3.0.0-alpha3.phar
+
+deploy:
+  provider: pages
+  local_dir: out
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
