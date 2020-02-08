@@ -346,7 +346,7 @@
             </not>
             <then>
                 <mkdir dir="${output.dir}/epub"/>
-                <exec command="${dbtoepub}" checkreturn="true">
+                <exec executable="${dbtoepub}" checkreturn="true">
                     <arg line="-o '${output.dir}/epub/manual.epub' -s ${dbxsl.dir}/epub.xsl -c ${css.style} ${master.document}"/>
                 </exec>
             </then>
