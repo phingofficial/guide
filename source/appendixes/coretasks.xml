@@ -4370,12 +4370,24 @@ file defines a task in the format: name=path.to.Task -->
             <programlisting language="xml">&lt;touch file="README.txt" millis="102134111" />
 
 &lt;touch file="COPYING.lib" datetime="10/10/1999 09:31 AM" /></programlisting>
+            <programlisting language="xml">&lt;target name="map">
+    &lt;touch file="${tmp.dir}/touchtest"/>
+    &lt;touch>
+        &lt;fileset file="${tmp.dir}/touchtest" />
+            &lt;mapper type="composite">
+                &lt;mapper type="glob" from="*" to="*foo" />
+                &lt;mapper type="glob" from="*" to="*bar" />
+            &lt;/mapper>
+        &lt;/touch>
+&lt;/target></programlisting>
         </sect2>
         <sect2 role="nestedtags">
             <title>Supported Nested Tags</title>
             <itemizedlist>
                 <listitem>
+                    <para><literal><link linkend="FileList">filelist</link></literal></para>
                     <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                    <para><literal><link linkend="Mapper">mapper</link></literal></para>
                 </listitem>
             </itemizedlist>
         </sect2>
