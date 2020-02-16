@@ -4424,16 +4424,25 @@ file defines a task in the format: name=path.to.Task -->
                     </row>
                     <row>
                         <entry><literal>length</literal></entry>
-                        <entry><literal role="type">Integer</literal></entry>
-                        <entry>Specifies the new file length (in bytes) to set.</entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specifies the new file length (in bytes) to set.
+                            The following suffixes are supported:
+                            <itemizedlist>
+                                <listitem><para>"k" : Kilobytes (1024 bytes)</para></listitem>
+                                <listitem><para>"m" : Megabytes (1024 K)</para></listitem>
+                                <listitem><para>"g" : Gigabytes (1024 M)</para></listitem>
+                            </itemizedlist>
+                        </entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
                     </row>
                     <row>
                         <entry><literal>adjust</literal></entry>
-                        <entry><literal role="type">Integer</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
                         <entry>Specifies the number of bytes (and positive/negative
-                            direction) by which to adjust file lengths.</entry>
+                            direction) by which to adjust file lengths.
+                            The same suffixes are supported for this attribute as for
+                            the <literal>length</literal> attribute.</entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
                     </row>
