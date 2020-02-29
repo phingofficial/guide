@@ -1248,6 +1248,16 @@ verbose="true" failonerror="false" /></programlisting>
                         <entry><literal>false</literal></entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>granularity</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The number of seconds leeway to give before deciding a file
+                            is out of date.
+                            This can also be useful if source and target files live on separate
+                            machines with clocks being out of sync.</entry>
+                        <entry><literal>0</literal></entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
