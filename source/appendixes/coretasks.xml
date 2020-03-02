@@ -2513,7 +2513,13 @@ verbose="true" failonerror="false" /></programlisting>
                     <literal>imported.properties</literal> is:</para>
             <programlisting language="xml">&lt;!-- imported.xml -->
 &lt;project name="imported" basedir="." default="...">
-  &lt;property file="${phing.file.imported}/imported.properties"/>
+  &lt;dirname property="imported.basedir" file="${phing.file.imported}"/>
+  &lt;property file="${imported.basedir}/imported.properties"/>
+&lt;/project></programlisting>
+            <para>or even shorter:</para>
+            <programlisting language="xml">&lt;!-- imported.xml -->
+&lt;project name="imported" basedir="." default="...">
+  &lt;property file="${phing.dir.imported}/imported.properties"/>
 &lt;/project></programlisting>
             <para>As explained above <literal>${phing.file.imported}</literal> stores the full path of the build
                 script, that defines the project called <emphasis>imported</emphasis>, (in short it
