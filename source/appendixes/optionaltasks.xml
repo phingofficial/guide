@@ -4122,7 +4122,7 @@ Note that you can omit both startpoint and track attributes in this case
         <title>HttpGetTask</title>
         <para>This task will download a file through HTTP GET and save it to a specified directory.
             You need an installed version of
-            <link xlink:href="http://pear.php.net/package/HTTP_Request2" role="extern">HTTP_Request2</link>
+            <link xlink:href="http://docs.guzzlephp.org/en/stable/" role="extern">Guzzle</link>
             to use this task.
         </para>
 
@@ -4220,8 +4220,8 @@ Note that you can omit both startpoint and track attributes in this case
                 <listitem>
                     <para><literal>config</literal></para>
                     <para>Holds additional config data. See
-                        <link xlink:href="http://pear.php.net/manual/en/package.http.http-request2.config.php"
-                              role="extern">HTTP_Request2  documentation</link>
+                        <link xlink:href="http://docs.guzzlephp.org/en/stable/request-options.html"
+                              role="extern">Guzzle documentation</link>
                         for supported values.
                     </para>
 
@@ -4306,7 +4306,7 @@ Note that you can omit both startpoint and track attributes in this case
         <sect2>
             <title>Global configuration</title>
             <para>
-                In addition to configuring a particular instance of <literal>HTTP_Request2</literal> via
+                In addition to configuring a particular instance of <literal>Guzzle</literal> via
                 nested <literal>&lt;config&gt;</literal> tags it is also possible to set default
                 configuration values for <link linkend='HttpGetTask'>HttpGetTask</link> / <link linkend='HttpRequestTask'>HttpRequestTask</link>
                 / <link linkend='VisualizerTask'>VisualizerTask</link> by setting <literal>phing.http.*</literal>
@@ -4328,7 +4328,7 @@ Note that you can omit both startpoint and track attributes in this case
         <para>This task will make an HTTP request to the provided URL and match the response against
             the provided regular expression. If an regular expression is provided and doesn't match
             the build will fail. You need an installed version of
-            <link xlink:href="http://pear.php.net/package/HTTP_Request2" role="extern">HTTP_Request2</link>
+            <link xlink:href="http://docs.guzzlephp.org/en/stable/" role="extern">Guzzle</link>
             to use this task.
         </para>
 
@@ -4400,15 +4400,6 @@ Note that you can omit both startpoint and track attributes in this case
                         <entry>No</entry>
                     </row>
                     <row>
-                        <entry><literal>observerEvents</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>Comma-separated list of events to log when <literal>verbose</literal>
-                            is set to <literal>true</literal></entry>
-                        <entry>connect, sentHeaders, sentBodyPart, receivedHeaders, receivedBody,
-                            disconnect</entry>
-                        <entry>No</entry>
-                    </row>
-                    <row>
                       <entry><literal>method</literal></entry>
                       <entry><literal role="type">String</literal></entry>
                       <entry>The HTTP method of the request, currently only GET or POST supported</entry>
@@ -4432,7 +4423,6 @@ Note that you can omit both startpoint and track attributes in this case
                 given regex pattern. Enable detailed logging and log only the specified
                 events.</para>
             <programlisting language="xml">&lt;http-request url="http://my-production.example.com/check-deployment.php">
-   &lt;config name="adapter" value="HTTP_Request2_Adapter_Curl"/>
    &lt;header name="user-agent" value="Phing HttpRequestTask"/>
  &lt;/http-request></programlisting>
             <para>Perform a HTTP request to the given URL. Setting request adapter to curl instead
@@ -4453,8 +4443,8 @@ Note that you can omit both startpoint and track attributes in this case
                 <listitem>
                     <para><literal>config</literal></para>
                     <para>Holds additional config data. See
-                        <link xlink:href="http://pear.php.net/manual/en/package.http.http-request2.config.php"
-                              role="extern">HTTP_Request2  documentation</link>
+                        <link xlink:href="http://docs.guzzlephp.org/en/stable/request-options.html"
+                              role="extern">Guzzle documentation</link>
                         for supported values.
                     </para>
 
@@ -4579,7 +4569,7 @@ Note that you can omit both startpoint and track attributes in this case
         <sect2>
             <title>Global configuration</title>
             <para>
-                In addition to configuring a particular instance of <literal>HTTP_Request2</literal> via
+                In addition to configuring a particular instance of <literal>Guzzle</literal> via
                 nested <literal>&lt;config&gt;</literal> tags it is also possible to set default
                 configuration values for <link linkend='HttpGetTask'>HttpGetTask</link> / <link linkend='HttpRequestTask'>HttpRequestTask</link>
                 / <link linkend='VisualizerTask'>VisualizerTask</link> by setting <literal>phing.http.*</literal>
@@ -14327,8 +14317,7 @@ host="webserver" command="ls" /></programlisting>
                 </listitem>
                 <listitem>
                     <para>
-                        <link xlink:href="https://packagist.org/packages/pear/http_request2" role="extern">PEAR
-                            HTTP_Request2</link>
+                        <link xlink:href="http://docs.guzzlephp.org/en/stable/" role="extern">Guzzle</link>
                     </para>
                 </listitem>
                 <listitem>
@@ -14404,8 +14393,8 @@ host="webserver" command="ls" /></programlisting>
                     <listitem>
                         <para><literal>config</literal></para>
                         <para>Holds additional config data. See
-                            <link xlink:href="http://pear.php.net/manual/en/package.http.http-request2.config.php"
-                                  role="extern">HTTP_Request2 documentation</link> for supported values.
+                            <link xlink:href="http://docs.guzzlephp.org/en/stable/request-options.html"
+                                  role="extern">Guzzle documentation</link> for supported values.
                         </para>
                         <table>
                             <title>Attributes</title>
@@ -14488,7 +14477,7 @@ host="webserver" command="ls" /></programlisting>
             <sect3>
                 <title>Global configuration</title>
                 <para>
-                    In addition to configuring a particular instance of <literal>HTTP_Request2</literal> via
+                    In addition to configuring a particular instance of <literal>Guzzle</literal> via
                     nested <literal>&lt;config&gt;</literal> tags it is also possible to set default
                     configuration values for <link linkend='HttpGetTask'>HttpGetTask</link> / <link linkend='HttpRequestTask'>HttpRequestTask</link>
                     / <link linkend='VisualizerTask'>VisualizerTask</link> by setting <literal>phing.http.*</literal>
