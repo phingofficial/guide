@@ -3011,6 +3011,14 @@ verbose="true" failonerror="false" /></programlisting>
                         <entry><literal>false</literal></entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>output</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Filename to write the Phing output to. This is relative to the value of the dir
+                            attribute if it has been set or to the basedir of the current project otherwise.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
