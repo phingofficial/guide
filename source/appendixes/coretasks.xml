@@ -1303,6 +1303,9 @@ verbose="true" failonerror="false" /></programlisting>
                     <para><literal><link linkend="FileList">filelist</link></literal></para>
                 </listitem>
                 <listitem>
+                    <para><literal><link linkend="DirSet">dirset</link></literal></para>
+                </listitem>
+                <listitem>
                     <para><literal><link linkend="app.corefilters">filterchain</link></literal></para>
                 </listitem>
                 <listitem>
