@@ -2942,8 +2942,9 @@ verbose="true" failonerror="false" /></programlisting>
         <title>PhingTask </title>
         <para>This task calls another build file. You may specify the target that is to be called
             within the build file. Additionally, the <literal>&lt;phing></literal> Tag may contain
-                <literal>&lt;property></literal> Tags (see <xref xlink:href="#PropertyTask"
-            />).</para>
+            <literal>&lt;property></literal> Tags (see <xref xlink:href="#PropertyTask"),
+            <literal>&lt;fileset></literal> Tags (see <xref xlink:href="#FileSet") or
+            <literal>&lt;reference></literal> Tags.</para>
 
         <table>
             <title>Attributes</title>
@@ -3047,6 +3048,12 @@ verbose="true" failonerror="false" /></programlisting>
             <itemizedlist>
                 <listitem>
                     <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="PropertyTask">property</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal>reference</literal></para>
                 </listitem>
             </itemizedlist>
         </sect2>
