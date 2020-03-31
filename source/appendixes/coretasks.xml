@@ -1054,6 +1054,9 @@ verbose="true" failonerror="false" /></programlisting>
                 <listitem>
                     <para><literal><link linkend="FileSet">fileset</link></literal></para>
                 </listitem>
+                <listitem>
+                    <para><literal><link linkend="DirSet">dirset</link></literal></para>
+                </listitem>
             </itemizedlist>
         </sect2>
     </sect1>
