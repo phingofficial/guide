@@ -1056,5 +1056,15 @@
 
         </sect2>
     </sect1>
+    <sect1 role="filterdef" xml:id="ClassConstants">
+        <title>ClassConstants</title>
+        <para>This filters basic constants defined in a PHP Class, and outputs them in lines
+            composed of the format <literal>name=value</literal>.</para>
+        <programlisting language="xml">&lt;property file="constants.php">
+    &lt;filterchain>
+        &lt;classconstants />
+    &lt;/filterchain>
+&lt;/property></programlisting>
+    </sect1>
 
 </appendix>
