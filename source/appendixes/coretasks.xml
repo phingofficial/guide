@@ -721,6 +721,55 @@
         </itemizedlist>
     </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="Augment">
+        <title>Augment </title>
+        <para>Modify an existing reference by adding nested elements or (re-)assigning
+            properties mapped as XML attributes. This is an unusual task that makes use
+            of Phing's internal processing mechanisms to reload a previously declared
+            reference by means of the id attribute, then treats the declared augment
+            element as though it were the original element.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>id</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The id of the reference to augment. If no such reference has been declared a BuildException is thrown.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <para>Given</para>
+            <programlisting language="xml">&lt;fileset id="input-fs" dir="${project.basedir}"/></programlisting>
+            <para>invocation</para>
+            <programlisting language="xml">&lt;augment id="input-fs" excludes="foo"/></programlisting>
+            <para>modifies the <literal>excludes</literal> attribute of input-fs, whereas</para>
+            <programlisting language="xml">&lt;augment id="input-fs">
+  &lt;filename name="bar"/>
+&lt;/augment></programlisting>
+            <para>adds a filename selector to input-fs.</para>
+        </sect2>
+
+    </sect1>
     <sect1 role="taskdef" xml:id="AvailableTask">
         <title>AvailableTask </title>
         <para>Available Task tests if a resource/file is set and sets a certain property to a
