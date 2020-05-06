@@ -103,7 +103,7 @@
         </sect2>
     </sect1>
     <sect1 xml:id="Target">
-        <title>Targets</title>
+        <title>Targets and Extension-Points</title>
 
         <sect2>
             <title>Example</title>
@@ -204,6 +204,49 @@
                     the target is about to be executed, and all its predecessors have already
                     run.</para>
             </caution>
+        </sect2>
+        <sect2>
+            <title>Extension-Points</title>
+            <para>Extension-Points are similar to targets in that they have a name and a depends list and
+                can be executed from the command line. Just like targets they represent a state during the
+                build process.</para>
+            
+            <para>Unlike targets they don't contain any tasks, their main purpose is to collect targets that
+                contribute to the desired state in their depends list.</para>
+            
+            <para>Targets can add themselves to an extension-point's depends list via their <literal>extensionOf</literal>
+                attribute. The targets that add themselves will be added after the targets of the explicit depends attribute
+                of the extension-point, if multiple targets add themselves, their relative order is not defined.</para>
+            
+            <para>The main purpose of an extension-point is to act as an extension point for build files designed
+                to be imported. In the imported file, an extension-point defines a state that must be reached and targets
+                from other build files can join the depends list of said extension-point in order to contribute to that state.</para>
+
+            <para>For example your imported build file may need to compile code, it might look like:</para>
+            <programlisting language="xml">
+&lt;target name="create-directory-layout">
+    ...
+&lt;/target>
+
+&lt;extension-point name="ready-to-compile"
+                    depends="create-directory-layout"/>
+
+&lt;target name="compile" depends="ready-to-compile">
+    ...
+&lt;/target></programlisting>
+            <programlisting>Call-Graph:  create-directory-layout -> 'empty slot' -> compile</programlisting>
+            <para>And you need to generate some source before compilation, then in your main build file you may use something like</para>
+            <programlisting language="xml">
+&lt;target name="generate-sources" 
+           extensionOf="ready-to-compile">
+...
+&lt;/target></programlisting>
+            <para>Call-Graph:  create-directory-layout -> generate-sources  -> compile</para>
+            
+            <para>This will ensure that the "generate-sources" target is executed before the "compile" target.</para>
+            
+            <para>Don't rely on the order of the depends list, if "generate-sources" depends on "create-directory-layout"
+                then it must explicitly depend on it via its own depends attribute.</para>
         </sect2>
     </sect1>
 </appendix>
