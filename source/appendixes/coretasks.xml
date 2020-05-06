@@ -3158,6 +3158,115 @@ verbose="true" failonerror="false" /></programlisting>
             </itemizedlist>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="Subphing">
+        <title>Subphing Task </title>
+        <para>Calls a given target for all defined sub-builds. This is an extension of Phing for bulk project execution.
+            This task must not be used outside of a target if it invokes the same build file it is part of.</para>
+
+        <para><literal>subphing</literal> uses <literal>phing</literal> task internally so many things said in phing's
+            manual page apply here as well.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>genericphingfile</literal></entry>
+                        <entry><literal role="type">PhingFile</literal></entry>
+                        <entry>Build file path, to use in conjunction with directories.
+                            Use genericphingfile, in order to run the same build file with different basedirs.
+                            If this attribute is set, phingfile is ignored.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>inheritAll</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Corresponds to &lt;phing>'s inheritall attribute but defaults to "false" in this task.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>inheritRefs</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Corresponds to &lt;phing>'s inheritrefs attribute.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>buildpath</literal></entry>
+                        <entry><literal role="type">Path</literal></entry>
+                        <entry>Set the buildpath to be used to find sub-projects.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>phingFile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Build file name, to use in conjunction with directories.</entry>
+                        <entry>build.xml, ignored if genericphingfile is set.</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>target</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The target to execute. Default is the new
+                            sub-project's default target.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>failonerror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Sets whether to fail with a build exception on error, or go on.</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>verbose</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Enable/disable log messages showing when each sub-build path is entered/exited.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="Path">buildpath</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal>buildpathelement</literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal>property</literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="Reference">reference</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="Phingversion">
         <title>Phingversion</title>
         <para> Stores the Phing version (when used as task) or checks for a specific Phing version
