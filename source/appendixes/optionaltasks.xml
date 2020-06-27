@@ -8368,6 +8368,14 @@ Note that you can omit both startpoint and track attributes in this case
                 </tbody>
             </tgroup>
         </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>FileSet</literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">&lt;phpcs bin="bin/phpcs" file="classes" checkreturn="true"/></programlisting>
