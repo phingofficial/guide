@@ -8589,7 +8589,7 @@ Note that you can omit both startpoint and track attributes in this case
                         <entry><literal role="type">String</literal></entry>
                         <entry>The directory to write the report file to.</entry>
                         <entry>false</entry>
-                        <entry>Yes, when report type csv, txt or xml is defined.</entry>
+                        <entry>Yes, when report type csv, txt, xml or json is defined.</entry>
                     </row>
                     <row>
                         <entry><literal>countTests</literal></entry>
