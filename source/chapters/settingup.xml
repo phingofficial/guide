@@ -221,9 +221,10 @@
     <sect1>
         <title>Phar package</title>
         <para>Download the <link xlink:href="https://www.phing.info/get/phing-latest.phar">Phar archive</link>.
-            The archive can then be executed by running:</para>
+            You do not need to execute any additional commands to install Phing, downloading the archive is enough.
+            Phing can simply be started by running:</para>
 
-        <screen>$ php phing-latest.phar</screen>
+        <screen>$ php phing-latest.phar [parameters ...]</screen>
     </sect1>
     <sect1>
         <title> Running Phing </title>
