@@ -45,8 +45,8 @@
             build framework. Features include running PHPUnit and SimpleTest unit tests (including
             test result and coverage reports), file transformations (e.g. token replacement, XSLT
             transformation, Smarty template transformations), file system operations, interactive
-            build support, SQL execution, CVS/SVN operations, tools for creating PEAR packages,
-            documentation generation (DocBlox, PhpDocumentor) and much more.</para>
+            build support, SQL execution, CVS/SVN operations, documentation generation (PhpDocumentor)
+            and much more.</para>
         <para>If you find yourself writing custom scripts to handle the packaging, deploying, or
             testing of your applications, then we suggest looking at the Phing framework. Phing
             comes packaged with numerous out-of-the-box operation modules (tasks), and an
