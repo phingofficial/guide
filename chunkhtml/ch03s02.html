@@ -1,9 +1,9 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2 Obtaining Phing</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="ch.settingup.html" title="Chapter 3 Setting-up Phing"><link rel="prev" href="ch.settingup.html" title="Chapter 3 Setting-up Phing"><link rel="next" href="ch03s03.html" title="3.3 Composer Install"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2  Obtaining Phing </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch.settingup.html">Prev</a> </td><th width="60%" align="center">Chapter 3 Setting-up Phing</th><td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm45217220545472"></a>3.2  Obtaining Phing </h2></div></div></div>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>3.2 Obtaining Phing</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="ch.settingup.html" title="Chapter 3 Setting-up Phing"><link rel="prev" href="ch.settingup.html" title="Chapter 3 Setting-up Phing"><link rel="next" href="ch03s03.html" title="3.3 Running Phing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">3.2  Obtaining Phing </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch.settingup.html">Prev</a> </td><th width="60%" align="center">Chapter 3 Setting-up Phing</th><td width="20%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idm46025666278736"></a>3.2  Obtaining Phing </h2></div></div></div>
         
 
         <p>Phing is free software distributed under the terms of the LGPL.</p>
 
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45217220544224"></a>3.2.1  Distribution Files </h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm46025666277360"></a>3.2.1  Distribution Files </h3></div></div></div>
             
 
             <p>There are several ways to get a Phing distribution package. If you do not want to
@@ -13,13 +13,30 @@
 
             <p>The easiest way to obtain the distribution package is to visit the Phing website <a class="ulink" href="Bibliography.html#phing" target="_top">[phing] </a>and download the current
                 distribution package in the format you desire.</p>
-            <p>As of version 2.0, you have the option of downloading a PEAR-installable package
-                or the full phing distribution. If you wish to modify phing we suggestion
-                downloading the full version so that you can (e.g.) create your own PEAR package. If
-                you simply wish to use Phing for your own project or need it to build another
-                package, download &amp; install the PEAR package.</p>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45217220541024"></a>3.2.2 Getting the latest source from Phing Git repository</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm46025666274352"></a>3.2.2  Composer Install </h3></div></div></div>
+            
+            <p>The preferred method to install Phing is through <a class="ulink" href="https://getcomposer.org/" target="_top">Composer</a>.
+                Add <a class="ulink" href="https://packagist.org/packages/phing/phing" target="_top">phing/phing</a> to the
+                <code class="literal">require-dev</code> or <code class="literal">require</code> of your project's `composer.json`
+                configuration file, and run <code class="literal">composer install</code>:</p>
+            <pre class="screen">
+{
+    "require-dev": {
+        "phing/phing": "3.*"
+    }
+}
+            </pre>
+        </div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm46025666269568"></a>3.2.3 Phar package</h3></div></div></div>
+            
+            <p>Download the <a class="ulink" href="https://www.phing.info/get/phing-latest.phar" target="_top">Phar archive</a>.
+                You do not need to execute any additional commands to install Phing, downloading the archive is enough.
+                Phing can simply be started by running:</p>
+
+            <pre class="screen">$ php phing-latest.phar [parameters ...]</pre>
+        </div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm46025666266688"></a>3.2.4 Getting the latest source from Phing's Github repository</h3></div></div></div>
             
             <p>The latest snapshot can always be downloaded directly the official Phing Git
                 repository. However, be warned that there is not guarantee that the momentous state
@@ -30,5 +47,4 @@
                     <p><a class="ulink" href="https://github.com/phingofficial/phing" target="_top">https://github.com/phingofficial/phing</a></p>
                 </li></ul></div>
         </div>
-
-    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch.settingup.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch.settingup.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3 Setting-up Phing </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.3  Composer Install </td></tr></table></div></body></html>
+    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch.settingup.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch.settingup.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3 Setting-up Phing </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> 3.3  Running Phing </td></tr></table></div></body></html>
