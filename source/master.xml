@@ -51,28 +51,6 @@
             testing of your applications, then we suggest looking at the Phing framework. Phing
             comes packaged with numerous out-of-the-box operation modules (tasks), and an
             easy-to-use OO model for adding your own custom tasks.</para>
-        <para>Phing provides the following high level features:</para>
-        <itemizedlist>
-            <listitem>
-                <para>Easy to read XML buildfiles</para>
-            </listitem>
-            <listitem>
-                <para>Rich set of predefined tasks </para>
-            </listitem>
-            <listitem>
-                <para>Easily extendible via PHP classes </para>
-            </listitem>
-            <listitem>
-                <para>Platform-independent: works on UNIX, Windows, MacOSX </para>
-            </listitem>
-            <listitem>
-                <para>No required external dependencies apart from a working PHP5 installation
-                </para>
-            </listitem>
-            <listitem>
-                <para>Built &amp; optimized for ZendEngine2/PHP5</para>
-            </listitem>
-        </itemizedlist>
     </preface>
 
     <xi:include href="chapters/about.xml" parse="xml"/>

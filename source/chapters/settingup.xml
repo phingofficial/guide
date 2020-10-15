@@ -34,135 +34,9 @@
         <sect2>
             <title> Software Dependencies </title>
 
-            <para>For a detailed list of required and/or optional software and libraries, refer to the
-                following table of Software Dependencies.</para>
-
-            <para>NB: This list is not exhaustive, please refer to individual Phing tasks to find
-                out additional software requirements.</para>
-
-            <table>
-                <title>Software Dependencies</title>
-                <tgroup cols="3">
-                    <colspec colname="c1" colnum="1" colwidth="1*"/>
-                    <colspec colname="c2" colnum="2" colwidth="1*"/>
-                    <colspec colname="c3" colnum="3" colwidth="2*"/>
-                    <thead>
-                        <row>
-                            <entry>Software</entry>
-                            <entry>Required for</entry>
-                            <entry>Source</entry>
-                        </row>
-                    </thead>
-                    <tbody>
-                        <row>
-                            <entry>PHP 5.6+</entry>
-                            <entry>Execution</entry>
-                            <entry><link xlink:href="http://www.php.net" role="external"
-                                    >http://www.php.net</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>PHPUnit 3.6.0+</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://www.phpunit.de" role="external"
-                                    >http://www.phpunit.de</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Xdebug 2.0.5+</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://www.xdebug.org" role="external"
-                                    >http://www.xdebug.org</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>phpDocumentor 2.0.0b7+ (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.phpdoc.org"
-                                    role="external">http://pear.phpdoc.org</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>VersionControl_SVN (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/VersionControl_SVN"
-                                    role="external"
-                                    >http://pear.php.net/package/VersionControl_SVN</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>VersionControl_Git (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/VersionControl_Git"
-                                    role="external"
-                                    >http://pear.php.net/package/VersionControl_Git</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>PHP_CodeSniffer (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/PHP_CodeSniffer"
-                                    role="external"
-                                    >http://pear.php.net/package/PHP_CodeSniffer</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Archive_Tar (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/Archive_Tar"
-                                    role="external">http://pear.php.net/package/Archive_Tar</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Services_Amazon_S3 (PEAR package)</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/Services_Amazon_S3"
-                                    role="external"
-                                    >http://pear.php.net/package/Services_Amazon_S3</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Guzzle</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://docs.guzzlephp.org/en/stable/index.html"
-                                    role="external">http://docs.guzzlephp.org/en/stable/index.html</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>Net_FTP (PEAR package)</entry>
-                            <entry>Optional; enables SSL connection in FtpDeployTask</entry>
-                            <entry><link xlink:href="http://pear.php.net/package/Net_FTP"
-                                    role="external">http://pear.php.net/package/Net_FTP</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>PHP Depend</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://www.pdepend.org" role="external"
-                                    >http://www.pdepend.org</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>PHP Mess Detector</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://www.phpmd.org" role="external"
-                                    >http://www.phpmd.org</link>
-                            </entry>
-                        </row>
-                        <row>
-                            <entry>PHP Copy/Paste Detector</entry>
-                            <entry>Optional; enables additional task(s)</entry>
-                            <entry><link xlink:href="http://pear.phpunit.de" role="external"
-                                    >http://pear.phpunit.de</link>
-                            </entry>
-                        </row>
-                    </tbody>
-                </tgroup>
-            </table>
-
-            <warning>
-                <para>Phing does not work with safe mode enabled in PHP!</para>
-            </warning>
+            <para>For a detailed and up-to-date list of required and/or optional software and libraries, refer to the
+                <link xlink:href="https://packagist.org/packages/phing/phing">phing/phing</link> package
+                on Packagist.</para>
         </sect2>
     </sect1>
 
@@ -182,14 +56,31 @@
             <para>The easiest way to obtain the distribution package is to visit the Phing website <link
                     xlink:href="Bibliography.html#phing">[phing] </link>and download the current
                 distribution package in the format you desire.</para>
-            <para>As of version 2.0, you have the option of downloading a PEAR-installable package
-                or the full phing distribution. If you wish to modify phing we suggestion
-                downloading the full version so that you can (e.g.) create your own PEAR package. If
-                you simply wish to use Phing for your own project or need it to build another
-                package, download &amp; install the PEAR package.</para>
         </sect2>
         <sect2>
-            <title>Getting the latest source from Phing Git repository</title>
+            <title> Composer Install </title>
+            <para>The preferred method to install Phing is through <link xlink:href="https://getcomposer.org/">Composer</link>.
+                Add <link xlink:href="https://packagist.org/packages/phing/phing">phing/phing</link> to the
+                <literal>require-dev</literal> or <literal>require</literal> of your project's `composer.json`
+                configuration file, and run <literal>composer install</literal>:</para>
+            <screen>
+{
+    "require-dev": {
+        "phing/phing": "3.*"
+    }
+}
+            </screen>
+        </sect2>
+        <sect2>
+            <title>Phar package</title>
+            <para>Download the <link xlink:href="https://www.phing.info/get/phing-latest.phar">Phar archive</link>.
+                You do not need to execute any additional commands to install Phing, downloading the archive is enough.
+                Phing can simply be started by running:</para>
+
+            <screen>$ php phing-latest.phar [parameters ...]</screen>
+        </sect2>
+        <sect2>
+            <title>Getting the latest source from Phing's Github repository</title>
             <para>The latest snapshot can always be downloaded directly the official Phing Git
                 repository. However, be warned that there is not guarantee that the momentous state
                 of the repository represents a completely stable application without any
@@ -198,33 +89,10 @@
             <itemizedlist>
                 <listitem>
                     <para><link xlink:href="https://github.com/phingofficial/phing"
-                            >https://github.com/phingofficial/phing</link></para>
+                    >https://github.com/phingofficial/phing</link></para>
                 </listitem>
             </itemizedlist>
         </sect2>
-
-    </sect1>
-    <sect1>
-        <title> Composer Install </title>
-        <para>The preferred method to install Phing is through <link xlink:href="https://getcomposer.org/">Composer</link>.
-            Add <link xlink:href="https://packagist.org/packages/phing/phing">phing/phing</link> to the
-            <literal>require-dev</literal> or <literal>require</literal> of your project's `composer.json`
-            configuration file, and run <literal>composer install</literal>:</para>
-        <screen>
-{
-    "require-dev": {
-        "phing/phing": "3.*"
-    }
-}
-</screen>
-    </sect1>
-    <sect1>
-        <title>Phar package</title>
-        <para>Download the <link xlink:href="https://www.phing.info/get/phing-latest.phar">Phar archive</link>.
-            You do not need to execute any additional commands to install Phing, downloading the archive is enough.
-            Phing can simply be started by running:</para>
-
-        <screen>$ php phing-latest.phar [parameters ...]</screen>
     </sect1>
     <sect1>
         <title> Running Phing </title>
