@@ -912,8 +912,7 @@
     </sect1>
     <sect1 role="taskdef" xml:id="FileSizeTask">
         <title>FileSizeTask</title>
-        <para>Stores the size of a specified file in a property. The file size is returned in
-            bytes.</para>
+        <para>Stores the size of a specified file in a property. The file size can be returned in different units.</para>
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
@@ -946,16 +945,37 @@
                         <entry>filesize</entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>unit</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>
+                            <para>File size unit. Must be one of the following:</para>
+                            <itemizedlist>
+                                <listitem><para><literal>B</literal>: Bytes</para></listitem>
+                                <listitem><para><literal>K</literal>: Kilobytes (1024 Bytes)</para></listitem>
+                                <listitem><para><literal>M</literal>: Megabytes (1024 Kilobytes)</para></listitem>
+                                <listitem><para><literal>G</literal>: Gigabytes (1024 Megabytes)</para></listitem>
+                                <listitem><para><literal>T</literal>: Terabytes (1024 Gigabytes)</para></listitem>
+                                <listitem><para><literal>P</literal>: Petabytes (1024 Terabytes)</para></listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>B</entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
         <sect2>
-            <title>Example</title>
-            <programlisting language="xml">&lt;filesize file="${builddir}/${tarball}.tar.${compression}" />
-&lt;php expression="floor(${filesize}/1024)" returnProperty="ksize" />
-&lt;php expression="floor(${filesize}/1024/1024)" returnProperty="msize" />
-&lt;echo msg="Filesize is: ${ksize} kB"/>
-&lt;echo msg="Filesize is: ${msize} MB"/></programlisting>
+            <title>Examples</title>
+            <programlisting language="xml">
+&lt;filesize file="./backup.zip"/>
+&lt;echo>Your backup size is ${filesize} Bytes&lt;/echo></programlisting>
+            <programlisting language="xml">
+&lt;filesize file="./backup.zip" propertyname="backup.size"/>
+&lt;echo>Your backup size is ${backup.size} Bytes&lt;/echo></programlisting>
+            <programlisting language="xml">
+&lt;filesize file="./backup.zip" unit="M"/>
+&lt;echo>Your backup size is ${filesize} Megabytes&lt;/echo></programlisting>
         </sect2>
 
     </sect1>
