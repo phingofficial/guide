@@ -12538,7 +12538,7 @@ host="webserver" command="ls" /></programlisting>
                         <entry>console</entry>
                         <entry>String</entry>
                         <entry>The path to symfony console application</entry>
-                        <entry>app/console</entry>
+                        <entry>bin/console</entry>
                         <entry>No</entry>
                     </row>
                     <row>
