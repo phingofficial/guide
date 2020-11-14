@@ -8876,14 +8876,15 @@ description="Measures the size of the project and counts the tests">
                         attribute to <literal>false</literal>. The name of the file is predetermined
                         by the formatter and can be changed by the <literal>outfile</literal>
                         attribute.</para>
-                    <para>There are four predefined formatters - <literal>xml</literal>,
-                            <literal>clover</literal>, and <literal>crap4j</literal> print the test
-                        results in the JUnit, Clover, and Crap4J
-                        XML formats respectively. The <literal>plain</literal> formatter emits a short
+                    <para>There are five predefined formatters. <literal>xml</literal>,
+                        <literal>clover</literal>, and <literal>crap4j</literal> print the test
+                        results in the JUnit, Clover, and Crap4J XML formats respectively.
+                        The <literal>clover-html</literal> formatter prints code coverage details
+                        to a set of HTML files.
+                        The <literal>plain</literal> formatter emits a short
                         statistics line for all test cases. Custom formatters that implement
                         phing.tasks.ext.phpunit.formatter.PHPUnitResultFormatter can be
                         specified.</para>
-
                     <table>
                         <title>Attributes</title>
                         <tgroup cols="5">
@@ -8907,8 +8908,8 @@ description="Measures the size of the project and counts the tests">
                                     <entry><literal role="type">String</literal></entry>
                                     <entry>Use a predefined formatter (either
                                         <literal>xml</literal>, <literal>plain</literal>,
-                                            <literal>clover</literal>,
-                                            <literal>crap4j</literal>, or
+                                        <literal>clover</literal>, <literal>clover-html</literal>,
+                                        <literal>crap4j</literal>, or
                                         <literal>summary</literal>).</entry>
                                     <entry>n/a</entry>
                                     <entry morerows="1">One of these is required.</entry>
