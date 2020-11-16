@@ -8784,6 +8784,20 @@ description="Measures the size of the project and counts the tests">
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>haltonwarning</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any warnings are encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonrisky</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any risky tests are encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>failureproperty</literal></entry>
                         <entry><literal role="type">String</literal></entry>
                         <entry>Name of property to set (to true) on failure.</entry>
@@ -8808,6 +8822,20 @@ description="Measures the size of the project and counts the tests">
                         <entry><literal>skippedproperty</literal></entry>
                         <entry><literal role="type">String</literal></entry>
                         <entry>Name of property to set (to true) on skipped tests.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>warningproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on warnings.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>riskyproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on risky tests.</entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
                     </row>
