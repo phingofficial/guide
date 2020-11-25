@@ -4,7 +4,7 @@
         <p>
             <span class="bold"><strong>NB:</strong></span> if you want to use the PHPUnit .phar file, please make sure you download the library version (<code class="literal">phpunit-library.phar</code>)
             and you set the <code class="literal">pharlocation</code> attribute!</p>
-        <div class="table"><a name="idm45735277009760"></a><p class="formal-object-title"><span class="label">Table C.92: </span><span class="title">Attributes</span></p><div class="table-contents">
+        <div class="table"><a name="idm45573359548944"></a><p class="formal-object-title"><span class="label">Table C.92: </span><span class="title">Attributes</span></p><div class="table-contents">
             
             <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">printsummary</code></td><td><code class="literal">Boolean</code></td><td>Print one-line statistics for each testcase.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">bootstrap</code></td><td><code class="literal">String</code></td><td>The name of a bootstrap file that is run before executing the
                             tests.</td><td>none</td><td>No</td></tr><tr><td><code class="literal">codecoverage</code></td><td><code class="literal">Boolean</code></td><td>Gather code coverage information while running tests (requires
@@ -22,7 +22,7 @@
                         <code class="literal">stopOnSkipped</code>. Values provided
                         <span class="bold"><strong>overwrite</strong></span> other attributes!</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">groups</code></td><td><code class="literal">String</code></td><td>Only run tests from the specified group(s).</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">excludeGroups</code></td><td><code class="literal">String</code></td><td>Exclude tests from the specified group(s).</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">pharlocation</code></td><td><code class="literal">String</code></td><td>Location of the PHPUnit PHAR package.</td><td>n/a</td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45735276999072"></a>C.75.1 Supported Nested Tags</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45573359538592"></a>C.75.1 Supported Nested Tags</h3></div></div></div>
             
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                     <p><code class="literal">formatter</code>
@@ -32,21 +32,25 @@
                         attribute to <code class="literal">false</code>. The name of the file is predetermined
                         by the formatter and can be changed by the <code class="literal">outfile</code>
                         attribute.</p>
-                    <p>There are four predefined formatters - <code class="literal">xml</code>,
-                            <code class="literal">clover</code>, and <code class="literal">crap4j</code> print the test
-                        results in the JUnit, Clover, and Crap4J
-                        XML formats respectively. The <code class="literal">plain</code> formatter emits a short
-                        statistics line for all test cases. Custom formatters that implement
+                    <p>There are six predefined formatters. <code class="literal">xml</code>,
+                        <code class="literal">clover</code>, and <code class="literal">crap4j</code> print the test
+                        results in the JUnit, Clover, and Crap4J XML formats respectively.
+                        The <code class="literal">clover-html</code> formatter prints code coverage details
+                        to a set of HTML files.
+                        The <code class="literal">plain</code> formatter emits a short
+                        statistics line for all test cases.
+                        The <code class="literal">summary</code> formatter print the same statistics as the
+                        plain formatter but only to the log output.
+                        Custom formatters that implement
                         phing.tasks.ext.phpunit.formatter.PHPUnitResultFormatter can be
                         specified.</p>
-
-                    <div class="table"><a name="idm45735276916640"></a><p class="formal-object-title"><span class="label">Table C.93: </span><span class="title">Attributes</span></p><div class="table-contents">
+                    <div class="table"><a name="idm45573359454208"></a><p class="formal-object-title"><span class="label">Table C.93: </span><span class="title">Attributes</span></p><div class="table-contents">
                         
                         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">type</code></td><td><code class="literal">String</code></td><td>Use a predefined formatter (either
                                         <code class="literal">xml</code>, <code class="literal">plain</code>,
-                                            <code class="literal">clover</code>,
-                                            <code class="literal">crap4j</code>, or
-                                        <code class="literal">summary</code>).</td><td>n/a</td><td rowspan="2">One of these is required.</td></tr><tr><td><code class="literal">classname</code></td><td><code class="literal">String</code></td><td>Name of a custom formatter class.</td><td>n/a</td></tr><tr><td><code class="literal">usefile</code></td><td><code class="literal">Boolean</code></td><td>Boolean that determines whether output should be sent to
+                                        <code class="literal">clover</code>, <code class="literal">clover-html</code>,
+                                        <code class="literal">crap4j</code>, or <code class="literal">summary</code>).
+                                    </td><td>n/a</td><td rowspan="2">One of these is required.</td></tr><tr><td><code class="literal">classname</code></td><td><code class="literal">String</code></td><td>Name of a custom formatter class.</td><td>n/a</td></tr><tr><td><code class="literal">usefile</code></td><td><code class="literal">Boolean</code></td><td>Boolean that determines whether output should be sent to
                                         a file.</td><td><code class="literal">true</code></td><td>No</td></tr><tr><td><code class="literal">todir</code></td><td><code class="literal">String</code></td><td>Directory to write the file to.</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">outfile</code></td><td><code class="literal">String</code></td><td>Filename of the result.</td><td>Depends on formatter</td><td>No</td></tr></tbody></table>
                     </div></div><br class="table-break">
                 </li><li class="listitem">
@@ -57,7 +61,7 @@
                         of nested &lt;fileset&gt;s. It then generates a lists of classes that are
                         (in)directly defined by each PHP file.</p>
 
-                    <div class="table"><a name="idm45735276883792"></a><p class="formal-object-title"><span class="label">Table C.94: </span><span class="title">Attributes</span></p><div class="table-contents">
+                    <div class="table"><a name="idm45573359421232"></a><p class="formal-object-title"><span class="label">Table C.94: </span><span class="title">Attributes</span></p><div class="table-contents">
                         
                         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">exclude</code></td><td><code class="literal">String</code></td><td>A list of classes to exclude from the pattern matching.
                                         For example, when you have two baseclasses
@@ -72,7 +76,7 @@
                     </div></div><br class="table-break">
                 </li></ul></div>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45735276859600"></a>C.75.2 Example</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45573359397328"></a>C.75.2 Example</h3></div></div></div>
             
             <pre class="programlisting">&lt;phpunit&gt;
   &lt;formatter todir="reports" type="xml"/&gt;
@@ -113,7 +117,7 @@
                 reporting and counting, and could possibly lead to strange results. Instead, use one
                 of more fileset's to provide a list of testcases to execute.</p>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45735276850480"></a>C.75.3 Supported Nested Tags</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idm45573359388336"></a>C.75.3 Supported Nested Tags</h3></div></div></div>
             
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                     <p><code class="literal"><a class="link" href="FileSet.html" title="D.4 FileSet">fileset</a></code></p>
