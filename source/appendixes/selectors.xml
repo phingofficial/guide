@@ -190,27 +190,35 @@
                     </row>
                     <row>
                         <entry><literal>seconds</literal></entry>
-                        <entry>The number of seconds since 1970 that should be tested for.</entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch) that should be
+                            tested for.</entry>
                         <entry>n/a</entry>
                     </row>
                     <row>
                         <entry><literal>when</literal></entry>
                         <entry>Indicates how to interpret the date, whether the files to be selected
                             are those whose last modified times should be before, after, or equal to
-                            the specified value. Accepted values are: <literal>before</literal> -
-                            select files whose last modified date is before the indicated date
+                            the specified value. Accepted values are:
+                            <itemizedlist><listitem><para>
+                                <literal>before</literal> - select files whose last modified date is
+                                    before the indicated date
+                            </para></listitem></itemizedlist>
+                            <itemizedlist><listitem><para>
                                 <literal>after</literal> - select files whose last modified date is
-                            after the indicated date <literal>equal</literal> - select files whose
-                            last modified date is this exact date </entry>
+                                    after the indicated date
+                            </para></listitem></itemizedlist>
+                            <itemizedlist><listitem><para>
+                                <literal>equal</literal> - select files whose last modified date is
+                                    this exact date
+                            </para></listitem></itemizedlist>
+                        </entry>
                         <entry>equal</entry>
                         <entry>No</entry>
                     </row>
                     <row>
                         <entry><literal>granularity</literal></entry>
-                        <entry>The number of milliseconds leeway to use when comparing file
-                            modification times. This is needed because not every file system
-                            supports tracking the last modified time to the millisecond
-                            level.</entry>
+                        <entry>The number of seconds leeway to use when comparing file
+                            modification times.</entry>
                         <entry>0</entry>
                         <entry>No</entry>
                     </row>
