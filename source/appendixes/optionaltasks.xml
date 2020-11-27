@@ -8769,6 +8769,13 @@ description="Measures the size of the project and counts the tests">
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>haltondefect</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if a test has failures, errors or warnings.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>haltonincomplete</literal></entry>
                         <entry><literal role="type">Boolean</literal></entry>
                         <entry>Stop the build process if any incomplete tests are
