@@ -280,8 +280,8 @@
                 <exec executable="${xmllint}">
                     <arg line="--xinclude ${master.document} > ${output.dir}/hlhtml/_flatten.xml"/>
                 </exec>
-                <exec dir="${output.dir}/hlhtml/" executable="../../scripts/hlsaxon" checkreturn="true">
-                    <arg line="_flatten.xml ../../${dbxsl.dir}/hl-html.xsl"/>
+                <exec dir="${output.dir}/hlhtml/" executable="scripts/hlsaxon" checkreturn="true">
+                    <arg line="_flatten.xml ${dbxsl.dir}/hl-html.xsl"/>
                 </exec>
                 <delete file="${output.dir}/hlhtml/_flatten.xml"/> 
             </then>
@@ -316,8 +316,8 @@
                 <exec executable="${xmllint}">
 		            <arg line="--xinclude ${master.document} > ${output.dir}/hlpdf/_flatten.xml"/>
 		        </exec>
-                <exec dir="${output.dir}/hlpdf/" executable="../../scripts/hlsaxon" checkreturn="true">
-                    <arg line="-o manual.fo _flatten.xml ../../${dbxsl.dir}/hl-fo.xsl"/>
+                <exec dir="${output.dir}/hlpdf/" executable="scripts/hlsaxon" checkreturn="true">
+                    <arg line="-o manual.fo _flatten.xml ${dbxsl.dir}/hl-fo.xsl"/>
                 </exec>
                 <exec dir="${output.dir}/hlpdf/" executable="${fop}" checkreturn="true">
 		            <arg line="manual.fo -pdf manual.pdf"/>
