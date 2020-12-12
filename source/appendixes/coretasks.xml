@@ -4551,6 +4551,13 @@ file defines a task in the format: name=path.to.Task -->
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>seconds</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
+                        <entry><literal>now</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>millis</literal></entry>
                         <entry><literal role="type">Integer</literal></entry>
                         <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch).
