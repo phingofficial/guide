@@ -28,7 +28,7 @@ jobs:
           tools: phing:3.0.0-alpha4
 
       - name: Build documentation
-        run: phing
+        run: phing -verbose
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
