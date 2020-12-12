@@ -16,7 +16,9 @@ jobs:
           persist-credentials: false
 
       - name: Install Tools
-        run: sudo apt-get install dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc && rvm use system
+        run: sudo apt-get install dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc
+
+      - uses: actions/setup-ruby@v1
 
       - name: Build Documentation
         uses: phingofficial/phing-github-action@main
