@@ -17,10 +17,10 @@ jobs:
 
       - name: Install Tools
         run: |
-          sudo apt-get install docbook dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc
+          sudo apt-get install dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc
 
       - name: Setup ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
 
       - name: Get phing
         uses: shivammathur/setup-php@v2
