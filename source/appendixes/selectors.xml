@@ -195,6 +195,12 @@
                         <entry>n/a</entry>
                     </row>
                     <row>
+                        <entry><literal>millis</literal></entry>
+                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch) that should be
+                            tested for. Note: It will be internaly converted to seconds.</entry>
+                        <entry>n/a</entry>
+                    </row>
+                    <row>
                         <entry><literal>when</literal></entry>
                         <entry>Indicates how to interpret the date, whether the files to be selected
                             are those whose last modified times should be before, after, or equal to
