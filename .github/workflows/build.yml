@@ -24,6 +24,7 @@ jobs:
         uses: phingofficial/phing-github-action@main
         with:
           version: 3.0.0-alpha4
+          verbose: true 
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
