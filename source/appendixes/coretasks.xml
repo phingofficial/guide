@@ -4563,7 +4563,7 @@ file defines a task in the format: name=path.to.Task -->
                         <entry><literal>millis</literal></entry>
                         <entry><literal role="type">Integer</literal></entry>
                         <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix
-                            epoch). (Deprecated, use seconds instead.)</entry>
+                            epoch).</entry>
                         <entry><literal>now</literal></entry>
                         <entry>No</entry>
                     </row>
