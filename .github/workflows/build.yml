@@ -26,14 +26,13 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Print java version
-        run: java -version
-
       - name: Build Documentation
         uses: phingofficial/phing-github-action@main
+        env:
+          JAVA_HOME: ${{ env.JAVA_HOME }}
         with:
           version: 3.0.0-alpha4
-          verbose: true 
+          verbose: true
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
