@@ -21,6 +21,8 @@ jobs:
 
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
 
       - name: Get phing
         uses: shivammathur/setup-php@v2
