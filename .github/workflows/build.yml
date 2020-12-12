@@ -21,11 +21,13 @@ jobs:
       - name: Setup ruby
         uses: actions/setup-ruby@v1
       
-      - name: Build Documentation
+      - name: Get phing
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
           tools: phing:3.0.0-alpha4
+
+      - name: Build documentation
         run: phing
 
       - name: Deploy
