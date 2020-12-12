@@ -1299,7 +1299,7 @@ verbose="true" failonerror="false" /></programlisting>
                     <row>
                         <entry><literal>verbose</literal></entry>
                         <entry><literal role="type">Boolean</literal></entry>
-                        <entry>	Whether to print the list of the copied file. Defaults to false.</entry>
+                        <entry>Whether to print the list of the copied file. Defaults to false.</entry>
                         <entry><literal>false</literal></entry>
                         <entry>No</entry>
                     </row>
@@ -4517,8 +4517,6 @@ file defines a task in the format: name=path.to.Task -->
         <para>The <literal>TouchTask</literal> works like the Unix <literal>touch</literal> command: It
             sets the <literal>modtime</literal> of a file to a specific time. Default is the current
             time.</para>
-
-
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
@@ -4562,8 +4560,16 @@ file defines a task in the format: name=path.to.Task -->
                     <row>
                         <entry><literal>millis</literal></entry>
                         <entry><literal role="type">Integer</literal></entry>
-                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix
-                            epoch).</entry>
+                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch).
+                            Note: milliseconds are converted to seconds internally. When using
+                            this option the value must be greater than 1000.</entry>
+                        <entry><literal>now</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>seconds</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
                         <entry><literal>now</literal></entry>
                         <entry>No</entry>
                     </row>
