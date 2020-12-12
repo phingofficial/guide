@@ -347,7 +347,7 @@
             <then>
                 <mkdir dir="${output.dir}/epub"/>
                 <exec executable="${dbtoepub}" checkreturn="true">
-                    <arg line="-o '${output.dir}/epub/manual.epub' -s ${dbxsl.dir}/epub.xsl -c ${css.style} ${master.document}"/>
+                    <arg line="-o '${output.dir}/epub/manual.epub' -s ${phing.dir}/${dbxsl.dir}/epub.xsl -c ${phing.dir}/${css.style} ${phing.dir}/${master.document}"/>
                 </exec>
             </then>
         </if>

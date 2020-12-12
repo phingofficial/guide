@@ -31,9 +31,11 @@ jobs:
       - name: Build documentation
         run: phing -verbose
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: out
+      - name: Check output folder
+        run: ls -la out
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@3.7.1
+      #   with:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BRANCH: gh-pages
+      #     FOLDER: out
