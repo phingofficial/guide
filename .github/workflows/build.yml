@@ -17,15 +17,9 @@ jobs:
 
       - name: Install Tools
         run: |
-          sudo apt-get install dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc
-
-      - name: Setup ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7
-
-      - run: gem install dbtoepub
-        name: install gem
+          sudo apt-get install dbtoepub docbook-xsl fop libsaxon-java libxml2-utils libxslthl-java xsltproc && \
+          curl -sSL https://get.rvm.io | bash -s stable && \
+          rvm use system
 
       - name: Get phing
         uses: shivammathur/setup-php@v2
