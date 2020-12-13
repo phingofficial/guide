@@ -22,10 +22,10 @@ jobs:
       - name: Setup ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.1
+          ruby-version: 2.7
 
-      - name: Debug
-        run: ls -la /usr/lib/ruby/vendor_ruby
+      - run: gem install dbtoepub
+        name: install gem
 
       - name: Get phing
         uses: shivammathur/setup-php@v2
