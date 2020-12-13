@@ -983,7 +983,7 @@
                     </row>
                     <row>
                         <entry><literal>onMissingExtensionPoint</literal></entry>
-                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
                         <entry>What to do if this target tries to extend a missing extension-point:
                             "fail", "warn", "ignore".</entry>
                         <entry><literal>fail</literal></entry>
