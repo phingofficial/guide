@@ -24,6 +24,9 @@ jobs:
         with:
           ruby-version: 2.1
 
+      - name: Debug
+        run: ls -la /usr/lib/ruby/vendor_ruby
+
       - name: Get phing
         uses: shivammathur/setup-php@v2
         with:
@@ -35,6 +38,7 @@ jobs:
 
       - name: Check output folder
         run: ls -la out
+
       # - name: Deploy
       #   uses: JamesIves/github-pages-deploy-action@3.7.1
       #   with:
