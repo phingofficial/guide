@@ -1,25 +1,24 @@
-README 
-======
+# README 
+
 This catalog holds all customized XSL style sheets responsible for the XSLT transformations of
 DocBook5 sources into either PDF or (X)HTML.
 
 NOTE: In order to render the syntax highlight the xslthl-2.x.x.jar must be installed in the
-CLASSPATH (e.g. "/usr/share/java/xslthl-2.0.2.jar" ) and the saxon 6.5.x xsl processor available. 
+CLASSPATH (e.g. `/usr/share/java/xslthl-2.0.2.jar` ) and the saxon 6.5.x xsl processor available. 
 For the non-syntax highlight versions a plain version of xsltproc is sufficient.
  
-All syntax highlight versions should be rendered with the "hlsaxon" script included in the
-"../../scripts/" directory. Please note that the script has hard code paths to necessary
+All syntax highlight versions should be rendered with the `hlsaxon` script included in the
+`scripts/` directory. Please note that the script has hard code paths to necessary
 xslt DocBook5 standard stylesheets and may need to be adjusted to the system this is run on.
 
  
 The stylesheets are organized as follows:
 
-Generic
-=======
+## Generic
+
 common.xsl              Common settings generic to all output rendering
 
-HTML Rendering
-==============
+## HTML Rendering
 
 html.xsl                Main script for html rendering without syntax highlighting
 hl-html.xsl             Main script for html rendering with syntax highlighting
@@ -28,8 +27,8 @@ chunk.xsl               Chunked version of html. No Syntax highlighting
 html.fancycmd.xsl       Alternative html rendering with syntax highlighting and an
                         alterantive rendering of screen output looking like a terminal.
                         
-PDF Rendering
-=============
+## PDF Rendering
+
 Note: PDF rendering always happen in two steps. First the docbook sources are transformed 
 into a XSL-FO and then to pdf with the means of "fop"
 
@@ -38,7 +37,7 @@ fo.xsl                  Plain XSL-FO rendering
 hl-fo.xsl               XSL-FO rendering with syntax highlighting
     fo-highlight.xsl    Sub-style sheet to hl-fo.xsl for setting coiors in highlighting
 
-Other renderings
-================
+## Other renderings
+
 epub.xsl                EPub rendering (experimental)
 xmldepend.xsl           Create a list of all dependencies in an XML file
