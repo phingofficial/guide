@@ -997,4 +997,40 @@ class DOSMapper implements FileNameMapper {
 &lt;/copy>
 </programlisting>
     </sect1>
+
+    <sect1>
+        <title>Writing Conditions</title>
+        <para>Custom conditions are datatypes that implement phing.tasks.system.condition.Condition.
+            For example a custom condition that returns true if a string is all upper case could be written as:</para>
+        <programlisting language="php">class AllUpperCaseCondition implements Condition
+{
+    private $value;
+
+    // The setter for the "value" attribute
+    public function setValue(string $value)
+    {
+        $this->value = $value;
+    }
+
+    // This method evaluates the condition
+    public boolean eval()
+    {
+        if ($this->value === null) {
+            throw new BuildException("value attribute is not set");
+        }
+        return strtoupper($value.toUpperCase()) === $value;
+    }
+}
+</programlisting>
+        <para>Adding the condition to the system is achieved as follows:</para>
+        <programlisting language="xml">&lt;typedef
+    name="alluppercase"
+    classname="AllUpperCaseCondition"/>
+</programlisting>
+        <para>This condition can now be used wherever a Core Ant condition is used.</para>
+        <programlisting language="xml">&lt;condition property="allupper">
+    &lt;alluppercase value="THIS IS ALL UPPER CASE"/>
+&lt;/condition>
+</programlisting>
+    </sect1>
 </chapter>
