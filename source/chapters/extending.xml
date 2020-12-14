@@ -969,4 +969,32 @@ class DOSMapper implements FileNameMapper {
         </sect2>
     </sect1>
 
+    <sect1>
+        <title>Writing Selectors</title>
+        <para>Custom selectors are datatypes that implement <literal>phing.types.selectors.FileSelector</literal>.</para>
+        <para>There is only one method required,
+            <literal>public function isSelected(PhingFile $basedir, string $filename, PhingFile $file): bool</literal>.
+        It returns true or false depending on whether the given file should be selected or not.</para>
+        <para>An example of a custom selection that selects filenames ending in <literal>.php</literal> would be:</para>
+        <programlisting language="php">class PhpSelector implements FileSelector
+{
+    public function isSelected(PhingFile $b, string $filename, PhingFile $f)
+    {
+        return StringHelper::endsWith('.php', strtolower($filename));
+    }
+}
+</programlisting>
+        <para>Adding the selector to the system is achieved as follows:</para>
+        <programlisting language="xml">&lt;typedef
+            name="phpselector"
+            classname="PhpSelector"/>
+</programlisting>
+        <para>This selector can now be used wherever a Core Phing selector is used, for example:</para>
+        <programlisting language="xml">&lt;copy todir="to">
+    &lt;fileset dir="src">
+        &lt;phpselector/>
+    &lt;/fileset>
+&lt;/copy>
+</programlisting>
+    </sect1>
 </chapter>
