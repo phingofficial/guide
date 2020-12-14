@@ -1,0 +1,28 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.9 Writing Selectors</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="ch.extending.html" title="Chapter 6 Extending Phing"><link rel="prev" href="ch06s08.html" title="6.8 Writing Mappers"><link rel="next" href="app.factsheet.html" title="Appendix A. Fact Sheet"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.9 Writing Selectors</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s08.html">Prev</a> </td><th width="60%" align="center">Chapter 6 Extending Phing</th><td width="20%" align="right"> <a accesskey="n" href="app.factsheet.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp34"></a>6.9 Writing Selectors</h2></div></div></div>
+        
+        <p>Custom selectors are datatypes that implement <code class="literal">phing.types.selectors.FileSelector</code>.</p>
+        <p>There is only one method required,
+            <code class="literal">public function isSelected(PhingFile $basedir, string $filename, PhingFile $file): bool</code>.
+        It returns true or false depending on whether the given file should be selected or not.</p>
+        <p>An example of a custom selection that selects filenames ending in <code class="literal">.php</code> would be:</p>
+        <pre class="programlisting">class PhpSelector implements FileSelector
+{
+    public function isSelected(PhingFile $b, string $filename, PhingFile $f)
+    {
+        return StringHelper::endsWith('.php', strtolower($filename));
+    }
+}
+</pre>
+        <p>Adding the selector to the system is achieved as follows:</p>
+        <pre class="programlisting">&lt;typedef
+            name="phpselector"
+            classname="PhpSelector"/&gt;
+</pre>
+        <p>This selector can now be used wherever a Core Phing selector is used, for example:</p>
+        <pre class="programlisting">&lt;copy todir="to"&gt;
+    &lt;fileset dir="src"&gt;
+        &lt;phpselector/&gt;
+    &lt;/fileset&gt;
+&lt;/copy&gt;
+</pre>
+    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s08.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch.extending.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="app.factsheet.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.8  Writing Mappers  </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix A. Fact Sheet</td></tr></table></div></body></html>
