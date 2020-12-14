@@ -1027,7 +1027,7 @@ class DOSMapper implements FileNameMapper {
     name="alluppercase"
     classname="AllUpperCaseCondition"/>
 </programlisting>
-        <para>This condition can now be used wherever a Core Ant condition is used.</para>
+        <para>This condition can now be used wherever a Core Phing condition is used.</para>
         <programlisting language="xml">&lt;condition property="allupper">
     &lt;alluppercase value="THIS IS ALL UPPER CASE"/>
 &lt;/condition>
