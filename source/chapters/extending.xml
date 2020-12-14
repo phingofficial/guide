@@ -1018,7 +1018,7 @@ class DOSMapper implements FileNameMapper {
         if ($this->value === null) {
             throw new BuildException("value attribute is not set");
         }
-        return strtoupper($value.toUpperCase()) === $value;
+        return strtoupper($this->value) === $this->value;
     }
 }
 </programlisting>
