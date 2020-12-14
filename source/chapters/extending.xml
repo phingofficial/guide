@@ -1013,7 +1013,7 @@ class DOSMapper implements FileNameMapper {
     }
 
     // This method evaluates the condition
-    public boolean evaluate()
+    public function evaluate()
     {
         if ($this->value === null) {
             throw new BuildException("value attribute is not set");
