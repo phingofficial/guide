@@ -1,8 +1,7 @@
-README
+# README
 
 This directory contains the CSS stylesheets used for rendering the different HTML
 versions of the Phing manual. These stylesheets depend on some of the customization
 done in the XSL stylesheets.
 
 It can be considered fairly safe to adjust the look&feel in these sheets.
-
