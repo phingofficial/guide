@@ -8,7 +8,7 @@ CLASSPATH (e.g. `/usr/share/java/xslthl-2.0.2.jar` ) and the saxon 6.5.x xsl pro
 For the non-syntax highlight versions a plain version of xsltproc is sufficient.
  
 All syntax highlight versions should be rendered with the `hlsaxon` script included in the
-`scripts/` directory. Please note that the script has hard code paths to necessary
+`../../scripts/` directory. Please note that the script has hard code paths to necessary
 xslt DocBook5 standard stylesheets and may need to be adjusted to the system this is run on.
 
  
