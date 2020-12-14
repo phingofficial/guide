@@ -1,0 +1,35 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>6.10 Writing Conditions</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="ch.extending.html" title="Chapter 6 Extending Phing"><link rel="prev" href="ch06s09.html" title="6.9 Writing Selectors"><link rel="next" href="app.factsheet.html" title="Appendix A. Fact Sheet"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">6.10 Writing Conditions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s09.html">Prev</a> </td><th width="60%" align="center">Chapter 6 Extending Phing</th><td width="20%" align="right"> <a accesskey="n" href="app.factsheet.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="idp35"></a>6.10 Writing Conditions</h2></div></div></div>
+        
+        <p>Custom conditions are datatypes that implement phing.tasks.system.condition.Condition.
+            For example a custom condition that returns true if a string is all upper case could be written as:</p>
+        <pre class="programlisting">class AllUpperCaseCondition implements Condition
+{
+    private $value;
+
+    // The setter for the "value" attribute
+    public function setValue(string $value)
+    {
+        $this-&gt;value = $value;
+    }
+
+    // This method evaluates the condition
+    public boolean evaluate()
+    {
+        if ($this-&gt;value === null) {
+            throw new BuildException("value attribute is not set");
+        }
+        return strtoupper($this-&gt;value) === $this-&gt;value;
+    }
+}
+</pre>
+        <p>Adding the condition to the system is achieved as follows:</p>
+        <pre class="programlisting">&lt;typedef
+    name="alluppercase"
+    classname="AllUpperCaseCondition"/&gt;
+</pre>
+        <p>This condition can now be used wherever a Core Phing condition is used.</p>
+        <pre class="programlisting">&lt;condition property="allupper"&gt;
+    &lt;alluppercase value="THIS IS ALL UPPER CASE"/&gt;
+&lt;/condition&gt;
+</pre>
+    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s09.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch.extending.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="app.factsheet.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">6.9 Writing Selectors </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Appendix A. Fact Sheet</td></tr></table></div></body></html>
