@@ -624,8 +624,8 @@ the large, complex Bar project.
                     <literal><link linkend="FileSet">&lt;fileset></link></literal> and <literal>&lt;dirset></literal> tags.</para>
         </sect2>
     </sect1>
-    <sect1 role="typedef" xml:id="regex">
-        <title>Regex</title>
+    <sect1 role="typedef" xml:id="regexp">
+        <title>Regexp</title>
         <para>Regexp represents a regular expression.</para>
         <table>
             <title> Attributes for <literal>&lt;regexp></literal> tag </title>
