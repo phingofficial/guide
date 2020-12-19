@@ -624,4 +624,51 @@ the large, complex Bar project.
                     <literal><link linkend="FileSet">&lt;fileset></link></literal> and <literal>&lt;dirset></literal> tags.</para>
         </sect2>
     </sect1>
+    <sect1 role="typedef" xml:id="regex">
+        <title>Regex</title>
+        <para>Regexp represents a regular expression.</para>
+        <table>
+            <title> Attributes for <literal>&lt;regexp></literal> tag </title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>pattern</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>regular expression pattern</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>refid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Makes this regexp a reference to a regexp defined elsewhere.
+                            If specified no other attributes or nested elements are allowed.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;regexp id="myregexp" pattern="alpha(.+)beta"/></programlisting>
+            <para>Defines a regular expression for later use with <literal>id "myregexp"</literal>.</para>
+            <programlisting language="xml">&lt;regexp refid="myregexp"/></programlisting>
+            <para>Use the regular expression with <literal>id "myregexp"</literal>.</para>
+        </sect2>
+    </sect1>
 </appendix>
