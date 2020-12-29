@@ -1,0 +1,50 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>G.13 Modified</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.selectors.html" title="Appendix G. Core selectors"><link rel="prev" href="Majority.html" title="G.12 Majority"><link rel="next" href="None.html" title="G.14 None"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">G.13 Modified </th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Majority.html">Prev</a> </td><th width="60%" align="center">Appendix G. Core selectors</th><td width="20%" align="right"> <a accesskey="n" href="None.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Modified"></a>G.13 Modified </h2></div></div></div>
+        
+        
+        <p>The <code class="literal">&lt;modified&gt;</code> selector computes a value for a file, compares that to the value
+            stored in a cache and select the file, if these two values differ.</p>
+        <p>Because this selector is highly configurable the order in which the selection is done is:</p>
+        <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">get the absolute path for the file</li><li class="listitem">get the cached value from the configured cache (absolute path as key)</li><li class="listitem">get the new value from the configured algorithm</li><li class="listitem">compare these two values with the configured comparator</li><li class="listitem">update the cache if needed and requested</li><li class="listitem">do the selection according to the comparison result</li></ol></div>
+        <p>The comparison, computing of the hashvalue and the store is done by implementation of special interfaces.
+            Therefore they may provide additional parameters.</p>
+        <div class="table"><a name="idp22355"></a><p class="formal-object-title"><span class="label">Table G.12: </span><span class="title"> Attributes for the <code class="literal">&lt;modified&gt;</code> selector </span></p><div class="table-contents">
+            
+            <table class="table" summary=" Attributes for the &lt;modified&gt; selector " border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">algorithm</code></td><td>The type of algorithm should be used. Acceptable values are (further information see later):
+                            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">hashfile</li><li class="listitem">lastmodified</li></ul></div>
+                        </td><td><code class="literal">hashfile</code></td><td>No</td></tr></tbody></table>
+        </div></div><br class="table-break">
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22380"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
+            
+            <span style="color: red">&lt;param&gt;All attributes of a &lt;modified&gt; selector an be set with nested &lt;param/&gt; tags.
+                Additional values can be set with &lt;param/&gt; tags according to the rules below.&lt;/param&gt;</span>
+            <div class="table"><a name="idp22383"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title">algorithm</span></p><div class="table-contents">
+                
+                <table class="table" summary="algorithm" border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">hashfile</code></td><td>This Algorithm supports the following attribute:
+                                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">algorithm.algorithm (optional): Name of the hashfile algorithm (e.g. "MD5" or "SHA"); default is "MD5"</li></ul></div>
+                            </td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">lastmodified</code></td><td>Uses the lastModified property of a file. No additional configuration is required.</td><td>n/a</td><td>No</td></tr></tbody></table>
+            </div></div><br class="table-break">
+        </div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22411"></a>G.13.2 Examples</h3></div></div></div>
+            
+            <span style="color: red">&lt;param&gt;Here are some examples of how to use the Modified Selector:&lt;/param&gt;</span>
+            <pre class="programlisting">&lt;copy todir="dest"&gt;
+    &lt;fileset dir="src"&gt;
+        &lt;modified/&gt;
+    &lt;/fileset&gt;
+&lt;/copy&gt;</pre>
+            <span style="color: red">&lt;param&gt;This will copy all files from src to dest which content has changed.
+                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.&lt;/param&gt;</span>
+            <pre class="programlisting">&lt;copy todir="dest"&gt;
+    &lt;fileset dir="src"&gt;
+        &lt;modified update="true"
+              seldirs="true"
+              cache="propertyfile"
+              algorithm="digest"
+              comparator="equal"&gt;
+            &lt;param name="cache.cachefile"     value="cache.properties"/&gt;
+            &lt;param name="algorithm.algorithm" value="md5"/&gt;
+        &lt;/modified&gt;
+    &lt;/fileset&gt;
+&lt;/copy&gt;</pre>
+        </div>
+    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Majority.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.selectors.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="None.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">G.12 Majority </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> G.14 None </td></tr></table></div></body></html>
