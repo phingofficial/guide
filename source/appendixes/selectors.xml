@@ -738,6 +738,116 @@
             </tgroup>
         </table>
     </sect1>
+    <sect1 role="typedef" xml:id="Modified" xreflabel="&lt;Modified>">
+        <title>Modified </title>
+        
+        <para>The <literal>&lt;modified></literal> selector computes a value for a file, compares that to the value
+            stored in a cache and select the file, if these two values differ.</para>
+        <para>Because this selector is highly configurable the order in which the selection is done is:</para>
+        <orderedlist>
+            <listitem>get the absolute path for the file</listitem>
+            <listitem>get the cached value from the configured cache (absolute path as key)</listitem>
+            <listitem>get the new value from the configured algorithm</listitem>
+            <listitem>compare these two values with the configured comparator</listitem>
+            <listitem>update the cache if needed and requested</listitem>
+            <listitem>do the selection according to the comparison result</listitem>
+        </orderedlist>
+        <para>The comparison, computing of the hashvalue and the store is done by implementation of special interfaces.
+            Therefore they may provide additional parameters.</para>
+        <table>
+            <title> Attributes for the <literal>&lt;modified></literal> selector </title>
+            <tgroup cols="4">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="description" colnum="2" colwidth="3*"/>
+                <colspec colname="default" colnum="3" colwidth="1*"/>
+                <colspec colname="required" colnum="4" colwidth="1*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>algorithm</literal></entry>
+                        <entry>The type of algorithm should be used. Acceptable values are (further information see later):
+                            <itemizedlist>
+                                <listitem>hashfile</listitem>
+                                <listitem>lastmodified</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>hashfile</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Parameters specified as nested elements</title>
+            <param>All attributes of a &lt;modified> selector an be set with nested &lt;param/> tags.
+                Additional values can be set with &lt;param/> tags according to the rules below.</param>
+            <table>
+                <title>algorithm</title>
+                <tgroup cols="4">
+                    <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                    <colspec colname="description" colnum="2" colwidth="3*"/>
+                    <colspec colname="default" colnum="3" colwidth="1*"/>
+                    <colspec colname="required" colnum="4" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Name</entry>
+                            <entry>Description</entry>
+                            <entry>Default</entry>
+                            <entry>Required</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><literal>hashfile</literal></entry>
+                            <entry>This Algorithm supports the following attribute:
+                                <itemizedlist>
+                                    <listitem>algorithm.algorithm (optional): Name of the hashfile algorithm (e.g. "MD5" or "SHA"); default is "MD5"</listitem>
+                                </itemizedlist>
+                            </entry>
+                            <entry>n/a</entry>
+                            <entry>No</entry>
+                        </row>
+                        <row>
+                            <entry><literal>lastmodified</literal></entry>
+                            <entry>Uses the lastModified property of a file. No additional configuration is required.</entry>
+                            <entry>n/a</entry>
+                            <entry>No</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect2>
+        <sect2>
+            <title>Examples</title>
+            <param>Here are some examples of how to use the Modified Selector:</param>
+            <programlisting language="xml">&lt;copy todir="dest">
+    &lt;fileset dir="src">
+        &lt;modified/>
+    &lt;/fileset>
+&lt;/copy></programlisting>
+            <param>This will copy all files from src to dest which content has changed.
+                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.</param>
+            <programlisting language="xml">&lt;copy todir="dest">
+    &lt;fileset dir="src">
+        &lt;modified update="true"
+              seldirs="true"
+              cache="propertyfile"
+              algorithm="digest"
+              comparator="equal">
+            &lt;param name="cache.cachefile"     value="cache.properties"/>
+            &lt;param name="algorithm.algorithm" value="md5"/>
+        &lt;/modified>
+    &lt;/fileset>
+&lt;/copy></programlisting>
+        </sect2>
+    </sect1>
     <sect1 role="typedef" xml:id="None" xreflabel="&lt;None>">
         <title>None </title>
 
