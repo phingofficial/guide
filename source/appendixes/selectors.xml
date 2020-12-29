@@ -781,6 +781,65 @@
                         <entry><literal>hashfile</literal></entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>cache</literal></entry>
+                        <entry>The type of cache should be used. Acceptable values are (further information see later):
+                            <itemizedlist>
+                                <listitem>propertyfile</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>propertyfile</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>comparator</literal></entry>
+                        <entry>The type of comparator should be used. Acceptable values are:
+                            <itemizedlist>
+                                <listitem>equal</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>equal</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>algorithmclass</literal></entry>
+                        <entry>Classname of custom algorithm implementation. Lower priority than algorithm.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>cacheclass</literal></entry>
+                        <entry>Classname of custom cache implementation. Lower priority than cache.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>comparatorclass</literal></entry>
+                        <entry>Classname of custom comparator implementation. Lower priority than comparator.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>update</literal></entry>
+                        <entry>Should the cache be updated when values differ? (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>seldirs</literal></entry>
+                        <entry>Should directories be selected? (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delayupdate</literal></entry>
+                        <entry>If set to "true", the storage of the cache will be delayed until the next finished BuildEvent;
+                            task finished, target finished or build finished, whichever comes first.
+                            This is provided for increased performance. If set to "false", the storage of the cache will
+                            happen with each change. This attribute depends upon the update attribute. (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
