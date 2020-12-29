@@ -11,20 +11,27 @@
             
             <table class="table" summary=" Attributes for the &lt;modified&gt; selector " border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">algorithm</code></td><td>The type of algorithm should be used. Acceptable values are (further information see later):
                             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">hashfile</li><li class="listitem">lastmodified</li></ul></div>
-                        </td><td><code class="literal">hashfile</code></td><td>No</td></tr></tbody></table>
+                        </td><td><code class="literal">hashfile</code></td><td>No</td></tr><tr><td><code class="literal">cache</code></td><td>The type of cache should be used. Acceptable values are (further information see later):
+                            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">propertyfile</li></ul></div>
+                        </td><td><code class="literal">propertyfile</code></td><td>No</td></tr><tr><td><code class="literal">comparator</code></td><td>The type of comparator should be used. Acceptable values are:
+                            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">equal</li></ul></div>
+                        </td><td><code class="literal">equal</code></td><td>No</td></tr><tr><td><code class="literal">algorithmclass</code></td><td>Classname of custom algorithm implementation. Lower priority than algorithm.</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">cacheclass</code></td><td>Classname of custom cache implementation. Lower priority than cache.</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">comparatorclass</code></td><td>Classname of custom comparator implementation. Lower priority than comparator.</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">update</code></td><td>Should the cache be updated when values differ? (boolean)</td><td><code class="literal">true</code></td><td>No</td></tr><tr><td><code class="literal">seldirs</code></td><td>Should directories be selected? (boolean)</td><td><code class="literal">true</code></td><td>No</td></tr><tr><td><code class="literal">delayupdate</code></td><td>If set to "true", the storage of the cache will be delayed until the next finished BuildEvent;
+                            task finished, target finished or build finished, whichever comes first.
+                            This is provided for increased performance. If set to "false", the storage of the cache will
+                            happen with each change. This attribute depends upon the update attribute. (boolean)</td><td><code class="literal">true</code></td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22380"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22437"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
             
             <p>All attributes of a &lt;modified&gt; selector an be set with nested &lt;param/&gt; tags.
                 Additional values can be set with &lt;param/&gt; tags according to the rules below.</p>
-            <div class="table"><a name="idp22383"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title">algorithm</span></p><div class="table-contents">
+            <div class="table"><a name="idp22440"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title">algorithm</span></p><div class="table-contents">
                 
                 <table class="table" summary="algorithm" border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">hashfile</code></td><td>This Algorithm supports the following attribute:
                                 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">algorithm.algorithm (optional): Name of the hashfile algorithm (e.g. "MD5" or "SHA"); default is "MD5"</li></ul></div>
                             </td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">lastmodified</code></td><td>Uses the lastModified property of a file. No additional configuration is required.</td><td>n/a</td><td>No</td></tr></tbody></table>
             </div></div><br class="table-break">
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22411"></a>G.13.2 Examples</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22468"></a>G.13.2 Examples</h3></div></div></div>
             
             <p>Here are some examples of how to use the Modified Selector:</p>
             <pre class="programlisting">&lt;copy todir="dest"&gt;
