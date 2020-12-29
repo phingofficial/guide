@@ -15,8 +15,8 @@
         </div></div><br class="table-break">
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22380"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
             
-            <span style="color: red">&lt;param&gt;All attributes of a &lt;modified&gt; selector an be set with nested &lt;param/&gt; tags.
-                Additional values can be set with &lt;param/&gt; tags according to the rules below.&lt;/param&gt;</span>
+            <p>All attributes of a &lt;modified&gt; selector an be set with nested &lt;param/&gt; tags.
+                Additional values can be set with &lt;param/&gt; tags according to the rules below.</p>
             <div class="table"><a name="idp22383"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title">algorithm</span></p><div class="table-contents">
                 
                 <table class="table" summary="algorithm" border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">hashfile</code></td><td>This Algorithm supports the following attribute:
@@ -26,14 +26,14 @@
         </div>
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22411"></a>G.13.2 Examples</h3></div></div></div>
             
-            <span style="color: red">&lt;param&gt;Here are some examples of how to use the Modified Selector:&lt;/param&gt;</span>
+            <p>Here are some examples of how to use the Modified Selector:</p>
             <pre class="programlisting">&lt;copy todir="dest"&gt;
     &lt;fileset dir="src"&gt;
         &lt;modified/&gt;
     &lt;/fileset&gt;
 &lt;/copy&gt;</pre>
-            <span style="color: red">&lt;param&gt;This will copy all files from src to dest which content has changed.
-                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.&lt;/param&gt;</span>
+            <p>This will copy all files from src to dest which content has changed.
+                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.</p>
             <pre class="programlisting">&lt;copy todir="dest"&gt;
     &lt;fileset dir="src"&gt;
         &lt;modified update="true"
