@@ -786,8 +786,8 @@
         </table>
         <sect2 role="nestedtags">
             <title>Parameters specified as nested elements</title>
-            <param>All attributes of a &lt;modified> selector an be set with nested &lt;param/> tags.
-                Additional values can be set with &lt;param/> tags according to the rules below.</param>
+            <para>All attributes of a &lt;modified> selector an be set with nested &lt;param/> tags.
+                Additional values can be set with &lt;param/> tags according to the rules below.</para>
             <table>
                 <title>algorithm</title>
                 <tgroup cols="4">
@@ -826,14 +826,14 @@
         </sect2>
         <sect2>
             <title>Examples</title>
-            <param>Here are some examples of how to use the Modified Selector:</param>
+            <para>Here are some examples of how to use the Modified Selector:</para>
             <programlisting language="xml">&lt;copy todir="dest">
     &lt;fileset dir="src">
         &lt;modified/>
     &lt;/fileset>
 &lt;/copy></programlisting>
-            <param>This will copy all files from src to dest which content has changed.
-                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.</param>
+            <para>This will copy all files from src to dest which content has changed.
+                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.</para>
             <programlisting language="xml">&lt;copy todir="dest">
     &lt;fileset dir="src">
         &lt;modified update="true"
