@@ -303,6 +303,13 @@ the large, complex Bar project.
                 &lt;/fileset></programlisting>
             <para> This will include the apache configuration and PHP configuration file from
                 <literal>/etc</literal>.</para>
+            <programlisting language="xml">&lt;fileset id="files" dir="${phing.dir}/etc">
+    &lt;excludesfile name="test"/>
+&lt;/fileset>
+&lt;target name="test">
+    &lt;echo msg="${toString:files}"/>
+&lt;/target></programlisting>
+            <para> This will exclude all files from a file named test. Each line of this file is taken to be an exclude pattern.</para>
         </sect2>
         <sect2 role="nestedtags">
             <title>Nested tags</title>
