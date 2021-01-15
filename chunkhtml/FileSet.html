@@ -67,8 +67,15 @@
                 &lt;/fileset&gt;</pre>
             <p> This will include the apache configuration and PHP configuration file from
                 <code class="literal">/etc</code>.</p>
+            <pre class="programlisting">&lt;fileset id="files" dir="${phing.dir}/etc"&gt;
+    &lt;excludesfile name="test"/&gt;
+&lt;/fileset&gt;
+&lt;target name="test"&gt;
+    &lt;echo msg="${toString:files}"/&gt;
+&lt;/target&gt;</pre>
+            <p> This will exclude all files from a file named test. Each line of this file is taken to be an exclude pattern.</p>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20311"></a>D.4.3 Nested tags</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20313"></a>D.4.3 Nested tags</h3></div></div></div>
             
             <p> The tags that are supported by <code class="literal">Fileset</code> are:</p>
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
@@ -84,7 +91,7 @@
                 must have a <code class="literal">name</code> attribute that contains the pattern to
                 include/exclude.</p>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20333"></a>D.4.4 Related types</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20335"></a>D.4.4 Related types</h3></div></div></div>
             
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                     <a class="link" href="">pearpackagefileset</a>
