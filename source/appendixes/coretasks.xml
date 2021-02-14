@@ -4438,7 +4438,7 @@ verbose="true" failonerror="false" /></programlisting>
                 &lt;propertyselector property="pack.list"
                 delimiter=","
                 match="package\.([^\.]*)\.name"
-                select="\1"
+                select="$1"
                 casesensitive="false" /></programlisting>
         </sect2>
     </sect1>
