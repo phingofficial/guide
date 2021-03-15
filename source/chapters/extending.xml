@@ -360,7 +360,7 @@
 
             <programlisting language="php">&lt;?php
 
-require_once "phing/Task.php";
+use Phing\Task;
 
 class MyEchoTask extends Task {
 
