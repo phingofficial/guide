@@ -3178,8 +3178,6 @@ Note that you can omit both startpoint and track attributes in this case
             <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
 
-    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
-
     &lt;target name="notification"
         description="display a single message with growl gntp over network"
     &gt;
@@ -3197,8 +3195,6 @@ Note that you can omit both startpoint and track attributes in this case
             </para>
             <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
-
-    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
 
     &lt;target name="notification"
         description="display a single message with growl udp over network"
@@ -3219,8 +3215,6 @@ Note that you can omit both startpoint and track attributes in this case
             <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
 
-    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
-
     &lt;target name="notification"
         description="display a sticky message on desktop"
     &gt;
@@ -3238,8 +3232,6 @@ Note that you can omit both startpoint and track attributes in this case
             </para>
             <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
-
-    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
 
     &lt;target name="notification"
         description="display a custom icon message"
@@ -6891,7 +6883,7 @@ Note that you can omit both startpoint and track attributes in this case
                         will be returned by the formatter if no output file is specified.</para>
                     <para>There are three predefined formatters - one prints the query results in
                         XML format, the other emits plain text. Custom formatters that extend
-                        phing.tasks.pdo.PDOResultFormatter can be specified.</para>
+                        <literal>Phing\Task\System\Pdo\PDOResultFormatter</literal> can be specified.</para>
 
                     <table>
                         <title>Attributes</title>
@@ -6923,7 +6915,7 @@ Note that you can omit both startpoint and track attributes in this case
                                     <entry><literal>classname</literal></entry>
                                     <entry><literal role="type">String</literal></entry>
                                     <entry>Name of a custom formatter class (must extend
-                                        phing.tasks.ext.pdo.PDOResultFormatter).</entry>
+                                        <literal>Phing\Task\System\Pdo\PDOResultFormatter</literal>).</entry>
                                     <entry>n/a</entry>
                                 </row>
                                 <row>
@@ -8752,7 +8744,7 @@ description="Measures the size of the project and counts the tests">
                         The <literal>summary</literal> formatter print the same statistics as the
                         plain formatter but only to the log output.
                         Custom formatters that implement
-                        phing.tasks.ext.phpunit.formatter.PHPUnitResultFormatter can be
+                        <literal>Phing\Task\Ext\Formatter\PHPUnitResultFormatter</literal> can be
                         specified.</para>
                     <table>
                         <title>Attributes</title>
@@ -10063,8 +10055,6 @@ host="webserver" todir="/www/htdocs/project/">
                     <para>This example assumes that the SonarQube Scanner is called <emphasis>sonarqube-scanner</emphasis> and is available on the <emphasis>PATH</emphasis>.</para>
                     <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="sonar-minimal-example" default="sonar"&gt;
-    &lt;taskdef name="sonar" classname="phing.tasks.ext.sonar.SonarTask" /&gt;
-
     &lt;sonar executable="sonarqube-scanner"&gt;
         &lt;property name="sonar.projectKey"     value="my-unique-project-key" /&gt;
         &lt;property name="sonar.projectName"    value="Foo Project" /&gt;
@@ -10078,8 +10068,6 @@ host="webserver" todir="/www/htdocs/project/">
                     <para>The <emphasis>build.xml</emphasis>:</para>
                     <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;project name="sonar-full-example" default="sonar"&gt;
-    &lt;taskdef name="sonar" classname="phing.tasks.ext.sonar.SonarTask" /&gt;
-
     &lt;sonar
       executable="path/to/sonarqube-scanner"
       errors="true"

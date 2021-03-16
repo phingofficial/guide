@@ -299,19 +299,19 @@
             <title> How Phing Parses Buildfiles </title>
             <para>Phing uses an ExpatParser class and PHP's native expat XML functions to handle the
                 parsing of build files. The handler classes all extend the
-                phing.parser.AbstractHandler class. These handler classes "handle" the tags that are
-                found in the buildfile.</para>
+                <literal>Phing\Parser\AbstractHandler</literal> class. These handler classes "handle"
+                the tags that are found in the buildfile.</para>
             <para>Core tasks and datatypes are mapped to XML tag names in the defaults.properties
                 files -- specifically phing/tasks/defaults.properties and
                 phing/types/defaults.properties.</para>
             <para>It works roughly like this:</para>
             <orderedlist>
                 <listitem>
-                    <para><literal>phing.parser.RootHandler</literal> is registered to handle the
+                    <para><literal>Phing\Parser\RootHandler</literal> is registered to handle the
                         buildfile XML document</para>
                 </listitem>
                 <listitem>
-                    <para>RootHanlder expects to find exactly one element:
+                    <para>RootHandler expects to find exactly one element:
                             <literal>&lt;project></literal>. RootHandler invokes the ProjectHandler
                         with the attributes from the &lt;project> tag or throws an exception if no
                         &lt;project> is found, or if something else is found instead.</para>
@@ -902,12 +902,12 @@ class DSN extends DataType {
             <title> Creating a Mapper </title>
             <para>Writing filename mappers is simplified by interface support in PHP5. Essentially,
                 your custom filename mapper must implement
-                    <literal>phing.mappers.FileNameMapper</literal>. Here's an example of a filename
+                    <literal>Phing\Mapper\FileNameMapper</literal>. Here's an example of a filename
                 mapper that creates DOS-style file names. For this example, the "to" and "from"
                 attributes are not needed because all files will be transformed. To see the "to" and
-                "from" attributes in action, look at <literal>phing.mappers.GlobMapper</literal> or
-                    <literal>phing.mappers.RegexpMapper</literal>.</para>
-            <programlisting language="php">require_once "phing/mappers/FileNameMapper.php";
+                "from" attributes in action, look at <literal>Phing\Mapper\GlobMapper</literal> or
+                    <literal>Phing\Mapper\RegexpMapper</literal>.</para>
+            <programlisting language="php">use Phing\Mapper\FileNameMapper;
 
 /**
  * A mapper that makes those ugly DOS filenames.
@@ -971,7 +971,7 @@ class DOSMapper implements FileNameMapper {
 
     <sect1>
         <title>Writing Selectors</title>
-        <para>Custom selectors are datatypes that implement <literal>phing.types.selectors.FileSelector</literal>.</para>
+        <para>Custom selectors are datatypes that implement <literal>Phing\Type\Selector\FileSelector</literal>.</para>
         <para>There is only one method required,
             <literal>public function isSelected(PhingFile $basedir, string $filename, PhingFile $file): bool</literal>.
         It returns true or false depending on whether the given file should be selected or not.</para>
@@ -1000,7 +1000,7 @@ class DOSMapper implements FileNameMapper {
 
     <sect1>
         <title>Writing Conditions</title>
-        <para>Custom conditions are datatypes that implement phing.tasks.system.condition.Condition.
+        <para>Custom conditions are datatypes that implement <literal>Phing\Task\System\Condition\Condition</literal>.
             For example a custom condition that returns true if a string is all upper case could be written as:</para>
         <programlisting language="php">class AllUpperCaseCondition implements Condition
 {

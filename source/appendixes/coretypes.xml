@@ -576,7 +576,7 @@ the large, complex Bar project.
 &lt;/path>
 
 &lt;target name="blah">
-  &lt;taskdef name="mytask" path="myapp.phing.tasks.MyTask">
+  &lt;taskdef name="mytask" path="MyApp\CustomTask\MyTask">
     &lt;classpath refid="project.class.path"/>
   &lt;/taskdef>
 &lt;/target></programlisting>
