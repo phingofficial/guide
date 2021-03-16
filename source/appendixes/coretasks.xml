@@ -770,6 +770,45 @@
         </sect2>
 
     </sect1>
+    <sect1 role="taskdef" xml:id="AutoloaderTask">
+        <title>AutoloaderTask</title>
+        <para>
+            The AutoloaderTask includes autoload file to bootstrap all necessary components in Phing execution context.
+            It could be useful if build tools (e.g. phpunit, phploc etc.) are installed as Composer dependencies.
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>autoloaderpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to autoloader file</entry>
+                        <entry>vendor/autoload.php</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;autoloader autoloaderpath="foo/autoload.php"/></programlisting>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="AvailableTask">
         <title>AvailableTask </title>
         <para>Available Task tests if a resource/file is set and sets a certain property to a
@@ -938,6 +977,64 @@
     suffix=".exe"/></programlisting>
         </sect2>
 
+    </sect1>
+    <sect1 role="taskdef" xml:id="Bindtargets">
+        <title>Bindtargets</title>
+        <para>Make some target the extension of some defined <link linkend="app.projcomponents">extension point</link>.
+            It will make the list of targets dependencies of the extension point.</para>
+        <para>This target is useful when you want to have a target to participate in another build workflow
+            which explicitly exposes an extension point for that kind of insertion.
+            Thus the target to bind and the extension point to bind to are both declared in some imported build files.
+            But directly modifying the target dependency graph of these external build files may have a side effect
+            on some other project which imports them. This task helps to modify the target dependencies but only
+            in your context.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>targets</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>a comma separated list of target names to bind.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>extensionPoint</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>the name of the extension point to bind the targets to.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>onMissingExtensionPoint</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>What to do if this target tries to extend a missing extension-point:
+                            "fail", "warn", "ignore".</entry>
+                        <entry><literal>fail</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;bindtargets targets="build-phar,build-src-phar" extensionPoint="dist"/></programlisting>
+        </sect2>
     </sect1>
     <sect1 role="taskdef" xml:id="ChmodTask">
         <title>ChmodTask </title>
@@ -1299,7 +1396,7 @@ verbose="true" failonerror="false" /></programlisting>
                     <row>
                         <entry><literal>verbose</literal></entry>
                         <entry><literal role="type">Boolean</literal></entry>
-                        <entry>	Whether to print the list of the copied file. Defaults to false.</entry>
+                        <entry>Whether to print the list of the copied file. Defaults to false.</entry>
                         <entry><literal>false</literal></entry>
                         <entry>No</entry>
                     </row>
@@ -2296,7 +2393,138 @@ verbose="true" failonerror="false" /></programlisting>
             </para>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="FileHashTask">
+        <title>FileHashTask</title>
+        <para>Calculates either MD5 or SHA1 hash value of a file and stores the value as a hex
+            string in a property and generates a checksum file.</para>
+        <para>Other popular <link xlink:href="http://php.net/manual/en/function.hash-algos.php">algorithms</link>
+            like "crc32" or "sha512" may be used with help of the <literal>algorithm</literal> attribute.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Filename</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>hashtype</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Specifies what hash algorithm to use. 0=MD5, 1=SHA1</entry>
+                        <entry>0</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>algorithm</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specifies what hash algorithm to use. Supported
+                            <link xlink:href="http://php.net/manual/en/function.hash-algos.php">algorithms</link>.
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>propertyname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property where the hash value is stored.</entry>
+                        <entry>filehashvalue</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;filehash file="${builddir}/${tarball}.tar.${compression}" />
+                &lt;echo msg="Hashvalue is; ${filehashvalue}" /></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="FileSizeTask">
+        <title>FileSizeTask</title>
+        <para>Stores the size of a specified file in a property. The file size can be returned in different units.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Filename.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>propertyname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property where the file size is stored.</entry>
+                        <entry>filesize</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>unit</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>
+                            <para>File size unit. Must be one of the following:</para>
+                            <itemizedlist>
+                                <listitem><para><literal>B</literal>: Bytes</para></listitem>
+                                <listitem><para><literal>K</literal>: Kilobytes (1024 Bytes)</para></listitem>
+                                <listitem><para><literal>M</literal>: Megabytes (1024 Kilobytes)</para></listitem>
+                                <listitem><para><literal>G</literal>: Gigabytes (1024 Megabytes)</para></listitem>
+                                <listitem><para><literal>T</literal>: Terabytes (1024 Gigabytes)</para></listitem>
+                                <listitem><para><literal>P</literal>: Petabytes (1024 Terabytes)</para></listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry>B</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">
+                &lt;filesize file="./backup.zip"/>
+                &lt;echo>Your backup size is ${filesize} Bytes&lt;/echo></programlisting>
+            <programlisting language="xml">
+                &lt;filesize file="./backup.zip" propertyname="backup.size"/>
+                &lt;echo>Your backup size is ${backup.size} Bytes&lt;/echo></programlisting>
+            <programlisting language="xml">
+                &lt;filesize file="./backup.zip" unit="M"/>
+                &lt;echo>Your backup size is ${filesize} Megabytes&lt;/echo></programlisting>
+        </sect2>
 
+    </sect1>
     <sect1 role="taskdef" xml:id="ForeachTask">
         <title>ForeachTask </title>
         <para>The <literal>foreach</literal> task iterates over a list, a list of
@@ -2762,6 +2990,43 @@ verbose="true" failonerror="false" /></programlisting>
 &lt;/input></programlisting>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="JsonValidateTask">
+        <title>JsonValidateTask</title>
+        <para>The <literal>JsonValidateTask</literal> checks
+            if a given file contains valid JSON data and fails if not.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Location of the file to be checked.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;jsonvalidate file="config/default.json" /&gt;</programlisting>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="LoadFileTask">
         <title>LoadFileTask </title>
         <para>The <literal>LoadFileTask</literal> loads the contents of a (text) file into a single
@@ -2829,6 +3094,63 @@ verbose="true" failonerror="false" /></programlisting>
             <itemizedlist>
                 <listitem>
                     <para><literal><link linkend="app.corefilters">filterchain</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="ManifestTask">
+        <title>ManifestTask</title>
+        <para>This task generates a simple manifest file with optional checksums.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>salt</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Salt to use when generating checksums.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>checksum</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Comma separated list of checksums (hashing algorithms) to run, or <literal>false</literal> to disable checksum generation.
+                            Possible values are <literal>md5</literal>, <literal>crc32</literal> or any of the algorithms returned by <link
+                                    xlink:href="http://www.php.net/manual/en/function.hash-algos.php"
+                                    role="extern">hash_algos()</link>.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The path to the manifest file.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
                 </listitem>
             </itemizedlist>
         </sect2>
@@ -3001,6 +3323,77 @@ verbose="true" failonerror="false" /></programlisting>
                 </tbody>
             </tgroup>
         </table>
+    </sect1>
+    <sect1 role="taskdef" xml:id="PathToFileSetTask">
+        <title>PathToFileSetTask</title>
+        <para>Coverts a path to a fileset. This is useful if you have a path but need to use a fileset as input
+            in a phing task.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>dir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The root of the directory tree of this FileSet.</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pathrefid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The reference to the path to convert from.</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignorenonrelative</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>This boolean controls what will happen if any of the files in the path are not in the
+                            directory for the fileset. If this is "true" the files are ignored, if this is "false"
+                            a build exception is thrown. (Note: if files are not present no check is made).</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>name</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>This is the identifier of the fileset to create. This fileset will contain the files that
+                            are relative to the directory root. Any files that are not present will not be placed in the
+                            set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;path id="modified.sources.path" dir="C:\Path\to\phing\classes\phing\" />
+                &lt;pathtofileset name="modified.sources.fileset"
+                pathrefid="modified.sources.path"
+                dir="." />
+
+                &lt;copy todir="C:\Path\to\phing\docs\api">
+                &lt;mapper type="glob" from="*.php" to="*.php.bak" />
+                &lt;fileset refid="modified.sources.fileset" />
+                &lt;/copy></programlisting>
+        </sect2>
     </sect1>
     <sect1 role="taskdef" xml:id="PhingTask">
         <title>PhingTask </title>
@@ -3517,6 +3910,538 @@ verbose="true" failonerror="false" /></programlisting>
             </itemizedlist>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="PhpLintTask">
+        <title>PhpLintTask</title>
+        <para> The <literal>PhpLintTask</literal> checks syntax (lint) on one or more PHP source
+            code files.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to source file</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonfailure</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if the linting process encounters an
+                            error.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>errorproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a property that will be set to contain the error string
+                            (if any).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>interpreter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to alternative PHP interpreter</entry>
+                        <entry>Defaults to the <literal>${php.interpreter}</literal> property which is
+                            the interpreter used to execute phing itself.</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>cachefile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>If set, enables writing of last-modified times to
+                            <literal>cachefile</literal>, to speed up processing of files that
+                            rarely change</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>level</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Control the level at which phplint reports status messages. One of
+                            <literal>error</literal>, <literal>warning</literal>,
+                            <literal>info</literal>, <literal>verbose</literal>,
+                            <literal>debug</literal>.</entry>
+                        <entry><literal>debug</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>tofile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File to write list of 'bad files' to.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>deprecatedAsError</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to treat deprecated warnings (introduced in PHP 5.3) as
+                            errors.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;phplint file="path/to/source.php"/></programlisting>
+
+            <para>Checking syntax of one particular source file.</para>
+            <programlisting language="xml">&lt;phplint>
+                &lt;fileset dir="src">
+                &lt;include name="**/*.php"/>
+                &lt;/fileset>
+                &lt;/phplint></programlisting>
+            <para>Check syntax of a fileset of source files.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="PropertyCopy">
+        <title>PropertyCopy</title>
+        <para>Copies the value of a named property to another property. This is useful when you need to plug in the
+            value of another property in order to get a property name and then want to get the value of that property
+            name.
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>override</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If the property is already set, should we change it's value.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>from</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property you wish to copy the value from.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>silent</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Do you want to suppress the error if the "from" property does not exist, and just
+                            not set the property "name".</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="org" value="MyOrg" />
+                &lt;property name="org.MyOrg.DisplayName" value="My Organiziation" />
+                &lt;propertycopy property="displayName" from="org.${org}.DisplayName" /></programlisting>
+            <para>Sets displayName to "My Organiziation".</para>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="PropertyPromptTask">
+        <title>PropertyPromptTask </title>
+        <para><literal>PropertyPromptTask</literal> is a simple task to read in user input into a
+            property. If you need something more advanced, see the <xref xlink:href="#InputTask"
+            />.</para>
+
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>propertyName</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the Property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>promptText</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The text to use for the prompt.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>promptCharacter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The character to use after the prompt.</entry>
+                        <entry>?</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>defaultValue</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A default value to use (if user just hits enter).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>useExistingValue</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Whether existing property should be used if available. (This will
+                            result in user only being prompted if the propertyName property is not
+                            already set.)</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;propertyprompt propertyName="someprop" defaultValue="/var/www"
+                promptText="Enter your web root" />
+                &lt;echo>${someprop}&lt;/echo></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="PropertyRegexTask">
+        <title>PropertyRegexTask</title>
+        <para> Performs regular expression operations on an subject string, and sets the results to a property.
+            There are two different operations that can be performed:
+            <itemizedlist>
+                <listitem>
+                    <para>Replace - The matched regular expression is replaced with a substitution pattern</para>
+                </listitem>
+                <listitem>
+                    <para>Match   - Groupings within the regular expression are matched via a selection expression.</para>
+                </listitem>
+            </itemizedlist>
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>override</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If the property is already set, should we change it's value. Can be <literal>true</literal> or <literal>false</literal></entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>subject</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The subject to be processed</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pattern</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The regular expression pattern which is matched in the subject.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>match</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A pattern which indicates what match pattern you want in the returned value. This uses
+                            the substitution pattern syntax to indicate where to insert groupings created as a result of
+                            the regular expression match.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (unless a replace is specified)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>replace</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A regular expression substitition pattern, which will be used to replace the given
+                            regular expression in the subject.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (unless a match is specified)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>casesensitive</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Should the match be case sensitive</entry>
+                        <entry>true</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>limit</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no limit).</entry>
+                        <entry>-1</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>defaultValue</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The value to set the output property to, if the subject string does not match the specific regular expression.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Match expressions</title>
+            <para>Expressions are matched in a the same syntax as a regular expression substitution pattern.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>$0 indicates the entire property name (default).</para>
+                </listitem>
+                <listitem>
+                    <para>$1 indicates the first grouping</para>
+                </listitem>
+                <listitem>
+                    <para>$2 indicates the second grouping</para>
+                </listitem>
+                <listitem>
+                    <para>etc...</para>
+                </listitem>
+            </itemizedlist>
+        </sect2><sect2>
+        <title>Replace</title>
+        <para>It is important to note that when doing a "replace" operation, if the subject string does not match the
+            regular expression, then the property is not set. You can change this behavior by supplying the "defaultValue"
+            attribute. This attribute should contain the value to set the property to in this case.</para>
+        <itemizedlist>
+            <listitem>
+                <para>$0 indicates the entire property name (default).</para>
+            </listitem>
+            <listitem>
+                <para>$1 indicates the first grouping</para>
+            </listitem>
+            <listitem>
+                <para>$2 indicates the second grouping</para>
+            </listitem>
+            <listitem>
+                <para>etc...</para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;propertyregex property="pack.name"
+                subject="package.ABC.name"
+                pattern="package\.([^.]*)\.name"
+                match="$1"
+                casesensitive="false"
+                defaultvalue="test1"/>
+
+                &lt;echo message="${pack.name}"/>
+
+                &lt;propertyregex property="pack.name"
+                override="true"
+                subject="package.ABC.name"
+                pattern="(package)\.[^.]*\.(name)"
+                replace="$1.DEF.$2"
+                casesensitive="false"
+                defaultvalue="test2"/>
+
+                &lt;echo message="${pack.name}"/></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="PropertySelector">
+        <title>PropertySelector</title>
+        <para> Selects property names that match a given regular expression and returns them in a delimited list
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>override</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If the property is already set, should we change it's value. Can be <literal>true</literal> or <literal>false</literal></entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>match</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The regular expression which is used to select property names for inclusion in the list.
+                            This follows the standard regular expression syntax accepted by phing's regular expression tasks.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>select</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A pattern which indicates what selection pattern you want in the returned list.
+                            This used the substitution pattern syntax to indicate where to insert groupings created
+                            as a result of the regular expression match.</entry>
+                        <entry>\0</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>casesensitive</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Should the match be case sensitive.</entry>
+                        <entry>true</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>replace</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A regular expression substitition pattern, which will be used to replace the given
+                            regular expression in the subject.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (unless a match is specified)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>casesensitive</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Should the match be case sensitive</entry>
+                        <entry>true</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delimiter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The delimiter used to separate entries in the resulting property</entry>
+                        <entry>,</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>distinct</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Should the returned entries be a distinct set (no duplicate entries).</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Select expressions</title>
+            <para>Expressions are matched in a the same syntax as a regular expression substitution pattern.</para>
+            <itemizedlist>
+                <listitem>
+                    <para>$0 indicates the entire property name (default).</para>
+                </listitem>
+                <listitem>
+                    <para>$1 indicates the first grouping</para>
+                </listitem>
+                <listitem>
+                    <para>$2 indicates the second grouping</para>
+                </listitem>
+                <listitem>
+                    <para>etc...</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="package.ABC.name" value="abc pack name" />
+                &lt;property name="package.DEF.name" value="def pack name" />
+                &lt;property name="package.GHI.name" value="ghi pack name" />
+                &lt;property name="package.JKL.name" value="jkl pack name" />
+
+                &lt;propertyselector property="pack.list"
+                delimiter=","
+                match="package\.([^\.]*)\.name"
+                select="$1"
+                casesensitive="false" /></programlisting>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="PropertyTask">
         <title>PropertyTask </title>
         <para>With <literal>PropertyTask</literal>, you can define <literal>user</literal> properties in
@@ -3547,8 +4472,8 @@ verbose="true" failonerror="false" /></programlisting>
                         <entry>The name of the Property.</entry>
                         <entry>n/a</entry>
                         <entry>Yes (unless using
-                        <literal>file</literal> or
-                        <literal>environment</literal>)</entry>
+                            <literal>file</literal> or
+                            <literal>environment</literal>)</entry>
                     </row>
                     <row>
                         <entry><literal>value</literal></entry>
@@ -3556,8 +4481,8 @@ verbose="true" failonerror="false" /></programlisting>
                         <entry>The value of the Property.</entry>
                         <entry>n/a</entry>
                         <entry>Yes (unless using
-                        <literal>file</literal> or
-                        <literal>environment</literal>)</entry>
+                            <literal>file</literal> or
+                            <literal>environment</literal>)</entry>
                     </row>
                     <row>
                         <entry><literal>environment</literal></entry>
@@ -3629,27 +4554,27 @@ verbose="true" failonerror="false" /></programlisting>
                 called inside a <literal>&lt;phingcall></literal> tag, any properties are set in a
                 new local scope. Thus, any properties or other variables set inside that scope will
                 cease to exist (or revert to their previous value) once the parent
-                    <literal>&lt;phingcall></literal> tag completes.</para>
+                <literal>&lt;phingcall></literal> tag completes.</para>
         </note>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">&lt;property name="strings.test" value="Harr harr, more power!" />
-&lt;echo message="${strings.test}" />
+                &lt;echo message="${strings.test}" />
 
-&lt;property name="foo.bar" value="Yet another property..." />
-&lt;echo message="${foo.bar}" />
+                &lt;property name="foo.bar" value="Yet another property..." />
+                &lt;echo message="${foo.bar}" />
 
-&lt;property file="build.properties" />
+                &lt;property file="build.properties" />
 
-&lt;property environment="env" />
+                &lt;property environment="env" />
 
-&lt;property name="newproperty" value="Hello"&gt;
-  &lt;filterchain&gt;
-    &lt;replaceregexp&gt;
-      &lt;regexp pattern="Hello" replace="World" ignoreCase="true"/&gt;
-    &lt;/replaceregexp&gt;
-  &lt;/filterchain&gt;
-&lt;/property&gt;</programlisting>
+                &lt;property name="newproperty" value="Hello"&gt;
+                &lt;filterchain&gt;
+                &lt;replaceregexp&gt;
+                &lt;regexp pattern="Hello" replace="World" ignoreCase="true"/&gt;
+                &lt;/replaceregexp&gt;
+                &lt;/filterchain&gt;
+                &lt;/property&gt;</programlisting>
         </sect2>
         <sect2 role="nestedtags">
             <title>Supported Nested Tags:</title>
@@ -3658,78 +4583,6 @@ verbose="true" failonerror="false" /></programlisting>
                     <para><literal><link linkend="app.corefilters">filterchain</link></literal></para>
                 </listitem>
             </itemizedlist>
-        </sect2>
-    </sect1>
-    <sect1 role="taskdef" xml:id="PropertyPromptTask">
-        <title>PropertyPromptTask </title>
-        <para><literal>PropertyPromptTask</literal> is a simple task to read in user input into a
-            property. If you need something more advanced, see the <xref xlink:href="#InputTask"
-            />.</para>
-
-
-        <table>
-            <title>Attributes</title>
-            <tgroup cols="5">
-                <colspec colname="name" colnum="1" colwidth="1.5*"/>
-                <colspec colname="type" colnum="2" colwidth="0.8*"/>
-                <colspec colname="description" colnum="3" colwidth="3.5*"/>
-                <colspec colname="default" colnum="4" colwidth="0.8*"/>
-                <colspec colname="required" colnum="5" colwidth="1.2*"/>
-                <thead>
-                    <row>
-                        <entry>Name</entry>
-                        <entry>Type</entry>
-                        <entry>Description</entry>
-                        <entry>Default</entry>
-                        <entry>Required</entry>
-                    </row>
-                </thead>
-                <tbody>
-                    <row>
-                        <entry><literal>propertyName</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>The name of the Property to set.</entry>
-                        <entry>n/a</entry>
-                        <entry>Yes</entry>
-                    </row>
-                    <row>
-                        <entry><literal>promptText</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>The text to use for the prompt.</entry>
-                        <entry>n/a</entry>
-                        <entry>Yes</entry>
-                    </row>
-                    <row>
-                        <entry><literal>promptCharacter</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>The character to use after the prompt.</entry>
-                        <entry>?</entry>
-                        <entry>No</entry>
-                    </row>
-                    <row>
-                        <entry><literal>defaultValue</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>A default value to use (if user just hits enter).</entry>
-                        <entry>n/a</entry>
-                        <entry>No</entry>
-                    </row>
-                    <row>
-                        <entry><literal>useExistingValue</literal></entry>
-                        <entry><literal role="type">String</literal></entry>
-                        <entry>Whether existing property should be used if available. (This will
-                            result in user only being prompted if the propertyName property is not
-                            already set.)</entry>
-                        <entry><literal>false</literal></entry>
-                        <entry>No</entry>
-                    </row>
-                </tbody>
-            </tgroup>
-        </table>
-        <sect2>
-            <title>Examples</title>
-            <programlisting language="xml">&lt;propertyprompt propertyName="someprop" defaultValue="/var/www"
-        promptText="Enter your web root" />
-&lt;echo>${someprop}&lt;/echo></programlisting>
         </sect2>
     </sect1>
     <sect1 role="taskdef" xml:id="RecordTask">
@@ -3883,6 +4736,67 @@ verbose="true" failonerror="false" /></programlisting>
                 </listitem>
                 <listitem>
                     <para><literal><link linkend="app.corefilters">filterchain</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="ReplaceRegexpTask">
+        <title>ReplaceRegexpTask</title>
+        <para>Replaces the occurrences of a given regular expression with a substitution pattern
+            in a selected file or set of files.</para>
+        <table>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File to apply regular expression on</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or <literal>fileset</literal>)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>match</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Regular expression match pattern</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or <literal>pattern</literal>)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pattern</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Regular expression match pattern</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>replace</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The replacement string</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
                 </listitem>
             </itemizedlist>
         </sect2>
@@ -4239,6 +5153,182 @@ BUILD FAILED
             <programlisting language="xml">&lt;sleep seconds="2"/></programlisting>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="SortList">
+        <title>SortList</title>
+        <para>Sort a delimited list of items in their natural string order.
+            Note that the <literal>value</literal> and <literal>refid</literal>
+            attributes are mutually exclusive, and the value attribute takes
+            precedence if both are specified.
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>overwrite</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If the property is already set, should we change it's value.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>value</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The list of values to process, with the delimiter character,
+                            indicated by the "delimiter" attribute, separating each value.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes, unless "refid" is specified.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>refid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The id of where the list of values to sort is stored.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes, unless "value" is specified.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delimiter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The delimiter string that separates the values in the
+                            "list" attribute.</entry>
+                        <entry>,</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>flags</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Sort flags depending on the php version and one of:
+                            SORT_REGULAR, SORT_NUMERIC, SORT_STRING, SORT_LOCALE_STRING,
+                            SORT_NATURAL, SORT_FLAG_CASE</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property id="test" name="my.list" value="z;y;X;w;v;U;t" />
+                &lt;sortlist property="my.sorted.list" refid="test"
+                delimiter=";"
+                flags="SORT_NATURAL|SORT_FLAG_CASE" /></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="SymlinkTask">
+        <title>SymlinkTask</title>
+        <para>Creates symlink(s) to a specified file / directory or a collection of files /
+            directories.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>target</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>What you're trying to symlink from</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or nested FileSet)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>link</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Where you'd like the symlink(s)</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>overwrite</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to override the symlink if it exists but points to a
+                            different location</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>relative</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to create relative symlinks</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <para>Single symlink</para>
+            <programlisting language="xml">&lt;symlink target="/path/to/original/file" link="/where/to/symlink" /></programlisting>
+            <para>Using filesets</para>
+            <programlisting language="xml">&lt;symlink link="/where/to/symlink">
+                &lt;fileset dir="/some/directory">
+                &lt;include name="*" />
+                &lt;/fileset>
+                &lt;/symlink></programlisting>
+            <para>In the fileset example, assuming the contents of "/some/directory" were:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Somedir</para>
+                </listitem>
+                <listitem>
+                    <para>somefile</para>
+                </listitem>
+            </itemizedlist>
+            <para>Then the contents of "/where/to/symlink" would be:</para>
+            <itemizedlist>
+                <listitem>
+                    <para>Somedir -> /some/directory/Somedir</para>
+                </listitem>
+                <listitem>
+                    <para>somefile -> /some/directory/somefile</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="SwitchTask">
         <title>SwitchTask </title>
         <para>Task definition for the phing task to switch on a particular value.</para>
@@ -4512,13 +5602,75 @@ file defines a task in the format: name=path.to.Task -->
             <para>create a temporary file in the <literal>build</literal> subdirectory</para>
         </sect2>
     </sect1>
+    <sect1 role="taskdef" xml:id="ThrowTask">
+        <title>ThrowTask</title>
+        <para> Extension of build in <literal>FailTask</literal> that can throw an exception that is given by a reference.
+            This may be useful if you want to rethrow the exception that has been caught by a <literal>TryCatchTask</literal>
+            in the &lt;catch> block.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>refid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Id of the referenced exception.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <note>
+            <para>In addition, all attributes of the <literal>FailTask</literal> are supported.</para>
+        </note>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;target name="tryCatchThrow">
+                &lt;trycatch property="foo" reference="bar">
+                &lt;try>
+                &lt;fail>Tada!&lt;/fail>
+                &lt;/try>
+
+                &lt;catch>
+                &lt;echo>In &lt;catch&gt;.&lt;/echo>
+                &lt;/catch>
+
+                &lt;finally>
+                &lt;echo>In &lt;finally&gt;.&lt;/echo>
+                &lt;/finally>
+                &lt;/trycatch>
+
+                &lt;echo>As property: ${foo}&lt;/echo>
+                &lt;property name="baz" refid="bar" />
+                &lt;echo>From reference: ${baz}&lt;/echo>
+
+                &lt;echo>Throw ...&lt;/echo>
+                &lt;throw refid="bar" />
+
+                &lt;/target></programlisting>
+        </sect2>
+    </sect1>
     <sect1 role="taskdef" xml:id="TouchTask">
         <title>TouchTask </title>
         <para>The <literal>TouchTask</literal> works like the Unix <literal>touch</literal> command: It
             sets the <literal>modtime</literal> of a file to a specific time. Default is the current
             time.</para>
-
-
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
@@ -4553,10 +5705,25 @@ file defines a task in the format: name=path.to.Task -->
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>seconds</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
+                        <entry><literal>now</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>millis</literal></entry>
                         <entry><literal role="type">Integer</literal></entry>
-                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix
-                            epoche).</entry>
+                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch).
+                            Note: milliseconds are converted to seconds internally. When using
+                            this option the value must be greater than 1000.</entry>
+                        <entry><literal>now</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>seconds</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
                         <entry><literal>now</literal></entry>
                         <entry>No</entry>
                     </row>
@@ -4682,7 +5849,7 @@ file defines a task in the format: name=path.to.Task -->
             <programlisting language="xml">&lt;truncate file="foo" /></programlisting>
         </sect2>
     </sect1>
-    <sect1 role="trycatch" xml:id="TryCatchTask">
+    <sect1 role="taskdef" xml:id="TryCatchTask">
         <title>TryCatchTask</title>
         <para>This task is a wrapper task that lets you run tasks(s) when another set of tasks fails,
             mirroring PHP's <literal>try/catch</literal> functionality (with the addition of
@@ -5053,6 +6220,237 @@ Includes the Type named "CustomProject" and makes it available by
                 </listitem>
             </itemizedlist>
         </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="URLEncodeTask">
+        <title>URLEncodeTask</title>
+        <para> The URLEncode task will encode a given property for use within a a URL string. This value which is
+            actually set will be encoded via the urlencode() function. Typically, you must do this
+            for all parameter values within a URL.
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>override</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If the property is already set, should we change it's value. Can be <literal>true</literal> or <literal>false</literal></entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>value</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The value of the property.</entry>
+                        <entry>n/a</entry>
+                        <entry>No, if refid is specified</entry>
+                    </row>
+                    <row>
+                        <entry><literal>refid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The id of a saved reference whose value will be the value of the property.</entry>
+                        <entry>n/a</entry>
+                        <entry>No, if value is specified</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;urlencode name="file.location" value="C:\\wwwhome\\my reports\\report.xml" /></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="Variable">
+        <title>Variable</title>
+        <para> The Variable task provides a mutable property to Phing and works much
+            like variable assignment in PHP. This task is similar to the standard
+            Phing Property task, except that THESE PROPERTIES ARE MUTABLE.
+            While this goes against the standard Phing use of properties,
+            occasionally it is useful to be able to change a property value within
+            the build. In general, use of this task is DISCOURAGED, and the standard
+            Phing Property should be used if possible. Having said that, in real
+            life I use this a lot.</para>
+        <para>
+            Variables can be set individually or loaded from a standard properties
+            file. A 'feature' of variables is that they can override properties,
+            but properties cannot override variables.
+            So if an already established property exists, its value can be reassigned
+            by use of this task.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>name</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to set.</entry>
+                        <entry>None</entry>
+                        <entry>Yes, unless 'file' is used.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>value</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The value of the property.</entry>
+                        <entry>""</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>unset</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Removes the property from the project as if it had never been set.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a standard properties file to load variables from.</entry>
+                        <entry>None</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;var name="x" value="6"/>
+                &lt;echo>x = ${x}&lt;/echo>   &lt;!-- print: 6 -->
+
+                &lt;var name="x" value="12"/>
+                &lt;echo>x = ${x}&lt;/echo>   &lt;!-- print: 12 -->
+
+                &lt;var name="x" value="6 + ${x}"/>
+                &lt;echo>x = ${x}&lt;/echo>   &lt;!-- print: 6 + 12 -->
+
+                &lt;var name="str" value="I "/>
+                &lt;var name="str" value="${str} am "/>
+                &lt;var name="str" value="${str} a "/>
+                &lt;var name="str" value="${str} string."/>
+                &lt;echo>${str}&lt;/echo>     &lt;!-- print: I am a string. -->
+
+                &lt;var name="x" value="6"/>
+                &lt;echo>x = ${x}&lt;/echo>   &lt;!-- print: 6 -->
+
+                &lt;property name="x" value="12"/>
+                &lt;echo>x = ${x}&lt;/echo>   &lt;!-- print: 6 (property can't override) -->
+
+                &lt;var name="x" value="blue"/>
+                &lt;tstamp>
+                &lt;format property="x" pattern="%A"/>
+                &lt;/tstamp>
+                &lt;echo>Today is ${x}.&lt;/echo> &lt;!-- print: Today is blue. -->
+
+                &lt;var name="x" value="" unset="true"/>
+                &lt;tstamp>
+                &lt;format property="x" pattern="%A"/>
+                &lt;/tstamp>
+                &lt;echo>Today is ${x}.&lt;/echo> &lt;!-- print: Today is Friday. --></programlisting>
+        </sect2>
+    </sect1>
+    <sect1 role="taskdef" xml:id="VersionTask">
+        <title>VersionTask</title>
+        <para> The <literal>VersionTask</literal> increments a three-part version number from a
+            given file and writes it back to the file. The resulting version number is also
+            published under supplied property.</para>
+        <para>The version number in the text file is expected in the format of Major.Minor.Bugfix
+            (e.g. 1.3.2). Alternatively you can use 'v' as prefix (e.g. v1.3.2).</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>releasetype</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specifies desired version release (Major, Minor or Bugfix)</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File containing three-part version number to increment</entry>
+                        <entry><literal>build.version</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Property which contains the resulting version number</entry>
+                        <entry><literal>build.version</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>propFile</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If <literal>true</literal>, version will be saved using <emphasis>property file</emphasis> format (i.e. key=value).</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>startingVersion</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Starting version string, if version file does not exist.</entry>
+                        <entry><literal>0.0.0</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;version releasetype="Major" file="version.txt" property="version.number"/></programlisting>
+            <programlisting language="xml">&lt;version releasetype="Minor" startingVersion="v5.7" propFile="true"/></programlisting>
+        </sect2>
+
     </sect1>
     <sect1 role="taskdef" xml:id="WaitForTask">
         <title>WaitForTask</title>

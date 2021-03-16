@@ -299,19 +299,19 @@
             <title> How Phing Parses Buildfiles </title>
             <para>Phing uses an ExpatParser class and PHP's native expat XML functions to handle the
                 parsing of build files. The handler classes all extend the
-                phing.parser.AbstractHandler class. These handler classes "handle" the tags that are
-                found in the buildfile.</para>
+                <literal>Phing\Parser\AbstractHandler</literal> class. These handler classes "handle"
+                the tags that are found in the buildfile.</para>
             <para>Core tasks and datatypes are mapped to XML tag names in the defaults.properties
                 files -- specifically phing/tasks/defaults.properties and
                 phing/types/defaults.properties.</para>
             <para>It works roughly like this:</para>
             <orderedlist>
                 <listitem>
-                    <para><literal>phing.parser.RootHandler</literal> is registered to handle the
+                    <para><literal>Phing\Parser\RootHandler</literal> is registered to handle the
                         buildfile XML document</para>
                 </listitem>
                 <listitem>
-                    <para>RootHanlder expects to find exactly one element:
+                    <para>RootHandler expects to find exactly one element:
                             <literal>&lt;project></literal>. RootHandler invokes the ProjectHandler
                         with the attributes from the &lt;project> tag or throws an exception if no
                         &lt;project> is found, or if something else is found instead.</para>
@@ -360,7 +360,7 @@
 
             <programlisting language="php">&lt;?php
 
-require_once "phing/Task.php";
+use Phing\Task;
 
 class MyEchoTask extends Task {
 
@@ -902,12 +902,12 @@ class DSN extends DataType {
             <title> Creating a Mapper </title>
             <para>Writing filename mappers is simplified by interface support in PHP5. Essentially,
                 your custom filename mapper must implement
-                    <literal>phing.mappers.FileNameMapper</literal>. Here's an example of a filename
+                    <literal>Phing\Mapper\FileNameMapper</literal>. Here's an example of a filename
                 mapper that creates DOS-style file names. For this example, the "to" and "from"
                 attributes are not needed because all files will be transformed. To see the "to" and
-                "from" attributes in action, look at <literal>phing.mappers.GlobMapper</literal> or
-                    <literal>phing.mappers.RegexpMapper</literal>.</para>
-            <programlisting language="php">require_once "phing/mappers/FileNameMapper.php";
+                "from" attributes in action, look at <literal>Phing\Mapper\GlobMapper</literal> or
+                    <literal>Phing\Mapper\RegexpMapper</literal>.</para>
+            <programlisting language="php">use Phing\Mapper\FileNameMapper;
 
 /**
  * A mapper that makes those ugly DOS filenames.
@@ -969,4 +969,68 @@ class DOSMapper implements FileNameMapper {
         </sect2>
     </sect1>
 
+    <sect1>
+        <title>Writing Selectors</title>
+        <para>Custom selectors are datatypes that implement <literal>Phing\Type\Selector\FileSelector</literal>.</para>
+        <para>There is only one method required,
+            <literal>public function isSelected(PhingFile $basedir, string $filename, PhingFile $file): bool</literal>.
+        It returns true or false depending on whether the given file should be selected or not.</para>
+        <para>An example of a custom selection that selects filenames ending in <literal>.php</literal> would be:</para>
+        <programlisting language="php">class PhpSelector implements FileSelector
+{
+    public function isSelected(PhingFile $b, string $filename, PhingFile $f)
+    {
+        return StringHelper::endsWith('.php', strtolower($filename));
+    }
+}
+</programlisting>
+        <para>Adding the selector to the system is achieved as follows:</para>
+        <programlisting language="xml">&lt;typedef
+            name="phpselector"
+            classname="PhpSelector"/>
+</programlisting>
+        <para>This selector can now be used wherever a Core Phing selector is used, for example:</para>
+        <programlisting language="xml">&lt;copy todir="to">
+    &lt;fileset dir="src">
+        &lt;phpselector/>
+    &lt;/fileset>
+&lt;/copy>
+</programlisting>
+    </sect1>
+
+    <sect1>
+        <title>Writing Conditions</title>
+        <para>Custom conditions are datatypes that implement <literal>Phing\Task\System\Condition\Condition</literal>.
+            For example a custom condition that returns true if a string is all upper case could be written as:</para>
+        <programlisting language="php">class AllUpperCaseCondition implements Condition
+{
+    private $value;
+
+    // The setter for the "value" attribute
+    public function setValue(string $value)
+    {
+        $this->value = $value;
+    }
+
+    // This method evaluates the condition
+    public function evaluate()
+    {
+        if ($this->value === null) {
+            throw new BuildException("value attribute is not set");
+        }
+        return strtoupper($this->value) === $this->value;
+    }
+}
+</programlisting>
+        <para>Adding the condition to the system is achieved as follows:</para>
+        <programlisting language="xml">&lt;typedef
+    name="alluppercase"
+    classname="AllUpperCaseCondition"/>
+</programlisting>
+        <para>This condition can now be used wherever a Core Phing condition is used.</para>
+        <programlisting language="xml">&lt;condition property="allupper">
+    &lt;alluppercase value="THIS IS ALL UPPER CASE"/>
+&lt;/condition>
+</programlisting>
+    </sect1>
 </chapter>

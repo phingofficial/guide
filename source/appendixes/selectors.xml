@@ -190,27 +190,41 @@
                     </row>
                     <row>
                         <entry><literal>seconds</literal></entry>
-                        <entry>The number of seconds since 1970 that should be tested for.</entry>
+                        <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch) that should be
+                            tested for.</entry>
+                        <entry>n/a</entry>
+                    </row>
+                    <row>
+                        <entry><literal>millis</literal></entry>
+                        <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch) that should be
+                            tested for. Note: It will be internaly converted to seconds.</entry>
                         <entry>n/a</entry>
                     </row>
                     <row>
                         <entry><literal>when</literal></entry>
                         <entry>Indicates how to interpret the date, whether the files to be selected
                             are those whose last modified times should be before, after, or equal to
-                            the specified value. Accepted values are: <literal>before</literal> -
-                            select files whose last modified date is before the indicated date
+                            the specified value. Accepted values are:
+                            <itemizedlist><listitem><para>
+                                <literal>before</literal> - select files whose last modified date is
+                                    before the indicated date
+                            </para></listitem></itemizedlist>
+                            <itemizedlist><listitem><para>
                                 <literal>after</literal> - select files whose last modified date is
-                            after the indicated date <literal>equal</literal> - select files whose
-                            last modified date is this exact date </entry>
+                                    after the indicated date
+                            </para></listitem></itemizedlist>
+                            <itemizedlist><listitem><para>
+                                <literal>equal</literal> - select files whose last modified date is
+                                    this exact date
+                            </para></listitem></itemizedlist>
+                        </entry>
                         <entry>equal</entry>
                         <entry>No</entry>
                     </row>
                     <row>
                         <entry><literal>granularity</literal></entry>
-                        <entry>The number of milliseconds leeway to use when comparing file
-                            modification times. This is needed because not every file system
-                            supports tracking the last modified time to the millisecond
-                            level.</entry>
+                        <entry>The number of seconds leeway to use when comparing file
+                            modification times.</entry>
                         <entry>0</entry>
                         <entry>No</entry>
                     </row>
@@ -723,6 +737,175 @@
                 </tbody>
             </tgroup>
         </table>
+    </sect1>
+    <sect1 role="typedef" xml:id="Modified" xreflabel="&lt;Modified>">
+        <title>Modified </title>
+        
+        <para>The <literal>&lt;modified></literal> selector computes a value for a file, compares that to the value
+            stored in a cache and select the file, if these two values differ.</para>
+        <para>Because this selector is highly configurable the order in which the selection is done is:</para>
+        <orderedlist>
+            <listitem>get the absolute path for the file</listitem>
+            <listitem>get the cached value from the configured cache (absolute path as key)</listitem>
+            <listitem>get the new value from the configured algorithm</listitem>
+            <listitem>compare these two values with the configured comparator</listitem>
+            <listitem>update the cache if needed and requested</listitem>
+            <listitem>do the selection according to the comparison result</listitem>
+        </orderedlist>
+        <para>The comparison, computing of the hashvalue and the store is done by implementation of special interfaces.
+            Therefore they may provide additional parameters.</para>
+        <table>
+            <title> Attributes for the <literal>&lt;modified></literal> selector </title>
+            <tgroup cols="4">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="description" colnum="2" colwidth="3*"/>
+                <colspec colname="default" colnum="3" colwidth="1*"/>
+                <colspec colname="required" colnum="4" colwidth="1*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>algorithm</literal></entry>
+                        <entry>The type of algorithm should be used. Acceptable values are (further information see later):
+                            <itemizedlist>
+                                <listitem>hashfile</listitem>
+                                <listitem>lastmodified</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>hashfile</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>cache</literal></entry>
+                        <entry>The type of cache should be used. Acceptable values are (further information see later):
+                            <itemizedlist>
+                                <listitem>propertyfile</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>propertyfile</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>comparator</literal></entry>
+                        <entry>The type of comparator should be used. Acceptable values are:
+                            <itemizedlist>
+                                <listitem>equal</listitem>
+                            </itemizedlist>
+                        </entry>
+                        <entry><literal>equal</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>algorithmclass</literal></entry>
+                        <entry>Classname of custom algorithm implementation. Lower priority than algorithm.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>cacheclass</literal></entry>
+                        <entry>Classname of custom cache implementation. Lower priority than cache.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>comparatorclass</literal></entry>
+                        <entry>Classname of custom comparator implementation. Lower priority than comparator.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>update</literal></entry>
+                        <entry>Should the cache be updated when values differ? (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>seldirs</literal></entry>
+                        <entry>Should directories be selected? (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delayupdate</literal></entry>
+                        <entry>If set to "true", the storage of the cache will be delayed until the next finished BuildEvent;
+                            task finished, target finished or build finished, whichever comes first.
+                            This is provided for increased performance. If set to "false", the storage of the cache will
+                            happen with each change. This attribute depends upon the update attribute. (boolean)</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Parameters specified as nested elements</title>
+            <para>All attributes of a &lt;modified> selector an be set with nested &lt;param/> tags.
+                Additional values can be set with &lt;param/> tags according to the rules below.</para>
+            <table>
+                <title>algorithm</title>
+                <tgroup cols="4">
+                    <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                    <colspec colname="description" colnum="2" colwidth="3*"/>
+                    <colspec colname="default" colnum="3" colwidth="1*"/>
+                    <colspec colname="required" colnum="4" colwidth="1*"/>
+                    <thead>
+                        <row>
+                            <entry>Name</entry>
+                            <entry>Description</entry>
+                            <entry>Default</entry>
+                            <entry>Required</entry>
+                        </row>
+                    </thead>
+                    <tbody>
+                        <row>
+                            <entry><literal>hashfile</literal></entry>
+                            <entry>This Algorithm supports the following attribute:
+                                <itemizedlist>
+                                    <listitem>algorithm.algorithm (optional): Name of the hashfile algorithm (e.g. "MD5" or "SHA"); default is "MD5"</listitem>
+                                </itemizedlist>
+                            </entry>
+                            <entry>n/a</entry>
+                            <entry>No</entry>
+                        </row>
+                        <row>
+                            <entry><literal>lastmodified</literal></entry>
+                            <entry>Uses the lastModified property of a file. No additional configuration is required.</entry>
+                            <entry>n/a</entry>
+                            <entry>No</entry>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </table>
+        </sect2>
+        <sect2>
+            <title>Examples</title>
+            <para>Here are some examples of how to use the Modified Selector:</para>
+            <programlisting language="xml">&lt;copy todir="dest">
+    &lt;fileset dir="src">
+        &lt;modified/>
+    &lt;/fileset>
+&lt;/copy></programlisting>
+            <para>This will copy all files from src to dest which content has changed.
+                Using an updating PropertyfileCache with cache.properties and MD5-FilehashAlgorithm.</para>
+            <programlisting language="xml">&lt;copy todir="dest">
+    &lt;fileset dir="src">
+        &lt;modified update="true"
+              seldirs="true"
+              cache="propertyfile"
+              algorithm="digest"
+              comparator="equal">
+            &lt;param name="cache.cachefile"     value="cache.properties"/>
+            &lt;param name="algorithm.algorithm" value="md5"/>
+        &lt;/modified>
+    &lt;/fileset>
+&lt;/copy></programlisting>
+        </sect2>
     </sect1>
     <sect1 role="typedef" xml:id="None" xreflabel="&lt;None>">
         <title>None </title>

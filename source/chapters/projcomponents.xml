@@ -285,7 +285,7 @@
     &lt;token key="BC_PATH_USER" value="${top.builddir}/testsite/user/${lang}/"/>
   &lt;/replacetokens>
 
-  &lt;filterreader classname="phing.filters.TailFilter">
+  &lt;filterreader classname="Phing\Filter\TailFilter">
     &lt;param name="lines" value="10"/>
   &lt;/filterreader>
 &lt;/filterchain></programlisting>
@@ -304,7 +304,7 @@
 
 &lt;!-- OR: -->
 
-&lt;filterreader classname="phing.filters.ReplaceTokens">
+&lt;filterreader classname="Phing\Filter\ReplaceTokens">
   &lt;param type="token" name="BC_PATH" value="${top.builddir}/"/>
   &lt;param type="token" name="BC_PATH"
   value="${top.builddir}/testsite/user/${lang}/"/>
@@ -348,7 +348,7 @@
   &lt;mapper type="regexp" from="^(.*)\.ent\.xml$" to="\1.php"/>
 
   &lt;filterchain>
-    &lt;filterreader classname="phing.filters.XsltFilter">
+    &lt;filterreader classname="Phing\Filter\XsltFilter">
       &lt;param name="style" value="ent2php.xsl"/>
     &lt;/filterreader>
   &lt;/filterchain>
