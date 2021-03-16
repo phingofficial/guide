@@ -79,7 +79,7 @@
     &lt;token key="BC_PATH_USER" value="${top.builddir}/testsite/user/${lang}/"/&gt;
   &lt;/replacetokens&gt;
 
-  &lt;filterreader classname="phing.filters.TailFilter"&gt;
+  &lt;filterreader classname="Phing\Filter\TailFilter"&gt;
     &lt;param name="lines" value="10"/&gt;
   &lt;/filterreader&gt;
 &lt;/filterchain&gt;</pre>
@@ -98,7 +98,7 @@
 
 &lt;!-- OR: --&gt;
 
-&lt;filterreader classname="phing.filters.ReplaceTokens"&gt;
+&lt;filterreader classname="Phing\Filter\ReplaceTokens"&gt;
   &lt;param type="token" name="BC_PATH" value="${top.builddir}/"/&gt;
   &lt;param type="token" name="BC_PATH"
   value="${top.builddir}/testsite/user/${lang}/"/&gt;
@@ -142,7 +142,7 @@
   &lt;mapper type="regexp" from="^(.*)\.ent\.xml$" to="\1.php"/&gt;
 
   &lt;filterchain&gt;
-    &lt;filterreader classname="phing.filters.XsltFilter"&gt;
+    &lt;filterreader classname="Phing\Filter\XsltFilter"&gt;
       &lt;param name="style" value="ent2php.xsl"/&gt;
     &lt;/filterreader&gt;
   &lt;/filterchain&gt;

@@ -7,17 +7,17 @@
             
             <p>Phing uses an ExpatParser class and PHP's native expat XML functions to handle the
                 parsing of build files. The handler classes all extend the
-                phing.parser.AbstractHandler class. These handler classes "handle" the tags that are
-                found in the buildfile.</p>
+                <code class="literal">Phing\Parser\AbstractHandler</code> class. These handler classes "handle"
+                the tags that are found in the buildfile.</p>
             <p>Core tasks and datatypes are mapped to XML tag names in the defaults.properties
                 files -- specifically phing/tasks/defaults.properties and
                 phing/types/defaults.properties.</p>
             <p>It works roughly like this:</p>
             <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
-                    <p><code class="literal">phing.parser.RootHandler</code> is registered to handle the
+                    <p><code class="literal">Phing\Parser\RootHandler</code> is registered to handle the
                         buildfile XML document</p>
                 </li><li class="listitem">
-                    <p>RootHanlder expects to find exactly one element:
+                    <p>RootHandler expects to find exactly one element:
                             <code class="literal">&lt;project&gt;</code>. RootHandler invokes the ProjectHandler
                         with the attributes from the &lt;project&gt; tag or throws an exception if no
                         &lt;project&gt; is found, or if something else is found instead.</p>
