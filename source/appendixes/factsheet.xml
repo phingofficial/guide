@@ -190,10 +190,10 @@
                     </row>
                     <row>
                         <entry><literal>-logger path.to.Logger</literal></entry>
-                        <entry>Specify an alternate logger. Default is phing.listener.AnsiColorLogger.
-                            Other options include phing.listener.NoBannerLogger,
-                            phing.listener.DefaultLogger, phing.listener.XmlLogger,
-                            phing.listener.TargetLogger and phing.listener.HtmlColorLogger.</entry>
+                        <entry>Specify an alternate logger. Default is Phing\Listener\AnsiColorLogger.
+                            Other options include Phing\Listener\NoBannerLogger,
+                            Phing\Listener\DefaultLogger, Phing\Listener\XmlLogger,
+                            Phing\Listener\TargetLogger and Phing\Listener\HtmlColorLogger.</entry>
                     </row>
                     <row>
                         <entry><literal>-f -buildfile &lt;file></literal></entry>
