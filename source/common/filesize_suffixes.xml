@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model xlink:href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+<note xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <para>
+        File size can be written using IEC and SI suffixes, bytes are assumed when suffix is not specified.
+        The following suffixes (case-insensitive) are supported:
+    </para>
+    <table>
+        <title>Supported file size suffixes</title>
+        <tgroup cols="3">
+            <colspec colname="standard" colnum="1" colwidth="1*"/>
+            <colspec colname="suffixes" colnum="2" colwidth="2*"/>
+            <colspec colname="equivalence" colnum="3" colwidth="1*"/>
+            <thead>
+                <row>
+                    <entry>Standard</entry>
+                    <entry>Suffixes</entry>
+                    <entry>Equivalence</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry morerows="4" valign="middle">IEC</entry>
+                    <entry colname="suffixes"><literal>B</literal>.
+                    </entry>
+                    <entry colname="equivalence">1 byte</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>K</literal>, <literal>Ki</literal>, <literal>KiB</literal>,
+                        <literal>kibi</literal>, <literal>kibibyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1024 bytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>M</literal>, <literal>Mi</literal>, <literal>MiB</literal>,
+                        <literal>mebi</literal>, <literal>mebibyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1024 kibibytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>G</literal>, <literal>Gi</literal>, <literal>GiB</literal>,
+                        <literal>gibi</literal>, <literal>gibibyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1024 mebibytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>T</literal>, <literal>Ti</literal>, <literal>TiB</literal>,
+                        <literal>tebi</literal>, <literal>tebibyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1024 gibibytes</entry>
+                </row>
+                <row>
+                    <entry morerows="3" valign="middle">SI</entry>
+                    <entry colname="suffixes">
+                        <literal>kB</literal>, <literal>kilo</literal>, <literal>kilobyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1000 bytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>MB</literal>, <literal>mega</literal>, <literal>megabyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1000 kilobytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>GB</literal>, <literal>giga</literal>, <literal>gigabyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1000 megabytes</entry>
+                </row>
+                <row>
+                    <entry colname="suffixes">
+                        <literal>TB</literal>, <literal>tera</literal>, <literal>terabyte</literal>.
+                    </entry>
+                    <entry colname="equivalence">1000 gigabytes</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+</note>
