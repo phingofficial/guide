@@ -2495,15 +2495,8 @@ verbose="true" failonerror="false" /></programlisting>
                         <entry><literal>unit</literal></entry>
                         <entry><literal role="type">String</literal></entry>
                         <entry>
-                            <para>File size unit. Must be one of the following:</para>
-                            <itemizedlist>
-                                <listitem><para><literal>B</literal>: Bytes</para></listitem>
-                                <listitem><para><literal>K</literal>: Kilobytes (1024 Bytes)</para></listitem>
-                                <listitem><para><literal>M</literal>: Megabytes (1024 Kilobytes)</para></listitem>
-                                <listitem><para><literal>G</literal>: Gigabytes (1024 Megabytes)</para></listitem>
-                                <listitem><para><literal>T</literal>: Terabytes (1024 Gigabytes)</para></listitem>
-                                <listitem><para><literal>P</literal>: Petabytes (1024 Terabytes)</para></listitem>
-                            </itemizedlist>
+                            <para>File size unit. Examples: <literal>M</literal>,
+                                <literal>G</literal>, <literal>T</literal>.</para>
                         </entry>
                         <entry>B</entry>
                         <entry>No</entry>
@@ -2511,6 +2504,7 @@ verbose="true" failonerror="false" /></programlisting>
                 </tbody>
             </tgroup>
         </table>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../common/filesize_suffixes.xml" parse="xml"/>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">
@@ -5773,10 +5767,10 @@ file defines a task in the format: name=path.to.Task -->
         </sect2>
     </sect1>
     <sect1 role="taskdef" xml:id="TruncateTask">
-        <title>TruncateTask </title>
-        <para>Set the length of one file, as the intermittently available
+        <title>TruncateTask</title>
+        <para>Modify the length of a file, as the intermittently available
             truncate Unix utility/function.</para>
-
+        <para>When <literal>length</literal> and <literal>adjust</literal> are not set an empty file is created.</para>
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
@@ -5805,13 +5799,8 @@ file defines a task in the format: name=path.to.Task -->
                     <row>
                         <entry><literal>length</literal></entry>
                         <entry><literal role="type">String</literal></entry>
-                        <entry>Specifies the new file length (in bytes) to set.
-                            The following suffixes are supported:
-                            <itemizedlist>
-                                <listitem><para>"k" : Kilobytes (1024 bytes)</para></listitem>
-                                <listitem><para>"m" : Megabytes (1024 K)</para></listitem>
-                                <listitem><para>"g" : Gigabytes (1024 M)</para></listitem>
-                            </itemizedlist>
+                        <entry>Specifies the file size.
+                            Examples: <literal>5000B</literal>, <literal>250K</literal>, <literal>1M</literal>.
                         </entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
@@ -5819,10 +5808,10 @@ file defines a task in the format: name=path.to.Task -->
                     <row>
                         <entry><literal>adjust</literal></entry>
                         <entry><literal role="type">String</literal></entry>
-                        <entry>Specifies the number of bytes (and positive/negative
-                            direction) by which to adjust file lengths.
-                            The same suffixes are supported for this attribute as for
-                            the <literal>length</literal> attribute.</entry>
+                        <entry>The value to increase or decrease (if you specify a negative value)
+                            the size of a file.
+                            Examples: <literal>-100</literal>, <literal>250B</literal>, <literal>4K</literal>.
+                        </entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
                     </row>
@@ -5844,6 +5833,7 @@ file defines a task in the format: name=path.to.Task -->
                 </tbody>
             </tgroup>
         </table>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../common/filesize_suffixes.xml" parse="xml"/>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">&lt;truncate file="foo" /></programlisting>
