@@ -5,21 +5,57 @@
             limit.</p>
 
         <pre class="programlisting">&lt;fileset dir="${src}"&gt;
-  &lt;size value="4" when="more"/&gt;
+  &lt;size value="4M" when="more"/&gt;
 &lt;/fileset&gt;</pre>
 
 
-        <div class="table"><a name="idp22240"></a><p class="formal-object-title"><span class="label">Table G.9: </span><span class="title"> Attributes for the <code class="literal">&lt;size&gt;</code> selector </span></p><div class="table-contents">
+        <div class="table"><a name="idp22446"></a><p class="formal-object-title"><span class="label">Table G.9: </span><span class="title"> Attributes for the <code class="literal">&lt;size&gt;</code> selector </span></p><div class="table-contents">
             
-            <table class="table" summary=" Attributes for the &lt;size&gt; selector " border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">value</code></td><td>The size of the file which should be tested for.</td><td>n/a</td><td>Yes</td></tr><tr><td><code class="literal">units</code></td><td>The units that the value attribute is expressed in. When using the
-                            standard single letter SI designations, such as "k","M", or "G",
-                            multiples of 1000 are used. If you want to use power of 2 units, use the
-                            IEC standard: "Ki" for 1024, "Mi" for 1048576, and so on. The default is
-                            no units, which means the value attribute expresses the exact number of
-                            bytes.</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">when</code></td><td>Indicates how to interpret the size, whether the files to be selected
+            <table class="table" summary=" Attributes for the &lt;size&gt; selector " border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">value</code></td><td>The size of the file which should be tested for.
+                            Examples: <code class="literal">250M</code>,
+                            <code class="literal">10G</code>, <code class="literal">1T</code>.</td><td>n/a</td><td>Yes</td></tr><tr><td><code class="literal">when</code></td><td>Indicates how to interpret the size, whether the files to be selected
                             should be larger, smaller, or equal to that value. Accepted values are:
-                                <code class="literal">less</code> - select files less than the indicated size
-                                <code class="literal">more</code> - select files greater than the indicated
-                            size <code class="literal">equal</code> - select files this exact size </td><td>equal</td><td>No</td></tr></tbody></table>
+                            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                                    <code class="literal">less</code>
+                                    - select files less than the indicated size
+                                </li><li class="listitem">
+                                    <code class="literal">more</code>
+                                    - select files greater than the indicated size
+                                </li><li class="listitem">
+                                    <code class="literal">equal</code>
+                                    - select files this exact size
+                                </li></ul></div>
+                        </td><td>equal</td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+    <p>
+        File size can be written using IEC and SI suffixes, bytes are assumed when suffix is not specified.
+        The following suffixes (case-insensitive) are supported:
+    </p>
+    <div class="table"><a name="idp22485"></a><p class="formal-object-title"><span class="label">Table G.10: </span><span class="title">Supported file size suffixes</span></p><div class="table-contents">
+        
+        <table class="table" summary="Supported file size suffixes" border="1"><colgroup><col class="standard"><col class="suffixes"><col class="equivalence"></colgroup><thead><tr><th>Standard</th><th>Suffixes</th><th>Equivalence</th></tr></thead><tbody><tr><td rowspan="5" valign="middle">IEC</td><td><code class="literal">B</code>.
+                    </td><td>1 byte</td></tr><tr><td>
+                        <code class="literal">K</code>, <code class="literal">Ki</code>, <code class="literal">KiB</code>,
+                        <code class="literal">kibi</code>, <code class="literal">kibibyte</code>.
+                    </td><td>1024 bytes</td></tr><tr><td>
+                        <code class="literal">M</code>, <code class="literal">Mi</code>, <code class="literal">MiB</code>,
+                        <code class="literal">mebi</code>, <code class="literal">mebibyte</code>.
+                    </td><td>1024 kibibytes</td></tr><tr><td>
+                        <code class="literal">G</code>, <code class="literal">Gi</code>, <code class="literal">GiB</code>,
+                        <code class="literal">gibi</code>, <code class="literal">gibibyte</code>.
+                    </td><td>1024 mebibytes</td></tr><tr><td>
+                        <code class="literal">T</code>, <code class="literal">Ti</code>, <code class="literal">TiB</code>,
+                        <code class="literal">tebi</code>, <code class="literal">tebibyte</code>.
+                    </td><td>1024 gibibytes</td></tr><tr><td rowspan="4" valign="middle">SI</td><td>
+                        <code class="literal">kB</code>, <code class="literal">kilo</code>, <code class="literal">kilobyte</code>.
+                    </td><td>1000 bytes</td></tr><tr><td>
+                        <code class="literal">MB</code>, <code class="literal">mega</code>, <code class="literal">megabyte</code>.
+                    </td><td>1000 kilobytes</td></tr><tr><td>
+                        <code class="literal">GB</code>, <code class="literal">giga</code>, <code class="literal">gigabyte</code>.
+                    </td><td>1000 megabytes</td></tr><tr><td>
+                        <code class="literal">TB</code>, <code class="literal">tera</code>, <code class="literal">terabyte</code>.
+                    </td><td>1000 gigabytes</td></tr></tbody></table>
+    </div></div><br class="table-break">
+</div>
     </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Containsregexp.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.selectors.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="Type.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">G.8 Containsregexp </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> G.10 Type </td></tr></table></div></body></html>

@@ -174,14 +174,43 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.hasfreespace"></a>5.8.11 <code class="literal">hasfreespace</code></h3></div></div></div>
             
             <p>Condition returns true if selected partition has the requested space, false otherwise.</p>
-            <p>Needed attribute can be specified using standard computing terms:</p>
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">K: Kilobytes (1024 bytes)</li><li class="listitem">M: Megabytes (1024K)</li><li class="listitem">G: Gigabytes (1024M)</li><li class="listitem">T: Terabytes (1024G)</li><li class="listitem">P: Petabytes (1024T)</li></ul></div>
-            <div class="table"><a name="idp1632"></a><p class="formal-object-title"><span class="label">Table 5.7: </span><span class="title">hasfreespace Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1625"></a><p class="formal-object-title"><span class="label">Table 5.7: </span><span class="title">hasfreespace Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="hasfreespace Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">partition</code></td><td>Absolute path to the partition/device to check.</td><td>Yes</td></tr><tr><td><code class="literal">needed</code></td><td>The amount of free space required. Examples: <code class="literal">250M</code>,
                                 <code class="literal">10G</code>, <code class="literal">1T</code>.</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
-            <p>On Unix like platforms:</p>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+    <p>
+        File size can be written using IEC and SI suffixes, bytes are assumed when suffix is not specified.
+        The following suffixes (case-insensitive) are supported:
+    </p>
+    <div class="table"><a name="idp1652"></a><p class="formal-object-title"><span class="label">Table 5.8: </span><span class="title">Supported file size suffixes</span></p><div class="table-contents">
+        
+        <table class="table" summary="Supported file size suffixes" border="1"><colgroup><col class="standard"><col class="suffixes"><col class="equivalence"></colgroup><thead><tr><th>Standard</th><th>Suffixes</th><th>Equivalence</th></tr></thead><tbody><tr><td rowspan="5" valign="middle">IEC</td><td><code class="literal">B</code>.
+                    </td><td>1 byte</td></tr><tr><td>
+                        <code class="literal">K</code>, <code class="literal">Ki</code>, <code class="literal">KiB</code>,
+                        <code class="literal">kibi</code>, <code class="literal">kibibyte</code>.
+                    </td><td>1024 bytes</td></tr><tr><td>
+                        <code class="literal">M</code>, <code class="literal">Mi</code>, <code class="literal">MiB</code>,
+                        <code class="literal">mebi</code>, <code class="literal">mebibyte</code>.
+                    </td><td>1024 kibibytes</td></tr><tr><td>
+                        <code class="literal">G</code>, <code class="literal">Gi</code>, <code class="literal">GiB</code>,
+                        <code class="literal">gibi</code>, <code class="literal">gibibyte</code>.
+                    </td><td>1024 mebibytes</td></tr><tr><td>
+                        <code class="literal">T</code>, <code class="literal">Ti</code>, <code class="literal">TiB</code>,
+                        <code class="literal">tebi</code>, <code class="literal">tebibyte</code>.
+                    </td><td>1024 gibibytes</td></tr><tr><td rowspan="4" valign="middle">SI</td><td>
+                        <code class="literal">kB</code>, <code class="literal">kilo</code>, <code class="literal">kilobyte</code>.
+                    </td><td>1000 bytes</td></tr><tr><td>
+                        <code class="literal">MB</code>, <code class="literal">mega</code>, <code class="literal">megabyte</code>.
+                    </td><td>1000 kilobytes</td></tr><tr><td>
+                        <code class="literal">GB</code>, <code class="literal">giga</code>, <code class="literal">gigabyte</code>.
+                    </td><td>1000 megabytes</td></tr><tr><td>
+                        <code class="literal">TB</code>, <code class="literal">tera</code>, <code class="literal">terabyte</code>.
+                    </td><td>1000 gigabytes</td></tr></tbody></table>
+    </div></div><br class="table-break">
+</div>
+            <p>On Unix-like platforms:</p>
             <pre class="programlisting">&lt;hasfreespace partition="/" needed="250M" /&gt;</pre>
             <p>On Windows:</p>
             <pre class="programlisting">&lt;hasfreespace partition="c:" needed="10M" /&gt;</pre>
@@ -190,7 +219,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.isset"></a>5.8.12 <code class="literal">isset</code></h3></div></div></div>
             
             <p>Test whether a given property has been set in this project.</p>
-            <div class="table"><a name="idp1666"></a><p class="formal-object-title"><span class="label">Table 5.8: </span><span class="title">isset Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1735"></a><p class="formal-object-title"><span class="label">Table 5.9: </span><span class="title">isset Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="isset Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">property</code></td><td>The name of the property to test.</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -199,7 +228,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.contains"></a>5.8.13 <code class="literal">contains</code></h3></div></div></div>
             
             <p>Tests whether a string contains another one.</p>
-            <div class="table"><a name="idp1687"></a><p class="formal-object-title"><span class="label">Table 5.9: </span><span class="title">contains Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1756"></a><p class="formal-object-title"><span class="label">Table 5.10: </span><span class="title">contains Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="contains Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">string</code></td><td>The string to search in.</td><td>Yes</td></tr><tr><td><code class="literal">substring</code></td><td>The string to search for.</td><td>Yes</td></tr><tr><td><code class="literal">casesensitive</code></td><td>Perform a case sensitive comparison. Default is true.</td><td>No</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -209,7 +238,7 @@
             
             <p>Tests whether a string evaluates to true.</p>
 
-            <div class="table"><a name="idp1718"></a><p class="formal-object-title"><span class="label">Table 5.10: </span><span class="title">istrue Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1787"></a><p class="formal-object-title"><span class="label">Table 5.11: </span><span class="title">istrue Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="istrue Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">value</code></td><td>value to test</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -221,7 +250,7 @@
             
             <p>Tests whether a string evaluates to not true, the negation of
                     <code class="literal">&lt;istrue&gt;</code></p>
-            <div class="table"><a name="idp1741"></a><p class="formal-object-title"><span class="label">Table 5.11: </span><span class="title">isfalse Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1810"></a><p class="formal-object-title"><span class="label">Table 5.12: </span><span class="title">isfalse Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="isfalse Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">value</code></td><td>value to test</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -233,7 +262,7 @@
             
             <p>Tests whether a property evaluates to true.</p>
 
-            <div class="table"><a name="idp1763"></a><p class="formal-object-title"><span class="label">Table 5.12: </span><span class="title">ispropertytrue Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1832"></a><p class="formal-object-title"><span class="label">Table 5.13: </span><span class="title">ispropertytrue Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="ispropertytrue Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">property</code></td><td>property to test</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -244,7 +273,7 @@
             
             <p>Tests whether a property evaluates to not true, the negation of
                 <code class="literal">&lt;ispropertytrue&gt;</code></p>
-            <div class="table"><a name="idp1786"></a><p class="formal-object-title"><span class="label">Table 5.13: </span><span class="title">ispropertyfalse Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1855"></a><p class="formal-object-title"><span class="label">Table 5.14: </span><span class="title">ispropertyfalse Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="ispropertyfalse Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">property</code></td><td>property name to test</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -254,7 +283,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.referenceexists"></a>5.8.18 <code class="literal">referenceexists</code></h3></div></div></div>
             
             <p>Tests whether a specified reference exists.</p>
-            <div class="table"><a name="idp1808"></a><p class="formal-object-title"><span class="label">Table 5.14: </span><span class="title">referenceexists Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1877"></a><p class="formal-object-title"><span class="label">Table 5.15: </span><span class="title">referenceexists Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="referenceexists Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">ref</code></td><td>reference to test for</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -280,7 +309,7 @@
                 This test does a byte for byte comparison, so test time scales with byte size.
                 NB: if the files are different sizes, one of them is missing or the filenames match
                 the answer is so obvious the detailed test is omitted. </p>
-            <div class="table"><a name="idp1836"></a><p class="formal-object-title"><span class="label">Table 5.15: </span><span class="title">filesmatch Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1905"></a><p class="formal-object-title"><span class="label">Table 5.16: </span><span class="title">filesmatch Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="filesmatch Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">file1</code></td><td>First file to test.</td><td>Yes</td></tr><tr><td><code class="literal">file2</code></td><td>Second file to test.</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -290,7 +319,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.isfileselected"></a>5.8.21 <code class="literal">isfileselected</code></h3></div></div></div>
             
             <p>Test whether a file passes an embedded selector. </p>
-            <div class="table"><a name="idp1863"></a><p class="formal-object-title"><span class="label">Table 5.16: </span><span class="title">isfileselected Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1932"></a><p class="formal-object-title"><span class="label">Table 5.17: </span><span class="title">isfileselected Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="isfileselected Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">file</code></td><td>The file to check if is passes the embedded selector.</td><td>Yes</td></tr><tr><td><code class="literal">basedir</code></td><td>The base directory to use for name based selectors.
                                 It this is not set, the project's basedirectory will be used.</td><td>No</td></tr></tbody></table>
@@ -303,7 +332,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.isfailure"></a>5.8.22 <code class="literal">isfailure</code></h3></div></div></div>
             
             <p>Test the return code of an executable for failure. </p>
-            <div class="table"><a name="idp1890"></a><p class="formal-object-title"><span class="label">Table 5.17: </span><span class="title">isfailure Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1959"></a><p class="formal-object-title"><span class="label">Table 5.18: </span><span class="title">isfailure Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="isfailure Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">code</code></td><td>The return code to test.</td><td>Yes</td></tr></tbody></table>
             </div></div><br class="table-break">
@@ -316,7 +345,7 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="conditions.matches"></a>5.8.23 <code class="literal">matches</code></h3></div></div></div>
             
             <p>Test if the specified string matches the specified regular expression pattern. </p>
-            <div class="table"><a name="idp1912"></a><p class="formal-object-title"><span class="label">Table 5.18: </span><span class="title">matches Attributes</span></p><div class="table-contents">
+            <div class="table"><a name="idp1981"></a><p class="formal-object-title"><span class="label">Table 5.19: </span><span class="title">matches Attributes</span></p><div class="table-contents">
                 
                 <table class="table" summary="matches Attributes" border="1"><colgroup><col class="attribute"><col class="description"><col class="required"></colgroup><thead><tr><th>Attribute</th><th>Description</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">string</code></td><td>The string to test.</td><td>Yes</td></tr><tr><td><code class="literal">pattern</code></td><td>The regular expression pattern used to test.</td><td>Yes</td></tr><tr><td><code class="literal">casesensitive</code></td><td>Perform a case sensitive match. Default is true.</td><td>No</td></tr><tr><td><code class="literal">multiline</code></td><td>Perform a multi line match. Default is false.</td><td>No</td></tr><tr><td><code class="literal">modifiers</code></td><td>The regular expression modifiers used to test.</td><td>No</td></tr></tbody></table>
             </div></div><br class="table-break">
