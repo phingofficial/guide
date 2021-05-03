@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PHPUnitTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PHPUnitTask</title>
+        <para> This task runs testcases using the <link xlink:href="http://www.phpunit.de/" role="extern">PHPUnit</link> framework. It is a functional port of the Ant <link xlink:href="http://ant.apache.org/manual/OptionalTasks/junit.html" role="extern">JUnit</link> task.</para>
+        <para>
+            <emphasis role="bold">NB:</emphasis> if you want to use the PHPUnit .phar file, please make sure you download the library version (<literal>phpunit-library.phar</literal>)
+            and you set the <literal>pharlocation</literal> attribute!</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>printsummary</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Print one-line statistics for each testcase.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>bootstrap</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a bootstrap file that is run before executing the
+                            tests.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>codecoverage</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Gather code coverage information while running tests (requires
+                            Xdebug).</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonerror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if an error occurs during the test
+                            run.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonfailure</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if a test fails (errors are considered
+                            failures as well).</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltondefect</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if a test has failures, errors or warnings.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonincomplete</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any incomplete tests are
+                            encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonskipped</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any skipped tests are encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonwarning</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any warnings are encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonrisky</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if any risky tests are encountered.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>failureproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on failure.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>errorproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on error.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>incompleteproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on incomplete tests.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>skippedproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on skipped tests.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>warningproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on warnings.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>riskyproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to set (to true) on risky tests.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>usecustomerrorhandler</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Use a custom Phing/PHPUnit error handler to process PHP
+                            errors.</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>processisolation</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Enable process isolation when executing tests.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>configuration</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to a PHPUnit configuration file (such as
+                        <literal>phpunit.xml</literal>). Supported elements are:
+                        <literal>bootstrap</literal>,
+                        <literal>processIsolation</literal>,
+                        <literal>stopOnFailure</literal>,
+                        <literal>stopOnError</literal>,
+                        <literal>stopOnIncomplete</literal> and
+                        <literal>stopOnSkipped</literal>. Values provided
+                        <emphasis role="bold">overwrite</emphasis> other attributes!</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>groups</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Only run tests from the specified group(s).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>excludeGroups</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Exclude tests from the specified group(s).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pharlocation</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Location of the PHPUnit PHAR package.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>formatter</literal>
+                    </para>
+                    <para>The results of the tests can be printed in different formats. Output will
+                        always be sent to a file, unless you set the <literal>usefile</literal>
+                        attribute to <literal>false</literal>. The name of the file is predetermined
+                        by the formatter and can be changed by the <literal>outfile</literal>
+                        attribute.</para>
+                    <para>There are six predefined formatters. <literal>xml</literal>,
+                        <literal>clover</literal>, and <literal>crap4j</literal> print the test
+                        results in the JUnit, Clover, and Crap4J XML formats respectively.
+                        The <literal>clover-html</literal> formatter prints code coverage details
+                        to a set of HTML files.
+                        The <literal>plain</literal> formatter emits a short
+                        statistics line for all test cases.
+                        The <literal>summary</literal> formatter print the same statistics as the
+                        plain formatter but only to the log output.
+                        Custom formatters that implement
+                        <literal>Phing\Task\Ext\Formatter\PHPUnitResultFormatter</literal> can be
+                        specified.</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>type</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Use a predefined formatter (either
+                                        <literal>xml</literal>, <literal>plain</literal>,
+                                        <literal>clover</literal>, <literal>clover-html</literal>,
+                                        <literal>crap4j</literal>, or <literal>summary</literal>).
+                                    </entry>
+                                    <entry>n/a</entry>
+                                    <entry morerows="1">One of these is required.</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>classname</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Name of a custom formatter class.</entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>usefile</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>Boolean that determines whether output should be sent to
+                                        a file.</entry>
+                                    <entry><literal>true</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>todir</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Directory to write the file to.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>outfile</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Filename of the result.</entry>
+                                    <entry>Depends on formatter</entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>batchtest</literal>
+                    </para>
+                    <para>Define a number of tests based on pattern matching.
+                            <literal>batchtest</literal> collects the included files from any number
+                        of nested &lt;fileset&gt;s. It then generates a lists of classes that are
+                        (in)directly defined by each PHP file.</para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>exclude</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>A list of classes to exclude from the pattern matching.
+                                        For example, when you have two baseclasses
+                                            <literal>BaseWebTest</literal> and
+                                            <literal>BaseMathTest</literal>, which are included a
+                                        number of testcases (and thus added to the list of
+                                        testclasses), you can exclude those classes from the list by
+                                        typing <literal>exclude="BaseWebTest
+                                        BaseMathTest"</literal>.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal><link linkend="path">classpath</link></literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Used to define more paths on which - besides the PHP
+                                        include_path - to look for the test files.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>name</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The name that is used to create a testsuite from this
+                                        batchtest.</entry>
+                                    <entry>Phing Batchtest</entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;phpunit&gt;
+  &lt;formatter todir="reports" type="xml"/&gt;
+  &lt;batchtest&gt;
+    &lt;fileset dir="tests"&gt;
+      &lt;include name="**/*Test*.php"/&gt;
+      &lt;exclude name="**/Abstract*.php"/&gt;
+    &lt;/fileset&gt;
+  &lt;/batchtest&gt;
+&lt;/phpunit&gt;</programlisting>
+            <para> Runs all matching testcases in the directory <literal>tests</literal>, writing
+                XML results to the directory <literal>reports</literal>.</para>
+            <programlisting language="xml">&lt;phpunit codecoverage="true" haltonfailure="true" haltonerror="true"&gt;
+  &lt;formatter type="plain" usefile="false"/&gt;
+  &lt;batchtest&gt;
+    &lt;fileset dir="tests"&gt;
+      &lt;include name="**/*Test*.php"/&gt;
+    &lt;/fileset&gt;
+  &lt;/batchtest&gt;
+&lt;/phpunit&gt;</programlisting>
+            <para> Runs all matching testcases in the directory <literal>tests</literal>, gathers
+                code coverage information, writing plain text results to the console. The build
+                process is aborted if a test fails.</para>
+            <programlisting language="xml">&lt;phpunit bootstrap="src/autoload.php"&gt;
+  &lt;formatter type="plain" usefile="false"/&gt;
+  &lt;batchtest&gt;
+    &lt;fileset dir="tests"&gt;
+      &lt;include name="**/*Test*.php"/&gt;
+    &lt;/fileset&gt;
+  &lt;/batchtest&gt;
+&lt;/phpunit&gt;</programlisting>
+            <para> Runs all matching testcases in the directory <literal>tests</literal>, writing
+                plain text results to the console. Additionally, before executing the tests, the
+                bootstrap file <literal>src/autoload.php</literal> is loaded.</para>
+            <para>
+                <emphasis role="bold">Important note:</emphasis> using a mechanism such as an
+                "AllTests.php" file to execute testcases will bypass the Phing hooks used for
+                reporting and counting, and could possibly lead to strange results. Instead, use one
+                of more fileset's to provide a list of testcases to execute.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

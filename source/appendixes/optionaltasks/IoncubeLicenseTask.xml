@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="IoncubeLicenseTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>IoncubeLicenseTask</title>
+        <para> The <literal>IoncubeLicenseTask</literal> executes the <link xlink:href="http://www.ioncube.com" role="extern">ionCube</link> make_license
+            program.</para>
+        <para> For more information on the meaning of the various options please consult the ionCube
+                <link xlink:href="http://www.ioncube.com/USER-GUIDE.pdf" role="extern">user
+                guide</link>.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>ioncubepath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to the ionCube binaries</entry>
+                        <entry>/usr/local/ioncube</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>licensepath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to the license file that will be generated</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>passphrase</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The passphrase to use when generating the license file</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>allowedserver</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Restricts the license to particular servers and/or domains. Consult
+                            the IonCude documentation for more information.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expirein</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Sets a period in seconds (s), minutes (m), hours (h) or days (d)
+                            after which the license expires. Accepts: 500s or 55m or 24h or
+                            7d.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expireon</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Sets a YYYY-MM-DD date to expire the license.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;ioncubelicense
+   ioncubepath="/usr/local/ioncube"
+   licensepath="mylicense.txt"
+   passphrase="mypassphrase"
+   allowedserver="00:06:4F:01:8F:2C"
+   expireon="2010-09-01"
+   expirein="7d"&gt;
+  &lt;comment&gt;A license file made with the ionCube encoder.&lt;/comment&gt;
+&lt;/ioncubelicense&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>comment</literal></para>
+                    <para>Custom text that is added to the start of each encoded file.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PhkPackageTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PhkPackageTask</title>
+        <para> This task runs PHK_Creator.phk to build PHK-package. Learn more about build process
+            in <link xlink:href="http://phk.tekwire.net/joomla/support/doc/builders_guide.htm" role="extern">PHK Builder's Guide</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>phkcreatorpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to PHK_Creator.phk.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>inputdirectory</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to directory, that will be packed.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Output PHK-file. Directory, where file will be stored, must
+                            exist!</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>compress</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Compression type (gzip, bzip2, none) to apply to the packed
+                            files.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>strip</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>When true, PHP source file(s) are stripped (filtered through
+                            php_strip_whitespace()) before being stored into the archive.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>name</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The package's name (Information only).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>webrunscript</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The script to run in web direct access mode. Subfile path.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>crccheck</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If true, a CRC check will be forced every time the package is
+                            mounted.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <para>Sample build command:</para>
+            <programlisting language="xml">&lt;phkpackage
+    phkcreatorpath="/path/to/PHK_Creator.phk"
+    inputdirectory="src"
+    outputfile="build/sample-project.phk"
+    compress="gzip"
+    strip="true"
+    name="Sample Project"
+    webrunscript="index.php"&gt;
+    &lt;webaccess&gt;
+        &lt;paentry&gt;/&lt;/paentry&gt;
+    &lt;/webaccess&gt;
+&lt;/phkpackage&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>webaccess</literal>
+                    </para>
+                    <para> Collection of <literal>path</literal> tags (see example below), that will
+                        be visible outside package in web mode.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ZendGuardLicenseTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>ZendGuardLicenseTask</title>
+        <para> The <literal>ZendGuardLicenseTask</literal> is a wrapper for ZendGuard
+                <literal>zendenc_sign</literal> executable. It generates ZendGuard license either
+            from a license template file or from the defined properties.</para>
+        <para> For more information about ZendGuard sign parameters see the <link xlink:href="http://static.zend.com/topics/Zend-Guard-User-Guidev5x.pdf">ZendGuard
+                documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>zendsignPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to zendenc_sign binary.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>privateKeyPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to the company private key. </entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputFile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path where should the license be generated.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>licenseTemplate</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to a license template file. If defined all other licensing
+                            properties will be ignored (even if they are otherwise
+                            required).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>productName</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of the product. This has to match the product name that was used
+                            to encode the files (see ZendGuardEncodeTask).</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>registeredTo</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name to which the product will be registered to.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expires</literal></entry>
+                        <entry>Mixed</entry>
+                        <entry>This allows to define when the license will expire. The license can
+                            be issued so it either never expires or expires at a specified data.
+                            Use: <literal>'Never'</literal>, 0 or false to set expiry data to Never.
+                            Date in yyyy-mm-dd format to set the expiry date to a specific date.
+                            Relative format supported by strtotime function (e.g. '+6 months' to
+                            generate a license that will expire in half a year). </entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ipRange</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Limits the use of the license to IP addresses that fall within
+                            specification. Supports wildcards for any of the IP place holders, as
+                            well as the two types of the net masks (e.g. 10.1.0.0/16 or
+                            10.1.0.0./255.255.0.0).</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>hardwareLocked</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Option that indicates if the license will be locked to a specific
+                            machine using the Zend Host ID code(s). If set to true the Host-ID
+                            property is required.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>hostID</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Coded string (Zend Host ID) used to lock the license to a specific
+                            hardware. The Zend Host Id obtained from the machine where the encoded
+                            files and license are to be installed. Can be obtained by using the
+                            zendid utility. This is REQUIRED if the Hardware-Locked property is set
+                            to true. You can define multiple Host IDs separated by
+                            semicolon.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>userDefinedValues</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Optional user defined values in format key=value. Multiple key-value
+                            pairs can be defined and separated by semicolon. These values then will
+                            be part of the license and can be obtained using the zend guard api
+                            (provided by Zend Optimizer). These values CANNOT be modified after the
+                            license is generated. Their modification would invalidate the license.
+                            Example: Drink=Tea;Material=Wood</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>xUserDefinedValues</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Optional user defined values in format key=value. Multiple key-value
+                            pairs can be defined and separated by semicolon. These values then will
+                            be part of the license and can be obtained using the zend guard api
+                            (provided by Zend Optimizer). These values CAN be modified after the
+                            license is generated. Their modification won't invalidate the license.
+                            Example: Drink=Tea;Material=Wood</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;zendguardlicense
+            privateKeyPath="/var/data/phing.key"
+            zendsignPath="/usr/local/Zend/ZendGuard-5_0_1/bin/zendenc_sign"
+            outputFile="./data/license/license.zl"
+            productName="Phing"
+            registeredTo="YourCustomerName"
+            hardwareLocked="true"
+            expires="+6 months"
+            HostID="H:MFM43-Q9CXC-B9EDX-GWYSU;H:MFM43-Q9CXC-B9EDX-GWYTY"
+            ipRange="10.1.*.*"
+            userDefinedValues="Drink=Tea;Material=Wood"
+            xUserDefinedValues="Drink=Tea;Material=Wood"
+/&gt;</programlisting>
+            <para>Creates a license using the given properties.</para>
+            <programlisting language="xml">&lt;zendguardlicense
+            privateKeyPath="/var/data/phing.key"
+            zendsignPath="/usr/local/Zend/ZendGuard-5_0_1/bin/zendenc_sign"
+            outputFile="./data/license/license.zl"
+            licenseTemplate="./data/license/license.template.zl"
+/&gt;</programlisting>
+            <para>Creates a license using a license template file.</para>
+        </sect2>
+    </sect1>

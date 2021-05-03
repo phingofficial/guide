@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SvnListTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>SvnListTask</title>
+        <para>The <literal>SvnListTask</literal> stores the output of a svn list command on a
+            workingcopy or repositoryurl in a property. The result will be stored in an array,
+            one string that is separated by ' | ' (in words: space pipe space) for easy parsing.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>svnpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Subversion binary</entry>
+                        <entry>/usr/bin/svn</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>workingcopy</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Working copy directory</entry>
+                        <entry>none</entry>
+                        <entry morerows="1">One of the two</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repositoryurl</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>URL of remote repository</entry>
+                        <entry>none</entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A username used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A password used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>propertyname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to use</entry>
+                        <entry>svn.list</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>limit</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Limits the number of items to get back from the command</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>orderDescending</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Sets whether to reverse the order of the listed items</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>configOption</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Override subversion's config option</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;svnlist svnpath="/usr/bin/svn"
+         workingcopy="/home/user/svnwc" propertyname="svn.list"/&gt;</programlisting>
+            <programlisting language="xml">&lt;svnlist svnpath="/usr/bin/svn"
+         repositoryurl="http://svn.example.com/myrepo/tags"
+         orderDescending="true" limit="10" /&gt;</programlisting>
+            <para>The latter example could produce a list of your tags like this:</para>
+            <programlisting language="xml">revision | author | date         | item
+4028     | tony   | May 19 18:31 | Release_2.9.1.7
+4026     | tony   | May 18 14:33 | Release_2.9.1.6
+4023     | tony   | May 16 15:53 | Release_2.9.1.5
+4018     | tony   | May 13 11:55 | Release_2.9.1.4
+4005     | tony   | Apr 27 12:09 | Release_2.9.1.3
+...</programlisting>
+        </sect2>
+
+    </sect1>

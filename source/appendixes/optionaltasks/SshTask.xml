@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SshTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>SshTask</title>
+        <para> The <literal>SshTask</literal> executes commands on a remote host using ssh. This
+            task requires the <link xlink:href="http://pecl.php.net/package/ssh2" role="extern">PHP
+                SSH2 extension</link> to function.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>host</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Remote host</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>port</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Remote port</entry>
+                        <entry>22</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Username to use for the connection</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Password to use for the connection</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pubkeyfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Public key file (OpenSSH format) to use for the connection</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>privkeyfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Private key file (OpenSSH format) to use for the connection</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>privkeyfilepassphrase</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Private key file passphrase to use for the connection</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>command</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Command to execute on the remote server</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>property</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the property to capture (any) output of the
+                            command</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>display</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to display the output of the command</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The terminal type to open</entry>
+                        <entry><literal>none</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>failonerror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Decides if a command chain will fail if one of the executed commands
+                            failed. Added for backward compatibility. Set to true if you execute
+                            more than one command and want the task to fail on any error.</entry>
+                        <entry><literal>False</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;ssh username="john" password="smith"
+host="webserver" command="ls" /&gt;</programlisting>
+
+            <para>Executes a single command on the remote server.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>sshconfig</literal>
+                    </para>
+                    <para>Sometimes it is necessary to set specific configuration parameters on the ssh connection
+                        when connecting to a remote server.  You can set them with the sshconfig nested tag.  Set the parameters
+                        to specify connection and encryption options.  These are the parameters as specified by the $methods
+                        parameter of the ssh2_connect function.  See <link xlink:href="http://us3.php.net/ssh2_connect">ssh2_connect</link>
+                        for more information</para>
+                    <para>sshconfig can also be used as project level parameter with a refid so the same parameters can be re-used
+                        across a project easily.</para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>kex</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>List of key exchange methods to advertise, comma separated in order of preference.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>hostkey</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>List of hostkey methods to advertise, come separated in order of preference.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>client</literal></entry>
+                                    <entry><literal role="type">Nested Tag</literal></entry>
+                                    <entry>Element containing attributes crypt, comp, and mac method preferences for messages sent from client to server.  All attributes are optional.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>server</literal></entry>
+                                    <entry><literal role="type">Nested Tag</literal></entry>
+                                    <entry>Element containing attributes crypt, comp, and mac method preferences for messages sent from server to client.  All attributes are optional.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+
+        </sect2>
+
+    </sect1>

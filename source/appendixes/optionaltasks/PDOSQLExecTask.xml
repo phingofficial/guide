@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PDOSQLExecTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PDOSQLExecTask</title>
+        <para> The <literal>PDOSQLExecTask</literal> executes SQL statements using PDO.</para>
+        <note>
+            <para>The combination of large SQL files and
+            <literal>delimitertype</literal> set to <literal>normal</literal>
+            can trigger segmentation faults with large files.</para>
+        </note>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>url</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>PDO connection URL (DSN)</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>userid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Username for connection (if it cannot be specified in URL) </entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The password to use for the connection (if it cannot be specified in
+                            URL)</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <!--        <row>
+<entry><literal>encoding</literal></entry>
+          <entry><literal role="type">String</literal></entry>
+          <entry>The database encoding.</entry>
+          <entry>none</entry>
+          <entry>No</entry>
+        </row> -->
+                    <row>
+                        <entry><literal>src</literal></entry>
+                        <entry>File</entry>
+                        <entry>A single source file of SQL statements to execute.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>onerror</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The action to perform on error (continue, stop, or abort)</entry>
+                        <entry>abort</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delimiter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The delimiter to separate SQL statements (e.g. "GO" in MSSQL)</entry>
+                        <entry>;</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delimitertype</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The delimiter type ("normal", "row" or "none"). Normal means that any
+                            occurrence of the delimiter terminate the SQL command whereas with row,
+                            only a line containing just the delimiter is recognized as the end of
+                            the command. None disables all delimiter detection.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>autocommit</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to auto (implicitly) commit every single
+                        statement, disabling transactions.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>encoding</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Encoding to use for read SQL files</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <para>You can also <link linkend="conditions.pdosqlexec">use
+            PDOSQLExecTask as condition</link></para>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;pdosqlexec url="pgsql:host=localhost dbname=test"&gt;
+  &lt;fileset dir="sqlfiles"&gt;
+      &lt;include name="*.sql"/&gt;
+      &lt;/fileset&gt;
+&lt;/pdosqlexec&gt;</programlisting>
+
+            <programlisting language="xml">&lt;pdosqlexec url="mysql:host=localhost;dbname=test"
+  userid="username" password="password"&gt;
+  &lt;transaction src="path/to/sqlfile.sql"/&gt;
+  &lt;formatter type="plain" outfile="path/to/output.txt"/&gt;
+  &lt;/pdosqlexec&gt;</programlisting>
+            <programlisting language="xml">&lt;property name="color" value="orange"/&gt;
+&lt;pdosqlexec url="mysql:host=localhost;dbname=test"
+            userid="username" password="password"&gt;
+    &lt;transaction&gt;
+        SELECT * FROM products WHERE color = '${color}';
+    &lt;/transaction&gt;
+    &lt;formatter type="xml" outfile="path/to/output.xml"/&gt;
+&lt;/pdosqlexec&gt;</programlisting>
+            <note>
+                <para>Because of backwards compatibility, the PDOSQLExecTask can also be called using
+                    the <literal>'pdo'</literal> statement.</para>
+            </note>
+            <programlisting language="xml">&lt;pdo url="pgsql:host=localhost dbname=test"&gt;
+  &lt;fileset dir="sqlfiles"&gt;
+      &lt;include name="*.sql"/&gt;
+  &lt;/fileset&gt;
+
+  &lt;!-- xml formatter --&gt;
+  &lt;formatter type="xml" output="output.xml"/&gt;
+
+  &lt;!-- custom formatter --&gt;
+  &lt;formatter classname="path.to.CustomFormatterClass"&gt;
+    &lt;param name="someClassAttrib" value="some-value"/&gt;
+  &lt;/formatter&gt;
+
+  &lt;!-- No output file + usefile=false means it goes to phing log --&gt;
+  &lt;formatter type="plain" usefile="false" /&gt;
+&lt;/pdo&gt;</programlisting>
+        </sect2>
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>transaction</literal>
+                    </para>
+                    <para>Wrapper for a single transaction. Transactions allow several files or
+                        blocks of statements to be executed using the same PDO connection and commit
+                        operation in between.</para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>src</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>File with statements to be run as one transaction</entry>
+                                    <entry>n/a</entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal>
+                    </para>
+                    <para>Files containing SQL statements.</para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="FileList">filelist</link></literal>
+                    </para>
+                    <para>Files containing SQL statements.</para>
+                </listitem>
+                <listitem>
+                    <para><literal>formatter</literal>
+                    </para>
+                    <para>The results of any queries that are executed can be printed in different
+                        formats. Output will always be sent to a file, unless you set the
+                            <literal>usefile</literal> attribute to <literal>false</literal>. The
+                        path to the output file can be specified by the
+                            <literal>outfile</literal> attribute; there is a default filename that
+                        will be returned by the formatter if no output file is specified.</para>
+                    <para>There are three predefined formatters - one prints the query results in
+                        XML format, the other emits plain text. Custom formatters that extend
+                        <literal>Phing\Task\System\Pdo\PDOResultFormatter</literal> can be specified.</para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>type</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Use a predefined formatter (either <literal>xml</literal>
+                                        or <literal>plain</literal>). </entry>
+                                    <entry>n/a</entry>
+                                    <entry morerows="1">One of these attributes is required.</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>classname</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Name of a custom formatter class (must extend
+                                        <literal>Phing\Task\System\Pdo\PDOResultFormatter</literal>).</entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>usefile</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>Boolean that determines whether output should be sent to
+                                        a file.</entry>
+                                    <entry><literal>true</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>outfile</literal></entry>
+                                    <entry>File</entry>
+                                    <entry>Path to file in which to store result.</entry>
+                                    <entry>Depends on formatter</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>showheaders</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>(only applies to plain formatter) Whether to show column
+                                        headers.</entry>
+                                    <entry><literal>false</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>coldelim</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>(only applies to plain formatter) The column
+                                        delimiter.</entry>
+                                    <entry>,</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>rowdelim</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>(only applies to plain formatter) The row
+                                        delimiter.</entry>
+                                    <entry>\n</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>encoding</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>(only applies to XML formatter) The xml document
+                                        encoding.</entry>
+                                    <entry>(PHP default)</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>formatoutput</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>(only applies to XML formatter) Whether to format XML
+                                        output.</entry>
+                                    <entry><literal>true</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

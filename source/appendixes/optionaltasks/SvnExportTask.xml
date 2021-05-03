@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SvnExportTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>SvnExportTask</title>
+        <para> The <literal>SvnExportTask</literal> exports a Subversion repository to a local
+            directory.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>revision</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Revision to use in export</entry>
+                        <entry>HEAD</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>svnpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Subversion binary</entry>
+                        <entry>/usr/bin/svn</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repositoryurl</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>URL of SVN repository</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A username used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A password used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>nocache</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Connection credentials will not be cached</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>todir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to export to</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>depth</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Limit operation by depth</entry>
+                        <entry><literal>empty</literal>,
+                        <literal>files</literal>,
+                        <literal>immediates</literal> or
+                        <literal>infinity</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignoreexternals</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Ignore externals definitions</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>trustServerCert</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Trust self-signed certificates</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>configOption</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Override subversion's config option</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;svnexport
+   svnpath="/usr/bin/svn"
+   username="anony"
+   password="anony"
+   force="true"
+   nocache="true"
+   repositoryurl="svn://localhost/project/trunk/"
+   todir="/home/user/svnwc"
+   configoption="config:miscellany:use-commit-times=yes" /&gt;</programlisting>
+
+            <programlisting language="xml">&lt;svnexport
+   svnpath="C:/Subversion/bin/svn.exe"
+   repositoryurl="svn://localhost/project/trunk/"
+   todir="C:/projects/svnwc"/&gt;</programlisting>
+        </sect2>
+    </sect1>

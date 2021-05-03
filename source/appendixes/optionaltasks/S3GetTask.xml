@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="S3GetTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>S3GetTask</title>
+        <para> Downloads an object from Amazon S3. This task requires the PEAR package <link xlink:href="http://pear.php.net/package/Services_Amazon_S3" role="extern">Services_Amazon_S3</link>
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>key</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Amazon S3 key</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or defined before task call as: amazon.key)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>secret</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Amazon S3 secret</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or defined before task call as: amazon.secret)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>bucket</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Bucket containing the object</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes (or defined before task call as: amazon.bucket)</entry>
+                    </row>
+                    <row>
+                        <entry><literal>object</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Object name</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>target</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Where to store the object after download</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <para>Downloading an object</para>
+            <programlisting language="xml">&lt;s3get object="file.txt" target="${project.basedir}" bucket="mybucket"
+key="AmazonKey" secret="AmazonSecret" /&gt;</programlisting>
+            <para>You can also define "bucket, key, secret" outside of the task call:</para>
+            <programlisting language="xml">&lt;property name="amazon.key" value="my_key" /&gt;
+&lt;property name="amazon.secret" value="my_secret" /&gt;
+&lt;property name="amazon.bucket" value="mybucket" /&gt;
+
+&lt;s3get object="file.txt" target="${project.basedir}" /&gt;</programlisting>
+        </sect2>
+
+    </sect1>
