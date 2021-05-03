@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="JsMinTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>JsMinTask</title>
+        <para> The <literal>JsMinTask</literal> minifies JavaScript files using <link xlink:href="https://github.com/tedivm/JShrink">JShrink</link>,
+                which can be installed using composer (Phing will try
+                to use the composer autoloader)</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>targetDir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path where to store minified JavaScript files</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>suffix</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Suffix to append to the filenames.</entry>
+                        <entry>-min</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>failonerror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether an error while minifying a JavaScript file should stop the
+                            build or not</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;jsMin targetDir="docroot/script/minified" failOnError="false"&gt;
+  &lt;fileset dir="docroot/script"&gt;
+    &lt;include name="**/*.js"/&gt;
+  &lt;/fileset&gt;
+&lt;/jsMin&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal>
+                    </para>
+                    <para>JavaScript files to be minified.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

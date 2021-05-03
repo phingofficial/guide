@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="CoverageMergerTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>CoverageMergerTask</title>
+        <para>The CoverageMergerTask merges code coverage information from external sources with an
+            existing code coverage database.</para>
+        <para>The format of the code coverage files is expected to be identical to:</para>
+        <programlisting language="xml">file_put_contents(
+        '/www/live/testcases/coverage.data', serialize(xdebug_get_code_coverage)
+        );</programlisting>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;coverage-merger&gt;
+  &lt;fileset dir="/www/live/testcases"&gt;
+    &lt;include name="**/*.data"/&gt;
+  &lt;/fileset&gt;
+&lt;/coverage-merger&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

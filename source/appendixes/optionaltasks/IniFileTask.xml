@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="IniFileTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>IniFileTask</title>
+        <para>The <literal>IniFileTask</literal> is inspired by the <link xlink:href="http://ant-contrib.sourceforge.net/tasks/tasks/inifile.html" role="extern">Ant-Contrib IniFile</link>
+        and can be used to build and edit .ini files. Unlike the Ant equivalent, it can also read values from different
+        sections of an .ini file and set the retrieved values to specified properties.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>dest</literal></entry>
+                        <entry><literal role="type">string</literal></entry>
+                        <entry>The name of the .ini file to write to. If not specified, the source file will be modified instead.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltOnError</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+                        <entry>Should the build fail when problems occur?</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>source</literal></entry>
+                        <entry><literal role="type">string</literal></entry>
+                        <entry>The name of the .ini file to read from. If not specified, the dest file will be used instead.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>get</literal>
+                    </para>
+                    <para>Use to read a value from a specific key and section of an .ini file</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                        <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                        <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                        <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                        <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                        <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Type</entry>
+                                <entry>Description</entry>
+                                <entry>Default</entry>
+                                <entry>Required</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry><literal>default</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Value to return if section, property or value are not set</entry>
+                                <entry>n/a</entry>
+                                <entry>No</entry>
+                            </row>
+                            <row>
+                                <entry><literal>section</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the section.</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                            <row>
+                                <entry><literal>property</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the key, in the specified section, to read</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                            <row>
+                                <entry><literal>outputproperty</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the property to set the value to</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>remove</literal>
+                    </para>
+                    <para>Use to remove either a specific key or section from an .ini file</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                        <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                        <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                        <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                        <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                        <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Type</entry>
+                                <entry>Description</entry>
+                                <entry>Default</entry>
+                                <entry>Required</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry><literal>section</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the section.</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                            <row>
+                                <entry><literal>property</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the key to remove. If not specified the entire section is removed.</entry>
+                                <entry>n/a</entry>
+                                <entry>No</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>set</literal>
+                    </para>
+                    <para>Use to set a key in a section to a specific value</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                        <thead>
+                            <row>
+                                <entry>Name</entry>
+                                <entry>Type</entry>
+                                <entry>Description</entry>
+                                <entry>Default</entry>
+                                <entry>Required</entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry><literal>section</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the section.</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                            <row>
+                                <entry><literal>property</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>Name of the key/property.</entry>
+                                <entry>n/a</entry>
+                                <entry>Yes</entry>
+                            </row>
+                            <row>
+                                <entry><literal>operation</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>The operation to perform on the existing value, which must be numeric. Possible values are "+" and "-", which add and subtract 1, respectively from the existing value. If the value doesn't already exist, the set is not performed, triggering an error.</entry>
+                                <entry>n/a</entry>
+                                <entry>No</entry>
+                            </row>
+                            <row>
+                                <entry><literal>value</literal></entry>
+                                <entry><literal role="type">String</literal></entry>
+                                <entry>The new value for the property.</entry>
+                                <entry>n/a</entry>
+                                <entry>No, if operation is specified.</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">
+&lt;inifile
+    haltonerror="no"
+    dest="${project.basedir}/application/configs/application.ini"&gt;
+    &lt;set section="production" property="buildTimestamp" value="${DSTAMP}${TSTAMP}" /&gt;
+    &lt;set section="production" property="buildNumber" operation="+" /&gt;
+    &lt;remove section="development : staging" /&gt;
+&lt;/inifile&gt;</programlisting>
+        </sect2>
+    </sect1>

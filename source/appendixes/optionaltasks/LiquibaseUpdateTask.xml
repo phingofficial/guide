@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="LiquibaseUpdateTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>LiquibaseUpdateTask</title>
+        <para>The <literal>LiquibaseUpdateTask</literal> applies the latest changes from the changelog
+            file to the definied database.
+        </para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>jar</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Location of the Liquibase jar file.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal><link linkend="path">classpath</link></literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Additional classpath entries.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>changeLogFile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Location of the changelog file in which the changes get written or read from.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The username needed to connect to the database.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The password needed to connect to the database.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>url</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The JDBC Url representing the database datasource, e.g <literal>jdbc:mysql://localhost/mydatabase</literal></entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>display</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to display the output of the command. Only used if <literal>passthru</literal> isn't true.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>passthru</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to use PHP's <literal>passthru()</literal> function instead of <literal>exec()</literal>. True by default for backwards compatibility. When true, the attributes <literal>display</literal>, <literal>outputProperty</literal> and <literal>checkReturn</literal>are ignored.</entry>
+                        <entry>true</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>checkreturn</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to check the return code of the execution, throws a BuildException when returncode != 0.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputProperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Property name to set output value to from the execution. Ignored if <literal>passthru</literal> attribute is true.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;liquibase-update
+      jar="/usr/local/lib/liquibase/liquibase.jar"
+      classpathref="/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar"
+      changelogFile="./changelogTest.xml"
+      username="liquibase"
+      password="liquibase"
+      url="jdbc:mysql://localhost/mydatabase"
+    /&gt;</programlisting>
+        </sect2>
+         <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>parameter</literal>
+                    </para>
+                    <para>Same as for <xref xlink:href="#LiquibaseTask"/>.</para>
+                </listitem>
+                <listitem>
+                    <para><literal>property</literal>
+                    </para>
+                    <para>Same as for <xref xlink:href="#LiquibaseTask"/>.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+
+    </sect1>

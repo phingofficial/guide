@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="IoncubeEncoderTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>IoncubeEncoderTask</title>
+        <para> The <literal>IoncubeEncoderTask</literal> executes the <link xlink:href="http://www.ioncube.com" role="extern">ionCube</link> encoder (for either
+            PHP4 or PHP5 projects).</para>
+        <para> For more information on the meaning of the various options please consult the ionCube
+                <link xlink:href="http://www.ioncube.com/USER-GUIDE.pdf" role="extern">user
+                guide</link>.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>allowedserver</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Restricts the encoded files to particular servers and/or domains.
+                            Consult the IonCude documentation for more information.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>binary</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to save encoded files in binary format (default is ASCII
+                            format)</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>copy</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specifies files or directories to exclude from being encoded or
+                            encrypted and copy them to the target directory (separated by
+                            space).</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>encode</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specifies additional file patterns, files or directories to encode,
+                            or to reverse the effect of <literal>copy</literal></entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>encrypt</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Specify files or directories (space separated list) that are to be
+                            encrypted.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expirein</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Sets a period in seconds (s), minutes (m), hours (h) or days (d)
+                            after which the files expire. Accepts: <literal>500s</literal> or
+                                <literal>55m</literal> or <literal>24h</literal> or
+                                <literal>7d</literal></entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expireon</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Sets a YYYY-MM-DD date to expire the files.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>fromdir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path containing source files</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignore</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Set files and directories to ignore entirely and exclude from the
+                            target directory (separated by space).</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ioncubepath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to the ionCube binaries</entry>
+                        <entry>/usr/local/ioncube</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>keep</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Set files and directories not to be ignored (separated by
+                            space).</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>licensepath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to the license file that will be used by the encoded
+                            files</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>nodoccomments</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Omits documents comments ( /** ... */ ) from the encoded
+                            files.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry>obfuscationkey</entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The obfuscation key must be supplied when using the obfuscate
+                            option</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>obfuscate</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The Encoder can obfuscate the names of global functions, the names of
+                            local variables in global functions, and line numbers. Use either
+                                <literal>all</literal> or any of <literal>functions</literal>,
+                                <literal>locals</literal> or <literal>linenos</literal> separated by
+                            a space.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>optimize</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Controls the optimization of the encoded files, accepts either
+                                <literal>more</literal> or <literal>max</literal></entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>passphrase</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The passphrase to use when encoding with a license file</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>phpversion</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Defines which php encoder version will be used (suffix of the encoder file)</entry>
+                        <entry>5</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>targetoption</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Option to use when target directory exists, accepts
+                                <literal>replace</literal>, <literal>merge</literal>,
+                                <literal>update</literal> and <literal>rename</literal></entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>todir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to save encoded files to</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>withoutruntimeloadersupport</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to disable support for runtime initialization of the ionCube
+                            Loader</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>noshortopentags</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to disable support for short PHP tags</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>callbackfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to callback file (.php)</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>obfuscationexclusionsfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to obfuscation exclusions file</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignoredeprecatedwarnings</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to ignore deprecated warnings</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignorestrictwarnings</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to ignore strict warnings</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>allowencodingintosource</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to allow encoding into the source tree</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>messageifnoloader</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A valid PHP expression to customize the "no loader installed"
+                            message</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>actionifnoloader</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A valid PHP expression to replace the "no loader installed"
+                            action</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>showcommandline</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>whether to show command line before it is executed</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;ioncubeencoder
+   binary="true"
+   copy="*.ini config/*"
+   encode="*.inc licenses/license.key"
+   encrypt="*.tpl *.xml"
+   fromdir="files"
+   ignore="*.bak RCS/ *~ docs/"
+   ioncubepath="/usr/local/ioncube"
+   keep="docs/README"
+   licensepath="mylicense.txt"
+   optimize="max"
+   passphrase="mypassphrase"
+   phpversion="4"
+   noshortopentags="false"
+   targetoption="replace"
+   todir="encoded"
+   withoutruntimeloadersupport="true"
+   callbackfile="errhandler.php"
+   obfuscationexlusionsfile="obfex.txt"&gt;
+  &lt;comment&gt;A project encoded with the ionCube encoder.&lt;/comment&gt;
+&lt;/ioncubeencoder&gt;</programlisting>
+        </sect2>
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>comment</literal></para>
+                    <para>Custom text that is added to the start of each encoded file.</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

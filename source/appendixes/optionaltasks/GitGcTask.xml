@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitGcTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitGcTask</title>
+        <para>Cleanup unnecessary files and optimize the local repository.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary.</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The repository to cleanup.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>aggressive</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>This option will cause git gc to more aggressively optimize the
+                            repository at the expense of taking much more time. See --aggressive
+                            option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">git-gc</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>auto</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>With this option, git gc checks whether any housekeeping is required;
+                            if not, it exits without performing any work. See --auto option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">git-gc</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>noprune</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Do not prune any loose objects. See --no-prune option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">git-gc</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>prune</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Prune loose objects older than date. See --prune option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-gc.html">git-gc</link>.</entry>
+                        <entry>2.weeks.ago</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+                &lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+                &lt;!-- Clone repository --&gt;
+                &lt;gitclone
+                repository="git://github.com/path/to/repo/repo.git"
+                targetPath="${repo.dir.resolved}" /&gt;
+
+                &lt;!-- Cleanup repository--&gt;
+                &lt;gitgc
+                repository="${repo.dir.resolved}"
+                aggressive="true"
+                prune="1.week.ago" /&gt;</programlisting>
+        </sect2>
+    </sect1>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PatchTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PatchTask</title>
+        <para> The <literal>PatchTask</literal> uses the <link xlink:href="http://savannah.gnu.org/projects/patch" role="extern">patch</link>
+            program to apply diff file to originals.</para>
+        <para>
+            <emphasis role="bold">NB:</emphasis> the <literal>patch</literal> program must be in the
+            system path! </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>patchfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File that includes the diff output</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>originalfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File to patch. If not specified Task tries to guess it from the diff
+                            file</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>destfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File to send the output to instead of patching the file in
+                            place</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>backups</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Keep backups of the unpatched files</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>quiet</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Work silently unless an error occurs</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>reverse</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Assume patch was created with old and new files swapped</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ignorewhitespace</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Ignore whitespace differences</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>strip</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Strip the smallest prefix containing specified number of leading
+                            slashes from filenames</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>dir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The directory in which to run the patch command</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonfailure</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if the patching process encounters an
+                            error.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>forward</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Ignore patches that appear to be reversed or already applied.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>fuzz</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Set the fuzz factor to LINES for inexact matching.</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;patch
+  patchfile="/path/to/patches/file.ext.patch"
+  dir="/path/to/original"
+/&gt;</programlisting>
+            <para>Apply "file.ext.path" to original file locataed in "/path/to/original"
+                folder.</para>
+        </sect2>
+    </sect1>

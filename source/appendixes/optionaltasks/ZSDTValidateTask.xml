@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ZSTDValidateTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>ZSDTValidateTask</title>
+        <para> The <literal>zsdtValidateTask</literal> validates a given Zend package descriptor against the schema file.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>descriptor</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The package descriptor file.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>schema</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The path to the package descriptor schema used for validation.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;zsdtvalidate schema="/path/to/schema.xsl" descriptor="/path/to/descriptor.xml" /&gt;</programlisting>
+        </sect2>
+    </sect1>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="XmlPropertyTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>XmlPropertyTask</title>
+        <para>Loads property values from a well-formed xml file. There are no other restrictions
+            than "well-formed".</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The XML file to parse.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>prefix</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The prefix to prepend to each property</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>keepRoot</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Keep the xml root tag as the first value in the property
+                            name.</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>collapseAttributes</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Treat attributes as nested elements.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delimiter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Delimiter for splitting multiple values.</entry>
+                        <entry>,</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>required</literal></entry>
+                        <entry><literal>Boolean</literal></entry>
+                        <entry>If this is set to <literal>true</literal> then a build exception will
+                            be raised if the file cannot be found otherwise only a warning will be
+                            logged.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <para>Consider the following XML file:</para>
+            <programlisting language="xml">&lt;root-tag myattr="true"&gt;
+    &lt;inner-tag someattr="val"&gt;Text&lt;/inner-tag&gt;
+    &lt;a2&gt;&lt;a3&gt;&lt;a4&gt;false&lt;/a4&gt;&lt;/a3&gt;&lt;/a2&gt;
+&lt;/root-tag&gt;</programlisting>
+            <para> Used with the following entry (<emphasis role="bold">default</emphasis>): </para>
+            <programlisting language="xml">&lt;xmlproperty file="somefile.xml"/&gt;</programlisting>
+            <para>results in the following properties:</para>
+            <programlisting language="xml">root-tag(myattr)=true
+root-tag.inner-tag=Text
+root-tag.inner-tag(someattr)=val
+root-tag.a2.a3.a4=false</programlisting>
+            <para> Used with the following entry (<literal>collapseAttributes=true</literal>): </para>
+            <programlisting language="xml">&lt;xmlproperty file="somefile.xml" collapseAttributes="true"/&gt;</programlisting>
+            <para>results in the following properties:</para>
+            <programlisting language="xml">root-tag.myattr=true
+root-tag.inner-tag=Text
+root-tag.inner-tag.someatt=val
+root-tag.a2.a3.a4=false</programlisting>
+            <para> Used with the following entry (<literal>keepRoot=false</literal>): </para>
+            <programlisting language="xml">&lt;xmlproperty file="somefile.xml" keepRoot="false"/&gt;</programlisting>
+            <para>results in the following properties:</para>
+            <programlisting language="xml">inner-tag=Text
+inner-tag(someattr)=val
+a2.a3.a4=false</programlisting>
+        </sect2>
+    </sect1>

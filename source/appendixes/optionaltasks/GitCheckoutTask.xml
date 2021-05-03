@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitCheckoutTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitCheckoutTask</title>
+        <para> Checkout a branch or paths to the working tree. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>branchname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Branch to checkout. See &lt;branch&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry>origin</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>startpoint</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a commit at which to start the new branch; Defaults to
+                            HEAD. See &lt;start_point&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry/>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>create</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Create a new branch named &lt;branchname&gt; and start it at
+                            &lt;startpoint&gt;</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>forcecreate</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Creates the branch &lt;branchname&gt; and start it at &lt;startpoint&gt;;
+                            if it already exists, then reset it to &lt;startpoint&gt;. This is
+                            equivalent to running "git branch" with "-f".</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>merge</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --merge in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>track</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --track in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>notrack</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --no-track in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>quiet</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Quiet, suppress feedback messages. See --quiet in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>force</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>When switching branches, proceed even if the index or the working
+                            tree differs from HEAD. This is used to throw away local changes. See
+                            --force in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-checkout.html">git-checkout</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+                &lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+                &lt;!-- clone repository --&gt;
+                &lt;gitclone
+                repository="git://github.com/path/to/repo/repo.git"
+                targetPath="${repo.dir.resolved}" /&gt;
+
+                &lt;!-- create and switch to "mybranch" branch --&gt;
+                &lt;gitcheckout
+                repository="${repo.dir.resolved}"
+                branchname="mybranch" quiet="true" create="true" /&gt;
+
+                &lt;!-- get back to "master" branch --&gt;
+                &lt;gitcheckout
+                repository="${repo.dir.resolved}"
+                branchname="master" quiet="true" /&gt;
+
+                &lt;!-- create (force) already created branch --&gt;
+                &lt;gitcheckout
+                repository="${repo.dir.resolved}"
+                branchname="mybranch" quiet="true"
+                forceCreate="true" /&gt;</programlisting>
+        </sect2>
+    </sect1>

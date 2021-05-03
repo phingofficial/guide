@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PHPCPDTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PHPCPDTask</title>
+        <para> This task runs <link xlink:href="http://github.com/sebastianbergmann/phpcpd/" role="extern">phpcpd</link>, a Copy/Paste Detector (CPD) for PHP Code. You need an
+            installed version of this software to use this task.</para>
+        <para>
+            <emphasis role="bold">NB:</emphasis> if you have installed the
+            PHPCPD PHAR, make sure you set the
+            <literal>pharlocation</literal> attribute!</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to source file or path</entry>
+                        <entry>n/a</entry>
+                        <entry>Only when there are <emphasis>no</emphasis> nested
+                        <literal><link linkend="FileSet">fileset</link></literal> elements</entry>
+                    </row>
+                    <row>
+                        <entry><literal>minTokens</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Sets the minimum number of identical tokens (default: 70)</entry>
+                        <entry>70</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>minLines</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Sets the minimum number of identical lines (default: 5)</entry>
+                        <entry>5</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>format</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The format for the report when no nested formatter is used.</entry>
+                        <entry>default</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>fuzzy</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If fuzzy is set to true, the task will perform a fuzzy match.</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pharlocation</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Location of the PHPCPD PHAR package.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="xml">&lt;phpcpd file="path/to/source.php"/&gt;</programlisting>
+
+            <para>Checking for copy/paste code in one particular source file. Sending Default-Report
+                to STDOUT.</para>
+            <programlisting language="xml">&lt;phpcpd file="path/to/source"&gt;
+   &lt;formatter type="pmd" outfile="reports/pmd-cpd.xml"/&gt;
+ &lt;/phpcpd&gt;</programlisting>
+            <para>Checking for copy/paste code in files of the given path.</para>
+            <programlisting language="xml">&lt;phpcpd&gt;
+   &lt;fileset dir="${builddir}" id="filestocpd"&gt;
+     &lt;include name="apps/**/*.php" /&gt;
+     &lt;include name="lib/de/**/*.php" /&gt;
+     &lt;include name="lib/task/**/*.php" /&gt;
+     &lt;include name="lib/services/**/*.php" /&gt;
+     &lt;include name="lib/form/**/*.php" /&gt;
+     &lt;include name="lib/model/**/*.php" /&gt;
+   &lt;/fileset&gt;
+   &lt;formatter type="pmd" outfile="reports/pmd-cpd.xml"/&gt;
+ &lt;/phpcpd&gt;</programlisting>
+
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal>
+                    </para>
+                    <para>This nested tag is required when the <literal>file</literal> attribute is
+                        not set.</para>
+                </listitem>
+                <listitem>
+                    <para><literal>formatter</literal>
+                    </para>
+                    <para> The results of the copy/paste scan can be printed in different formats.
+                        Output will always be sent to a file, unless you set the
+                            <literal>usefile</literal> attribute to <literal>false</literal>.</para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>type</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The output format. Accepts the same values as the
+                                            <literal>format</literal> attribute
+                                            (<literal>default</literal>,
+                                        <literal>pmd</literal>).</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>useFile</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>Flag that determines whether output should be sent to a
+                                        file or not.</entry>
+                                    <entry><literal>true</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>outfile</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Path to write output file to.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

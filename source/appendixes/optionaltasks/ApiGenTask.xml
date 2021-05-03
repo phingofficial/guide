@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ApiGenTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>ApiGenTask</title>
+        <para>This task runs <link xlink:href="http://apigen.org/" role="extern">ApiGen</link>, a
+            tool for creating professional API documentation from PHP source code, similar to
+            discontinued phpDocumentor/phpDoc.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>executable</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>ApiGen executable name.</entry>
+                        <entry>apigen</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>action</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>ApiGen action to be executed.</entry>
+                        <entry>generate</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>config</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Config file name.</entry>
+                        <entry>n/a</entry>
+                        <entry morerows="2">Source and destination are required - either set
+                            explicitly or using a config file. Attribute values set explicitly have
+                            precedence over values from a config file.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>source</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>List of source files or directories.</entry>
+                        <entry>n/a</entry>
+                    </row>
+                    <row>
+                        <entry><literal>destination</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Destination directory.</entry>
+                        <entry>n/a</entry>
+                    </row>
+                    <row>
+                        <entry><literal>exclude</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>List of masks (case sensitive) to exclude files or directories from
+                            processing.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>skipdocpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>List of masks (case sensitive) to exclude elements from documentation
+                            generating.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>charset</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Character set of source files.</entry>
+                        <entry>UTF-8</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>main</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Main project name prefix.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>title</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Title of generated documentation.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>baseurl</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Documentation base URL.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>googlecseid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Google Custom Search ID.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>googlecselabel</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Google Custom Search label.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>googleanalytics</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Google Analytics tracking code.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>templateconfig</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Template config file name.</entry>
+                        <entry>n/a</entry>
+                        <entry>If not set the default template is used.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>templatetheme</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Template theme file name.</entry>
+                        <entry>n/a</entry>
+                        <entry>If not set the default template is used.</entry>
+                    </row>
+                    <row>
+                        <entry><literal>accesslevels</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Element access levels. Documentation only for methods and properties
+                            with the given access level will be generated.</entry>
+                        <entry>public, protected</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>internal</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate documentation for elements marked as internal and
+                            internal documentation parts or not.</entry>
+                        <entry>No</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>php</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate documentation for PHP internal classes or
+                            not.</entry>
+                        <entry>Yes</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>tree</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate tree view of classes, interfaces, traits and
+                            exceptions or not.</entry>
+                        <entry>Yes</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>deprecated</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate documentation for deprecated elements or
+                            not.</entry>
+                        <entry>No</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>todo</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate documentation of tasks or not.</entry>
+                        <entry>No</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>sourcecode</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate highlighted source code files or not.</entry>
+                        <entry>Yes</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>download</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to generate a link to download documentation as a ZIP archive
+                            or not.</entry>
+                        <entry>No</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>debug</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to enable the debug mode or not.</entry>
+                        <entry>No</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;apigen
+  source="classes"
+  destination="api"
+  exclude="*/tests/*"
+  title="My Project API Documentation"
+  deprecated="true"
+  todo="true"/&gt;</programlisting>
+        </sect2>
+    </sect1>

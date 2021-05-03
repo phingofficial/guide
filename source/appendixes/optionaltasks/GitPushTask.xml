@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitPushTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitPushTask</title>
+        <para> Update remote refs along with associated objects. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>all</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Push all references</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>destination</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The "remote" repository that is destination of a push operation. See
+                            &lt;repository&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry>origin</entry>
+                        <entry>Yes, if allRemotes set to false</entry>
+                    </row>
+                    <row>
+                        <entry><literal>refspec</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>See &lt;refspec&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>mirror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --mirror in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delete</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Delete "remote" reference. Same as prefixing the refspec with colon.
+                            See --delete in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>tags</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Push all references under refs/tags. See --tags in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>quiet</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Quiet, suppress feedback messages. See --quiet in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>force</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Force update. See --force in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-push.html">git-push</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+&lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+&lt;!-- clone repository --&gt;
+&lt;gitclone
+    repository="git://github.com/path/to/repo/repo.git"
+    targetPath="${repo.dir.resolved}" /&gt;
+
+&lt;!-- push branch "master" into "foobranch" on "origin" remote --&gt;
+&lt;gitpush
+    repository="${repo.dir.resolved}"
+    refspec="master:foobranch" tags="true" /&gt;
+
+&lt;!-- create new branch "newbranch" on "origin" remote --&gt;
+&lt;gitpush
+    repository="${repo.dir.resolved}"
+    refspec="master:newbranch" quiet="true" /&gt;
+
+&lt;!-- delete "newbranch" branch from "origin" remote --&gt;
+&lt;gitpush
+    repository="${repo.dir.resolved}"
+    delete="true"
+    refspec="newbranch" quiet="true" /&gt;</programlisting>
+        </sect2>
+    </sect1>

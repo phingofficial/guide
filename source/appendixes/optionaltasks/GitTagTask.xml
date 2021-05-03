@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitTagTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitTagTask</title>
+        <para> Create, list, delete or verify a tag object signed with GPG. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>message</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Use given tag message. See -m of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>name</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Tag name</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>commit</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;commit&gt; argument to git-tag</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>object</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;object&gt; argument to git-tag</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>pattern</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;pattern&gt; argument to git-tag</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputProperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Property name to set with output value from git-tag</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Take tag message from given file. See -F of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>annotate</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Make unsigned, annotated tag object. See -a of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>force</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Replace existing tag with given name. See -f of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delete</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Delete existing tags with given names. See -d of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>list</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>List tags with names matching given pattern. See -l of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>num</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Specifies how many lines from the annotation, if any, are printed
+                            when using -l. See -n of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>contains</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Only list tags containing specified commit. See --contains of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>sign</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Make GPG-signed tag. See -s of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>keySign</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Make GPG-signed tag, using given key. See -u of git-tag of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>verify</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Verify GPG signature of given tag names. See -v of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html">git-tag</link>
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+&lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+&lt;!-- clone repository --&gt;
+&lt;gitclone
+    repository="git://github.com/path/to/repo/repo.git"
+    targetPath="${repo.dir.resolved}" /&gt;
+
+&lt;gittag repository="${repo.dir.resolved}" name="ver1.0" /&gt;
+&lt;!-- Force duplicate tag creation --&gt;
+&lt;gittag
+    repository="${repo.dir.resolved}"
+    name="ver1.0" force="true"/&gt;
+&lt;!-- Create tag with annotation and message --&gt;
+&lt;gittag
+    repository="${repo.dir.resolved}"
+    name="ver1.0"
+    annotate="true" message="Version 1.0 tag"/&gt;
+&lt;!-- Delete tag --&gt;
+&lt;gittag
+    repository="${repo.dir.resolved}"
+        name="ver2.0" delete="true" /&gt;
+&lt;!-- List tags matching to pattern "marked" into "tags" variable --&gt;
+&lt;gittag repository="${repo.dir.resolved}"
+    list="true"
+    outputProperty="tags"
+    pattern="marked" /&gt;</programlisting>
+        </sect2>
+    </sect1>

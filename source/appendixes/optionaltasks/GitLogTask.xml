@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitLogTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitLogTask</title>
+        <para> Show commit logs. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-log.html">documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>paths</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;paentry&gt; arguments to git-log. Accepts one or more paths
+                            delimited by PATH_SEPARATOR</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputProperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Property name to set with output value from git-log</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>format</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Commit format. See --format of git-log. Can be one of
+                            <literal>oneline</literal>, <literal>short</literal>,
+                            <literal>medium</literal>, <literal>full</literal>,
+                            <literal>fuller</literal>, <literal>email</literal>,
+                            <literal>raw</literal> and
+                            <literal>format:&lt;string&gt;</literal></entry>
+                        <entry>medium</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>date</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Date format. See --date of git-log.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>since</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;since&gt; argument to git-log.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>until</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>&lt;until&gt; argument to git-log.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>stat</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Generate a diffstat. See --stat of git-log</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>nameStatus</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Names + status of changed files. See --name-status of
+                            git-log.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>maxCount</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Number of commits to show. See -&lt;n&gt;|-n|--max-count of
+                            git-log.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>noMerges</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Don't show commits with more than one parent. See --no-merges of
+                            git-log.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+                &lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+                &lt;!-- clone repository --&gt;
+                &lt;gitclone
+                repository="git://github.com/path/to/repo/repo.git"
+                targetPath="${repo.dir.resolved}" /&gt;
+                <!-- write git-log output to "logs" variable -->
+                &lt;gitlog
+                paths="${repo.dir.resolved}"
+                format="oneline"
+                maxCount="2"
+                stat="true"
+                noMerges="false"
+                since="Sun Jan 23 23:55:42 2011 +0300"
+                until="Mon Jan 24 09:59:33 2011 +0300"
+                outputProperty="logs"
+                repository="${repo.dir.resolved}" /&gt;</programlisting>
+        </sect2>
+    </sect1>

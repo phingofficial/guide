@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PHPUnitReport" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>PHPUnitReport</title>
+        <para>This task transforms PHPUnit xml reports to HTML using XSLT.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>infile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The filename of the XML results file to use.</entry>
+                        <entry>testsuites.xml</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>format</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The format of the generated report. Must be
+                                <literal>noframes</literal> or <literal>frames</literal>.</entry>
+                        <entry>noframes</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>styledir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The directory where the stylesheets are located. They must conform to
+                            the following conventions: frames format: the stylesheet must be named
+                                <filename>phpunit-frames.xsl</filename>. noframes format: the
+                            stylesheet must be named <filename>phpunit-noframes.xsl</filename>. If
+                            unspecified, the task will look for the stylesheet(s) in the following
+                            directories: the PHP include path, the Phing home directory and the PEAR
+                            data directory (if applicable). </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>todir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>An existing directory where the files resulting from the
+                            transformation should be written to.</entry>
+                        <entry/>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>usesorttable</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to use the sorttable JavaScript library (see <link xlink:href="http://www.kryogenix.org/code/browser/sorttable/">http://www.kryogenix.org/code/browser/sorttable/</link>)</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;phpunitreport infile="reports/testsuites.xml"
+    format="frames"
+    todir="reports/tests"
+    styledir="/home/phing/etc"/&gt;</programlisting>
+            <para> Generates a framed report in the directory <literal>reports/tests</literal> using
+                the file <literal>reports/testsuites.xml</literal> as input.</para>
+            <para>
+                <emphasis role="bold">Important note:</emphasis> testclasses that are not explicitly
+                placed in a package (by using a '@package' tag in the class-level DocBlock) are
+                listed under the "default" package.</para>
+        </sect2>
+    </sect1>

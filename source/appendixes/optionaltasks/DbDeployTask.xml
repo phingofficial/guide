@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="DbDeployTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>DbDeployTask</title>
+        <para> The <literal>DbDeployTask</literal> creates .sql files for making revisions to a
+            database, based on dbdeploy conventions centering around a changelog table in the
+            database. See <link xlink:href="http://dbdeploy.com/documentation/getting-started/rules-for-using-dbdeploy/">rules for using dbdeploy</link> for more information. You will need a changelog
+            table like so: </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>url</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>PDO connection url</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>userid</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>DB userid to use for accessing the changelog table.</entry>
+                        <entry>none</entry>
+                        <entry>As required by db</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>DB password to use for accessing the changelog table.</entry>
+                        <entry>none</entry>
+                        <entry>As required by db</entry>
+                    </row>
+                    <row>
+                        <entry><literal>dir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Directory containing dbdeploy delta scripts.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outputfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Filename in which deployment SQL will be generated.</entry>
+                        <entry>dbdeploy_deploy.sql</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>undooutputfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Filename in which undo SQL will be generated.</entry>
+                        <entry>dbdeploy_undo.sql</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>deltaset</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>deltaset to check within db.</entry>
+                        <entry>Main</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>lastchangetoapply</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>Highest-numbered delta script to apply to db.</entry>
+                        <entry>999</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>appliedBy</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Value of the 'applied_by' column for each
+                        entry in the changelog table.</entry>
+                        <entry>dbdeploy</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>checkall</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>False means dbdeploy will only apply patches that have a higher number
+                        than the last patchnumber that was applied
+                        True means dbdeploy will apply all changes that aren't applied
+                        already (in ascending order).</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">CREATE TABLE changelog (
+  change_number BIGINT NOT NULL,
+  delta_set VARCHAR(10) NOT NULL,
+  start_dt TIMESTAMP NOT NULL,
+  complete_dt TIMESTAMP NULL,
+  applied_by VARCHAR(100) NOT NULL,
+  description VARCHAR(500) NOT NULL
+)</programlisting>
+            <programlisting language="xml">&lt;dbdeploy
+  url="sqlite:${project.basedir}/data/db.sqlite"
+  userid="dbdeploy"
+  password="dbdeploy"
+  dir="${project.basedir}/data/dbdeploy/deltas"
+/&gt;</programlisting>
+
+            <para>The above example uses a sqlite database and delta scripts located in
+                dbdeploy/deltas in the project base dir.</para>
+        </sect2>
+    </sect1>

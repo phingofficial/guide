@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SvnLastRevisionTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>SvnLastRevisionTask</title>
+        <para> The <literal>SvnLastRevisionTask</literal> stores the number of the last revision of
+            a Subversion workingcopy in a property.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>svnpath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Subversion binary</entry>
+                        <entry>/usr/bin/svn</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>workingcopy</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Working copy directory</entry>
+                        <entry>none</entry>
+                        <entry>Yes, or <literal>repositoryurl</literal></entry>
+                    </row>
+                    <row>
+                        <entry><literal>repositoryurl</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>URL of remote repository</entry>
+                        <entry>none</entry>
+                        <entry>Yes, or <literal>workingcopy</literal></entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A username used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>A password used to connect to the SVN server</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>propertyname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of property to use</entry>
+                        <entry>svn.lastrevision</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>lastChanged</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Sets whether to store actual last changed revision of the
+                            directory/file mentioned</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>configOption</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Override subversion's config option</entry>
+                        <entry><literal>n/a</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;svnlastrevision
+   svnpath="/usr/bin/svn"
+   workingcopy="/home/user/svnwc"
+   propertyname="svn.lastrevision"/&gt;</programlisting>
+            <programlisting language="xml">&lt;svnlastrevision
+   svnpath="C:/Subversion/bin/svn.exe"
+   workingcopy="C:/projects/svnwc"
+   propertyname="svn.lastrevision"/&gt;</programlisting>
+            <programlisting language="xml">&lt;svnlastrevision
+   svnpath="C:/Subversion/bin/svn.exe"
+   repositoryurl="http://svn.phing.info/"
+   propertyname="svn.lastrevision"/&gt;</programlisting>
+        </sect2>
+    </sect1>

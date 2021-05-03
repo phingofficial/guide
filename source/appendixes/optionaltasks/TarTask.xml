@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="TarTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>TarTask</title>
+        <para> The <literal>TarTask</literal> creates a tarball from a fileset or directory.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>destfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Tarball filename</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>basedir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Base directory to tar (if no fileset specified, entire directory
+                            contents will be included in tar)</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>compression</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Type of compression to use (gzip, bzip2, lzma2, none)</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>includeemptydirs</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If set to <literal>true</literal>, also empty directories are copied. </entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>longfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>How to handle long files, those with a path &gt; 100 chars. Allowable
+                            values are: <literal>truncate</literal> - paths are truncated to the
+                            maximum length, <literal>fail</literal> - paths greater than the maximim
+                            cause a build exception <literal>warn</literal> - paths greater than the
+                            maximum cause a warning and GNU is used, <literal>gnu</literal> - GNU
+                            extensions are used for any paths greater than the maximum,
+                                <literal>omit</literal> - paths greater than the maximum are omitted
+                            from the archive </entry>
+                        <entry>warn</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>prefix</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File path prefix to use when adding files to archive</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <note>
+            <para>files are not replaced if they are already present in the archive.</para>
+        </note>
+        <note>
+            <para>using basedir and fileset simultaneously can result in strange contents in the
+                archive.</para>
+        </note>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;tar destfile="phing.tar"&gt;
+ &lt;fileset dir="."&gt;
+     &lt;include name="**/**" /&gt;
+ &lt;/fileset&gt;
+&lt;/tar&gt;</programlisting>
+
+            <para>The above example uses a fileset to determine which files to include in the
+                archive.</para>
+            <programlisting language="xml">&lt;tar destfile="phing.tar.gz" basedir="." compression="gzip"/&gt;</programlisting>
+            <para>The second example uses the basedir attribute to include the contents of that
+                directory (including subdirectories) in the archive,
+                compressing the archive using gzip.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="FtpDeployTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>FtpDeployTask</title>
+        <para>Deploys a set of files to a remote FTP server.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>host</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The hostname of the remote server.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>port</literal></entry>
+                        <entry><literal role="type">Integer</literal></entry>
+                        <entry>The port of the remote server.</entry>
+                        <entry>21</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>username</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The username to use when logging in to the remote server.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>password</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The password to use when logging in to the remote server.</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>ssl</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+                        <entry>Whether to connect via SSL. This requires Net/FTP to be installed.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>dir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Directory on the remote server.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>mode</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The transfer mode to use, either <literal>ascii</literal> or
+                                <literal>binary</literal>.</entry>
+                        <entry>binary</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>clearfirst</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Delete all files in the remote directory before uploading.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>passive</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Open connection in passive mode</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>dirmode</literal></entry>
+                        <entry><literal role="type">mixed</literal></entry>
+                        <entry>
+                            Permissions of the uploaded files, can either be 'inherit' or it can be a octal value
+                            without the leading zero. Settings the dirmode to 'inherit' will cause the uploaded files to
+                            have the same permissions as on the filesystem.
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>filemode</literal></entry>
+                        <entry><literal role="type">mixed</literal></entry>
+                        <entry>This option does the same as dirmode, except it only affects regular files.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>depends</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+                        <entry>
+                            If depends is set to true, the task will only update files
+                            with a local modification timestamp that is newer
+                            than the corresponding timestamp on the server.
+                        </entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+
+                    <row>
+                        <entry><literal>level</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Control the level at which the task reports status messages. One of
+                                <literal>error</literal>, <literal>warning</literal>,
+                                <literal>info</literal>, <literal>verbose</literal>,
+                                <literal>debug</literal>.</entry>
+                        <entry><literal>verbose</literal></entry>
+                        <entry>No</entry>
+            </row>
+            <row>
+                        <entry><literal>rawdatafallback</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+            <entry>
+                If Net_FTP is not able to parse the raw ftp data, the depends option does not work at all.
+                Setting rawdatafallback will cause phing trying to parse the ftp data on its own, so the
+                depends option might work again.
+
+                If depends is set to false, rawdatafallback is ignored.
+            </entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>skiponsamesize</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Skip upload, if file of same size exists.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;ftpdeploy
+  host="${ftp.host}"
+  port="${ftp.port}"
+  username="${ftp.username}"
+  password="${ftp.password}"
+  dir="${ftp.dir}"
+  ssl="true"
+  passive="false"
+  mode="${ftp.mode}"&gt;
+  &lt;fileset dir="."&gt;
+    &lt;include name="**"/&gt;
+    &lt;exclude name="phing"/&gt;
+    &lt;exclude name="build.xml"/&gt;
+    &lt;exclude name="images/**.png"/&gt;
+    &lt;exclude name="images/**.gif"/&gt;
+    &lt;exclude name="images/**.jpg"/&gt;
+  &lt;/fileset&gt;
+&lt;/ftpdeploy&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                    <para>The files to deploy</para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
