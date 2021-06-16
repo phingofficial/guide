@@ -7348,6 +7348,27 @@ Note that you can omit both startpoint and track attributes in this case
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>standard</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The list of coding standards to test against. Separated by space, comma or semicolon.</entry>
+                        <entry></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>format</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The output format. (ex  <literal>checkstyle</literal>, <literal>full</literal>, <literal>summary</literal>, ...)</entry>
+			<entry></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>outfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+			<entry>Filename to write output/report to. If not set output will be sent to STDOUT.</entry>
+			<entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>cache</literal></entry>
                         <entry><literal role="type">Boolean</literal></entry>
                         <entry>Cache results between runs.</entry>
