@@ -2171,7 +2171,21 @@ verbose="true" failonerror="false" /></programlisting>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">&lt;!-- List the contents of "/home". -->
-&lt;exec command="ls -l" dir="/home" />
+&lt;exec command="ls -l" dir="/home" passthru="yes" />
+
+&lt;!-- List the contents of "/home" using the executable attribute -->
+&lt;exec executable="ls" passthru="yes">
+  &lt;arg value="-l"/>
+  &lt;arg path="/home"/>
+&lt;/>
+
+&lt;!-- Demonstrate executable attribute and environment variables. -->
+&lt;exec executable="php" outputProperty="outputProperty">
+    &lt;env key="HELLO" value="hello"/>
+    &lt;env key="WORLD" value="world"/>
+      &lt;arg value="-r"/>
+    &lt;arg value="print getEnv('HELLO') . ' ' . getEnv('WORLD');"/>
+&lt;/exec>
 
 &lt;!-- Start the make process in "/usr/src/php-4.0". -->
 &lt;exec command="make" dir="/usr/src/php-4.0" />
