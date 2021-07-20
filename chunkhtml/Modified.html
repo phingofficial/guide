@@ -7,7 +7,7 @@
         <div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">get the absolute path for the file</li><li class="listitem">get the cached value from the configured cache (absolute path as key)</li><li class="listitem">get the new value from the configured algorithm</li><li class="listitem">compare these two values with the configured comparator</li><li class="listitem">update the cache if needed and requested</li><li class="listitem">do the selection according to the comparison result</li></ol></div>
         <p>The comparison, computing of the hashvalue and the store is done by implementation of special interfaces.
             Therefore they may provide additional parameters.</p>
-        <div class="table"><a name="idp22656"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title"> Attributes for the <code class="literal">&lt;modified&gt;</code> selector </span></p><div class="table-contents">
+        <div class="table"><a name="idp22702"></a><p class="formal-object-title"><span class="label">Table G.13: </span><span class="title"> Attributes for the <code class="literal">&lt;modified&gt;</code> selector </span></p><div class="table-contents">
             
             <table class="table" summary=" Attributes for the &lt;modified&gt; selector " border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">algorithm</code></td><td>The type of algorithm should be used. Acceptable values are (further information see later):
                             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">hashfile</li><li class="listitem">lastmodified</li></ul></div>
@@ -20,18 +20,18 @@
                             This is provided for increased performance. If set to "false", the storage of the cache will
                             happen with each change. This attribute depends upon the update attribute. (boolean)</td><td><code class="literal">true</code></td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22738"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22784"></a>G.13.1 Parameters specified as nested elements</h3></div></div></div>
             
             <p>All attributes of a &lt;modified&gt; selector an be set with nested &lt;param/&gt; tags.
                 Additional values can be set with &lt;param/&gt; tags according to the rules below.</p>
-            <div class="table"><a name="idp22741"></a><p class="formal-object-title"><span class="label">Table G.14: </span><span class="title">algorithm</span></p><div class="table-contents">
+            <div class="table"><a name="idp22787"></a><p class="formal-object-title"><span class="label">Table G.14: </span><span class="title">algorithm</span></p><div class="table-contents">
                 
                 <table class="table" summary="algorithm" border="1"><colgroup><col class="name"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">hashfile</code></td><td>This Algorithm supports the following attribute:
                                 <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">algorithm.algorithm (optional): Name of the hashfile algorithm (e.g. "MD5" or "SHA"); default is "MD5"</li></ul></div>
                             </td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">lastmodified</code></td><td>Uses the lastModified property of a file. No additional configuration is required.</td><td>n/a</td><td>No</td></tr></tbody></table>
             </div></div><br class="table-break">
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22769"></a>G.13.2 Examples</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp22815"></a>G.13.2 Examples</h3></div></div></div>
             
             <p>Here are some examples of how to use the Modified Selector:</p>
             <pre class="programlisting">&lt;copy todir="dest"&gt;
