@@ -2014,6 +2014,13 @@ verbose="true" failonerror="false" /></programlisting>
         <para>Executes a shell command. You can use this to quickly add a new command to Phing.
             However, if you want to use this regularly, you should think about writing a Task for
             it.</para>
+            <para><emphasis>The command attribute is now deprecated.</emphasis></para>
+            <para>Where it was once possible to pipe the output of one program to be the input of another using the command attribute:
+&lt;exec command="echo FLUSHALL | redis-cli">
+This must now be done using a combination of the <emphasis role="bold">executable and line attributes</emphasis>, thus:
+&lt;exec executable="bash" line="echo FLUSHALL | redis-cli">
+</para>
+
 
         <table>
             <title>Attributes</title>
@@ -2171,10 +2178,41 @@ verbose="true" failonerror="false" /></programlisting>
         <sect2>
             <title>Examples</title>
             <programlisting language="xml">&lt;!-- List the contents of "/home". -->
-&lt;exec command="ls -l" dir="/home" />
+&lt;exec command="ls -l" dir="/home" passthru="yes" />
 
-&lt;!-- Start the make process in "/usr/src/php-4.0". -->
-&lt;exec command="make" dir="/usr/src/php-4.0" />
+&lt;!-- List the contents of "/home" using the executable attribute -->
+&lt;exec executable="ls" passthru="yes">
+  &lt;arg value="-l"/>
+  &lt;arg path="/home"/>
+&lt;/>
+
+&lt;!-- List the contents of "/home", but only if on Linux -->
+&lt;exec executable="ls" passthru="yes" os="Linux">
+  &lt;arg value="-l"/>
+  &lt;arg path="/home"/>
+&lt;/>
+
+&lt;!-- Demonstrate executable attribute and environment variables. -->
+&lt;exec executable="php" outputProperty="outputProperty">
+    &lt;env key="HELLO" value="hello"/>
+    &lt;env key="WORLD" value="world"/>
+      &lt;arg value="-r"/>
+    &lt;arg value="print getEnv('HELLO') . ' ' . getEnv('WORLD');"/>
+&lt;/exec>
+
+&lt;!-- Demonstrate piping outputs from one command to another using the executable attribute. -->
+&lt;exec executable="bash">
+    &lt;arg value="-c"/>
+    &lt;arg line='"java -jar test.jar page.xml | mysql -u user -p base"'/>
+&lt;/exec>
+
+&lt;!-- Restart some docker service -->
+&lt;exec executable="docker">
+    &lt;arg line="--debug restart ${service.name}"/>
+&lt;/exec>
+
+&lt;!-- Start the configure process in "/tmp/php-src/php-8.0.8". -->
+&lt;exec command="configure" dir="/tmp/php-src/php-8.0.8" />
 
 &lt;!-- List the contents of "/tmp" out to a file. -->
 &lt;exec command="ls -l /tmp > foo.out" escape="false" /></programlisting>
