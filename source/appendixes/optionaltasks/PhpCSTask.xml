@@ -105,6 +105,53 @@
                 <listitem>
                     <para><literal>FileSet</literal></para>
                 </listitem>
+                <listitem>
+                    <para><literal>Formatter</literal></para>
+                    <para>The results of the tests can be printed in different formats. Output will
+                        always be sent to a file, unless you set the <literal>usefile</literal>
+                        attribute to <literal>false.</literal>
+                    </para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>type</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The output format. Accepts the same values as the
+                                        <literal>format</literal> attribute
+                                        (<literal>default</literal>, <literal>xml</literal>,
+                                        <literal>checkstyle</literal>, <literal>csv</literal>,
+                                        <literal>report</literal>, <literal>summary</literal>
+                                        &amp; <literal>doc</literal>).</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>outfile</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Path to write output file to.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
             </itemizedlist>
         </sect2>
         <sect2>
