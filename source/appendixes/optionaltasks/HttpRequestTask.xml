@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="HttpRequestTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>HttpRequestTask</title>
+        <para>This task will make an HTTP request to the provided URL and match the response against
+            the provided regular expression. If an regular expression is provided and doesn't match
+            the build will fail. You need an installed version of
+            <link xlink:href="http://docs.guzzlephp.org/en/stable/" role="extern">Guzzle</link>
+            to use this task.
+        </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>url</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The request URL</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>responseRegex</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The regular expression for matching the response</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>responseCodeRegex</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The regular expression for matching the response code</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>authUser</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The authentication user name</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>authPassword</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The authentication password</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>authScheme</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The authentication scheme</entry>
+                        <entry>basic</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>verbose</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to enable detailed logging</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                      <entry><literal>method</literal></entry>
+                      <entry><literal role="type">String</literal></entry>
+                      <entry>The HTTP method of the request, currently only GET or POST supported</entry>
+                      <entry><literal>GET</literal></entry>
+                      <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;http-request url="http://my-production.example.com/check-deployment.php"/&gt;</programlisting>
+
+            <para>Just perform a HTTP request to the given URL.</para>
+            <programlisting language="xml">&lt;http-request
+   url="http://my-production.example.com/check-deployment.php"
+   responseRegex="/Heartbeat/"
+   verbose"true"
+   observerEvents="connect, disconnect"/&gt;</programlisting>
+            <para>Perform a HTTP request to the given URL and matching the response against the
+                given regex pattern. Enable detailed logging and log only the specified
+                events.</para>
+            <programlisting language="xml">&lt;http-request url="http://my-production.example.com/check-deployment.php"&gt;
+   &lt;header name="user-agent" value="Phing HttpRequestTask"/&gt;
+ &lt;/http-request&gt;</programlisting>
+            <para>Perform a HTTP request to the given URL. Setting request adapter to curl instead
+                of socket. Setting an additional header.</para>
+            <programlisting language="xml">&lt;http-request
+            url="http://my-production.example.com/check-deployment.php"
+            verbose"true"
+            method="POST"&gt;
+              &lt;postparameter name="param1" value="value1" /&gt;
+              &lt;postparameter name="param2" value="value2" /&gt;
+            &lt;/http-request&gt;
+          </programlisting>
+          <para>Perform an HTTP POST request to the given URL. Setting POST request parameters to emulate form submission.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal>config</literal></para>
+                    <para>Holds additional config data. See
+                        <link xlink:href="http://docs.guzzlephp.org/en/stable/request-options.html" role="extern">Guzzle documentation</link>
+                        for supported values.
+                    </para>
+
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>name</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Config parameter name</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>value</literal></entry>
+                                    <entry>Mixed</entry>
+                                    <entry>Config value</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>header</literal></para>
+                    <para> Holds additional header <literal>name</literal> and
+                            <literal>value</literal>.</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>name</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Header name</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>value</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Header value</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+                <listitem>
+                    <para><literal>postparameter</literal></para>
+                    <para>Used when performing a POST request. Contains <literal>name</literal> and
+                            <literal>value</literal> of a form field.</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>name</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Field name</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>value</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Field value</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+        <sect2>
+            <title>Global configuration</title>
+            <para>
+                In addition to configuring a particular instance of <literal>Guzzle</literal> via
+                nested <literal>&lt;config&gt;</literal> tags it is also possible to set default
+                configuration values for <link linkend="HttpGetTask">HttpGetTask</link> / <link linkend="HttpRequestTask">HttpRequestTask</link>
+                / <link linkend="VisualizerTask">VisualizerTask</link> by setting <literal>phing.http.*</literal>
+                properties.
+            </para>
+            <programlisting role="xml"><![CDATA[
+<property name="phing.http.proxy" value="socks5://localhost:1080/"/>
+<!-- This request will go through the default proxy -->
+<http-request url="http://example.com/foo"/>
+<http-request url="http://example.org/restricted" dir="./">
+    <!-- This proxy will be used instead of the default one -->
+    <config name="proxy" value="http://foo:bar@proxy.example.org:3128/"/>
+</http-request>
+            ]]></programlisting>
+        </sect2>
+    </sect1>

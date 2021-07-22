@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="CoverageReportTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>CoverageReportTask</title>
+        <para>The CoverageReportTask formats a coverage database into a framed HTML report using
+            XSLT. The report can optionally make use of the <emphasis role="bold">Ge</emphasis>neric
+                <emphasis role="bold">S</emphasis>yntax <emphasis role="bold">Hi</emphasis>ghlighting library, <literal>GeSHi</literal> (See <link xlink:href="http://qbnz.com/highlighter/">GeSHi Homepage</link>) library to mark up
+            source code. The path to the library (if not in the default path) can be specified as an
+            attribute.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>outfile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The location for the intermediate XML file.</entry>
+                        <entry>coverage.db</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal><link linkend="path">classpath</link></literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Additional classpath to locate source referenced in the
+                            report.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>geshipath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to GeSHi highlighting library.</entry>
+                        <entry>n/a</entry>
+                        <entry>No/Yes* If syntax highlighting is to be enabled</entry>
+                    </row>
+                    <row>
+                        <entry><literal>geshilanguagespath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Language to use with GeSHi.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;coverage-report outfile="reports/coverage.xml"&gt;
+  &lt;report todir="reports/coverage" styledir="/home/phing/etc"/&gt;
+&lt;/coverage-report&gt;</programlisting>
+        </sect2>
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para>report</para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry><literal>styledir</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The directory where the stylesheets are located.</entry>
+                                    <entry>The <literal>etc</literal> directory in the Phing installation.</entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>todir</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>The directory where the files resulting from the
+                                        transformation should be written to.</entry>
+                                    <entry/>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>title</literal></entry>
+                                    <entry><literal role="type">String</literal></entry>
+                                    <entry>Title of the project (used in the generated
+                                        document(s)).</entry>
+                                    <entry/>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>usesorttable</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>Whether to use the sorttable JavaScript library (see
+                                            <link xlink:href="http://www.kryogenix.org/code/browser/sorttable/">http://www.kryogenix.org/code/browser/sorttable/</link>).</entry>
+                                    <entry><literal>false</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

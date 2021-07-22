@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="UntarTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>UntarTask</title>
+        <para> The <literal>UntarTask</literal> unpacks one or more tar archives.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Archive filename</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>todir</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Directory to unpack the archive(s) to</entry>
+                        <entry>none</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>removepath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to remove from files in the archive(s)</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>forceExtract</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>When set to false, only extract files if the destination does not
+                            exist yet or is older than the archive. When set to true, always extract
+                            files.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>preservePermissions</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>When set to true, preserve permissions (mode, uid, gid) as set in the tar file..</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;untar file="testtar.tar.gz" todir="dest"&gt;
+  &lt;fileset dir="."&gt;
+    &lt;include name="*.tar.gz"/&gt;
+    &lt;include name="*.tar"/&gt;
+  &lt;/fileset&gt;
+&lt;/untar&gt;</programlisting>
+        </sect2>
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

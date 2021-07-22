@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitMergeTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitMergeTask</title>
+        <para> Join two or more development histories together. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">documentation</link>.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>remote</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Space separated list of branches to merge into current HEAD. See
+                            &lt;commit&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>message</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Commit message to be used for the merge commit (in case one is
+                            created). See &lt;msg&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>fastForwardCommit</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If set false (default), will not generate a merge commit if the merge
+                            resolved as a fast-forward, only update the branch pointer. If set true,
+                            will generate a merge commit even if the merge resolved as a
+                            fast-forward. See --ff/--no-ff options in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>strategy</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Merge strategy. One of "resolve", "recursive", "octopus", "ours", or
+                            "subtree". See &lt;strategy&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>strategyOption</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Pass merge strategy specific option through to the merge strategy.
+                            See &lt;strategy-option&gt; in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>commit</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --commit in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>nocommit</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --no-commit in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>quiet</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Quiet, suppress feedback messages. See --quiet in <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-merge.html">git-merge</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+&lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+&lt;!-- clone repository --&gt;
+&lt;gitclone
+    repository="git://github.com/path/to/repo/repo.git"
+    targetPath="${repo.dir.resolved}" /&gt;
+
+&lt;!-- create couple of test branches --&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="merge-test-1" startpoint="origin/master" /&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="merge-test-2" startpoint="origin/master" /&gt;
+
+&lt;!-- Merge those branches back into master --&gt;
+&lt;gitmerge
+    repository="${repo.dir.resolved}"
+    remote="merge-test-1 merge-test-2"
+    message="merging repos" commit="true" /&gt;</programlisting>
+        </sect2>
+    </sect1>
