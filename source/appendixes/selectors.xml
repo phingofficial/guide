@@ -592,7 +592,7 @@
             limit.</para>
 
         <programlisting language="xml">&lt;fileset dir="${src}">
-  &lt;size value="4" when="more"/>
+  &lt;size value="4M" when="more"/>
 &lt;/fileset></programlisting>
 
 
@@ -614,34 +614,38 @@
                 <tbody>
                     <row>
                         <entry><literal>value</literal></entry>
-                        <entry>The size of the file which should be tested for.</entry>
+                        <entry>The size of the file which should be tested for.
+                            Examples: <literal>250M</literal>,
+                            <literal>10G</literal>, <literal>1T</literal>.</entry>
                         <entry>n/a</entry>
                         <entry>Yes</entry>
-                    </row>
-                    <row>
-                        <entry><literal>units</literal></entry>
-                        <entry>The units that the value attribute is expressed in. When using the
-                            standard single letter SI designations, such as "k","M", or "G",
-                            multiples of 1000 are used. If you want to use power of 2 units, use the
-                            IEC standard: "Ki" for 1024, "Mi" for 1048576, and so on. The default is
-                            no units, which means the value attribute expresses the exact number of
-                            bytes.</entry>
-                        <entry>n/a</entry>
-                        <entry>No</entry>
                     </row>
                     <row>
                         <entry><literal>when</literal></entry>
                         <entry>Indicates how to interpret the size, whether the files to be selected
                             should be larger, smaller, or equal to that value. Accepted values are:
-                                <literal>less</literal> - select files less than the indicated size
-                                <literal>more</literal> - select files greater than the indicated
-                            size <literal>equal</literal> - select files this exact size </entry>
+                            <itemizedlist>
+                                <listitem>
+                                    <literal>less</literal>
+                                    - select files less than the indicated size
+                                </listitem>
+                                <listitem>
+                                    <literal>more</literal>
+                                    - select files greater than the indicated size
+                                </listitem>
+                                <listitem>
+                                    <literal>equal</literal>
+                                    - select files this exact size
+                                </listitem>
+                            </itemizedlist>
+                        </entry>
                         <entry>equal</entry>
                         <entry>No</entry>
                     </row>
                 </tbody>
             </tgroup>
         </table>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../common/filesize_suffixes.xml" parse="xml"/>
     </sect1>
     <sect1 role="typedef" xml:id="Type" xreflabel="&lt;Type>">
         <title>Type </title>

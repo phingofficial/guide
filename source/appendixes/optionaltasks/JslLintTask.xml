@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="JslLintTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>JslLintTask</title>
+        <para> The <literal>JslLintTask</literal> uses the <link xlink:href="http://www.javascriptlint.com" role="extern">Javascript Lint</link>
+            program to check the sytax on one or more JavaScript source code files.</para>
+        <para>
+            <emphasis role="bold">NB:</emphasis> the Javascript lint program must be in the system
+            path! </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>executable</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to JSL executable</entry>
+                        <entry>jsl</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to source file</entry>
+                        <entry>n/a</entry>
+                        <entry>No, unless no <literal>fileset</literal> elements are present</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonfailure</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if the linting process encounters an
+                            error.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltonwarning</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Stop the build process if the linting process encounters a
+                            warning.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>showwarnings</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Sets the flag if warnings should be shown.</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>cachefile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>If set, enables writing of last-modified times to
+                                <literal>cachefile</literal>, to speed up processing of files that
+                            rarely change</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>conffile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to JSL config file</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>tofile</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>File to write list of 'bad files' to.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;jsllint
+            file="path/to/source.js"/&gt;</programlisting>
+
+            <para>Checking syntax of one particular source file.</para>
+            <programlisting language="xml">&lt;jsllint&gt;
+  &lt;fileset dir="src"&gt;
+    &lt;include name="**/*.js"/&gt;
+  &lt;/fileset&gt;
+&lt;/jsllint&gt;</programlisting>
+            <para>Check syntax of a fileset of source files.</para>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

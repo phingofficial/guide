@@ -118,26 +118,24 @@ any later version published by the Free Software Foundation;</programlisting>
                         VirtualBox).</para>
                 </tip>
             </para>
-            <para>All DocBook sources are structured in a tree under <filename role="dir"
-                    >docs/docbook5</filename>. The top level is the language of the manual. As of
-                this writing only an English manual is available and hence the only top level
-                directory available is "<literal>en</literal>". Under this directory the following
-                structure applies (also for any new language translation that is added):</para>
-            <programlisting>|-- scripts
-|-- source
-|   |-- appendixes
-|   `-- chapters
-`-- stylesheets
-    |-- css
-    |   `-- img
-    `-- xsl
-        `-- images</programlisting>
+            <para>All DocBook is structured in a tree:</para>
+            <programlisting>.
+├── source
+│   ├── appendixes
+│   │   └── optionaltasks
+│   └── chapters
+└── stylesheets
+    ├── css
+    │   └── img
+    └── xsl
+        └── images</programlisting>
             <para>All document sources are stored under the subdirectory "<filename role="dir"
                     >source</filename>" and the master document is aptly named
                     "<filename>master.xml</filename>". This document pulls in all chapters and
-                appendixes in the right order. For example, new tasks added should normally be
-                documented in the "<filename>appendix/optionaltasks.xml</filename>" file. Look at
-                the existing tasks and follow the same structure.</para>
+                appendixes in the right order. For example, new tasks added must be documented
+                in a new file inside "<filename role="dir">source/appendixes/optionaltasks/</filename>",
+                then a reference should be added in "<filename>source/appendix/optionaltasks.xml</filename>".
+                Look at the existing tasks and follow the same structure.</para>
             <important>
                 <para>In order to get highlighting to work both the
                         "<filename>xslthl-2.x.x.jar</filename>" package must be installed as well as

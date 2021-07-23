@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="JsHintTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>JsHintTask</title>
+        <para>This task runs <link xlink:href="http://www.jshint.com/" role="extern">JSHint</link>,
+            a tool that helps to detect errors and potential problems in JavaScript code.
+            JSHint 2.5.6+ is supported, although latest JSHint is recommended.</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>file</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Single file to perform check on.</entry>
+                        <entry>n/a</entry>
+                        <entry>No, unless no <literal>fileset</literal> elements are present</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltOnError</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+                        <entry>Should the build fail when there are errors in the JS code?</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>haltOnWarning</literal></entry>
+                        <entry><literal role="type">boolean</literal></entry>
+                        <entry>Should the build fail when there are warnings in the JS code?</entry>
+                        <entry>false</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>reporter</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>JSHint reporter.</entry>
+                        <entry>checkstyle</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>checkstyleReportPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path where the the report in Checkstyle format should be saved.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>config</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>JSHint config path.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">
+        &lt;jshint
+            haltonerror="false"
+            haltOnWarning="false"
+            reporter="jslint"
+            checkstyleReportPath="${project.basedir}/build/checkstyle-jshint.xml"&gt;
+            &lt;fileset dir="${project.basedir}/public_html/www/js"&gt;
+                &lt;include name="**/**.js"/&gt;
+                &lt;exclude name="js-cache/**"/&gt;
+            &lt;/fileset&gt;
+        &lt;/jshint&gt;</programlisting>
+        </sect2>
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>

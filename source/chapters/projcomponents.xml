@@ -716,14 +716,6 @@
         <sect2 xml:id="conditions.hasfreespace">
             <title><literal>hasfreespace</literal></title>
             <para>Condition returns true if selected partition has the requested space, false otherwise.</para>
-            <para>Needed attribute can be specified using standard computing terms:</para>
-            <itemizedlist>
-                <listitem>K: Kilobytes (1024 bytes)</listitem>
-                <listitem>M: Megabytes (1024K)</listitem>
-                <listitem>G: Gigabytes (1024M)</listitem>
-                <listitem>T: Terabytes (1024G)</listitem>
-                <listitem>P: Petabytes (1024T)</listitem>
-            </itemizedlist>
             <table>
                 <title>hasfreespace Attributes</title>
                 <tgroup cols="3">
@@ -752,8 +744,9 @@
                     </tbody>
                 </tgroup>
             </table>
-            <para>On Unix like platforms:</para>
-            <programlisting anguage="xml">&lt;hasfreespace partition="/" needed="250M" /&gt;</programlisting>
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../common/filesize_suffixes.xml" parse="xml"/>
+            <para>On Unix-like platforms:</para>
+            <programlisting language="xml">&lt;hasfreespace partition="/" needed="250M" /&gt;</programlisting>
             <para>On Windows:</para>
             <programlisting language="xml">&lt;hasfreespace partition="c:" needed="10M" /&gt;</programlisting>
             <para>This condition internally uses PHP disk_free_space().</para>

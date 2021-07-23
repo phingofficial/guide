@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="GitBranchTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>GitBranchTask</title>
+        <para> Create, move or delete repository branches. See official <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">documentation</link> (branch listing functionality is omitted in current
+            implementation).</para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>gitPath</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git binary.</entry>
+                        <entry>/usr/bin/git</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>repository</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Path to Git repository.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>branchname</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of the branch to create or delete.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry><literal>newbranch</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The new name for an existing branch.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes, if branch move invoked</entry>
+                    </row>
+                    <row>
+                        <entry><literal>startpoint</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The new branch head will point to this commit. It may be given as a
+                            branch name, a commit-id, or a tag. If this option is omitted, the
+                            current HEAD will be used instead. See &lt;start-point&gt; argument of
+                                <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">git-branch</link>.</entry>
+                        <entry/>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>setupstream</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>If specified branch does not exist yet or if --force has been given,
+                            acts exactly like --track. Otherwise sets up configuration like --track
+                            would when creating the branch, except that where branch points to is
+                            not changed. See --set-upstream option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">git-branch</link>.</entry>
+                        <entry/>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>track</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --track option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">git-branch</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>notrack</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>See --no-track option of <link xlink:href="http://www.kernel.org/pub/software/scm/git/docs/git-branch.html">git-branch</link>.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>force</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Reset &lt;branchname&gt; to &lt;startpoint&gt; if &lt;branchname&gt; exists
+                            already. Without -f git branch refuses to change an existing
+                            branch.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>move</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Move/rename a branch and the corresponding reflog.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>forcemove</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Move/rename a branch even if the new branch name already
+                            exists.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>delete</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Delete a branch. The branch must be fully merged in its upstream
+                            branch, or in HEAD if no upstream was set with --track or
+                            --set-upstream.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>forcedelete</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Delete a branch irrespective of its merged status.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;property name="repo.dir" value="./relative/path/to/repo" /&gt;
+&lt;resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" /&gt;
+
+&lt;!-- Initialize normal repository --&gt;
+&lt;gitinit repository="${repo.dir.resolved}" /&gt;
+
+&lt;!-- Create branch "sample-branch" tracking current HEAD --&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="sample-branch" /&gt;
+
+&lt;!--
+Create branch "sample-branch" tracking origin/master
+Note that you can omit both startpoint and track attributes in this case
+--&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="sample-branch"
+    startpoint="origin/master"
+    track="true" /&gt;
+
+&lt;!-- Delete fully merged branch "sample-branch" --&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="sample-branch"
+    delete="true" /&gt;
+
+&lt;!-- Force delete even unmerged branch "sample-branch" --&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="sample-branch"
+    forcedelete="true" /&gt;
+
+&lt;!-- Renabe "branch1" to "branch2" --&gt;
+&lt;gitbranch
+    repository="${repo.dir.resolved}"
+    branchname="branch1"
+    newbranch="branch2"
+    move="true" /&gt;</programlisting>
+        </sect2>
+    </sect1>

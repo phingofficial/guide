@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="CoverageSetupTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+        <title>CoverageSetupTask</title>
+        <para>The CoverageSetupTask prepares a database which can be used to gather code coverage
+            information for unit tests.</para>
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>database</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The location for the coverage database.</entry>
+                        <entry>coverage.db</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Example</title>
+            <programlisting language="xml">&lt;coverage-setup database="./reports/coverage.db"&gt;
+  &lt;fileset dir="classes"&gt;
+    &lt;include name="**/*.php"/&gt;
+  &lt;/fileset&gt;
+&lt;/coverage-setup&gt;
+&lt;phpunit codecoverage="true"&gt;
+  &lt;batchtest&gt;
+    &lt;fileset dir="src"&gt;
+      &lt;include name="*Test.php"/&gt;
+    &lt;/fileset&gt;
+  &lt;/batchtest&gt;
+&lt;/phpunit&gt;</programlisting>
+        </sect2>
+
+        <sect2 role="nestedtags">
+            <title>Supported Nested Tags</title>
+            <itemizedlist>
+                <listitem>
+                    <para><literal><link linkend="path">classpath</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="FileSet">fileset</link></literal></para>
+                </listitem>
+                <listitem>
+                    <para><literal><link linkend="FileList">filelist</link></literal></para>
+                </listitem>
+            </itemizedlist>
+        </sect2>
+    </sect1>
