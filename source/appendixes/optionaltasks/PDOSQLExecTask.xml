@@ -143,14 +143,14 @@
             <programlisting language="xml">&lt;pdosqlexec url="pgsql:host=localhost dbname=test"&gt;
   &lt;fileset dir="sqlfiles"&gt;
       &lt;include name="*.sql"/&gt;
-      &lt;/fileset&gt;
+  &lt;/fileset&gt;
 &lt;/pdosqlexec&gt;</programlisting>
 
             <programlisting language="xml">&lt;pdosqlexec url="mysql:host=localhost;dbname=test"
   userid="username" password="password"&gt;
   &lt;transaction src="path/to/sqlfile.sql"/&gt;
   &lt;formatter type="plain" outfile="path/to/output.txt"/&gt;
-  &lt;/pdosqlexec&gt;</programlisting>
+&lt;/pdosqlexec&gt;</programlisting>
             <programlisting language="xml">&lt;property name="color" value="orange"/&gt;
 &lt;pdosqlexec url="mysql:host=localhost;dbname=test"
             userid="username" password="password"&gt;
@@ -286,14 +286,14 @@
                                 </row>
                                 <row>
                                     <entry><literal>outfile</literal></entry>
-                                    <entry>File</entry>
+                                    <entry><literal role="type">File</literal></entry>
                                     <entry>Path to file in which to store result.</entry>
                                     <entry>Depends on formatter</entry>
                                     <entry>No</entry>
                                 </row>
                                 <row>
                                     <entry><literal>append</literal></entry>
-                                    <entry>Boolean</entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
                                     <entry>Whether output should be appended to or overwrite an existing file.</entry>
                                     <entry><literal>false</literal></entry>
                                     <entry>No</entry>
