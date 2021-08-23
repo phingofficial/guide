@@ -72,6 +72,13 @@
                         <entry>No</entry>
                     </row>
                     <row>
+                        <entry><literal>failonconnectionerror</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>If <literal>false</literal>, will not execute any statement if the task fails to connect to the database.</entry>
+                        <entry>true</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
                         <entry><literal>delimiter</literal></entry>
                         <entry><literal role="type">String</literal></entry>
                         <entry>The delimiter to separate SQL statements (e.g. "GO" in MSSQL)</entry>
