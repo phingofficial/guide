@@ -103,6 +103,36 @@
                         <entry>none</entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>keepformat</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Control whether the format of SQL will be preserved.
+                        Useful when loading packages and procedures.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>expandproperties</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Set to <literal>false</literal> to turn off property expansion in nested SQL,
+                        inline in the task or nested transactions.</entry>
+                        <entry><literal>true</literal></entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>errorproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a property to set in the event of an error.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry><literal>statementcountproperty</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>The name of a property to set to the number of statements executed successfully.</entry>
+                        <entry>none</entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
@@ -266,6 +296,14 @@
                                     <entry><literal role="type">Boolean</literal></entry>
                                     <entry>(only applies to plain formatter) Whether to show column
                                         headers.</entry>
+                                    <entry><literal>false</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
+                                    <entry><literal>showtrailers</literal></entry>
+                                    <entry><literal role="type">Boolean</literal></entry>
+                                    <entry>(only applies to plain formatter) Whether to show successful executed statement counter
+                                        trailers.</entry>
                                     <entry><literal>false</literal></entry>
                                     <entry>No</entry>
                                 </row>
