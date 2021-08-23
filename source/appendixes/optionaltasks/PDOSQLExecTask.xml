@@ -292,6 +292,13 @@
                                     <entry>No</entry>
                                 </row>
                                 <row>
+                                    <entry><literal>append</literal></entry>
+                                    <entry>Boolean</entry>
+                                    <entry>Whether output should be appended to or overwrite an existing file.</entry>
+                                    <entry><literal>false</literal></entry>
+                                    <entry>No</entry>
+                                </row>
+                                <row>
                                     <entry><literal>showheaders</literal></entry>
                                     <entry><literal role="type">Boolean</literal></entry>
                                     <entry>(only applies to plain formatter) Whether to show column
