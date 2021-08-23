@@ -13,11 +13,13 @@
                             occurrence of the delimiter terminate the SQL command whereas with row,
                             only a line containing just the delimiter is recognized as the end of
                             the command. None disables all delimiter detection.</td><td>none</td><td>No</td></tr><tr><td><code class="literal">autocommit</code></td><td><code class="literal">Boolean</code></td><td>Whether to auto (implicitly) commit every single
-                        statement, disabling transactions.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">encoding</code></td><td><code class="literal">String</code></td><td>Encoding to use for read SQL files</td><td>none</td><td>No</td></tr></tbody></table>
+                        statement, disabling transactions.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">encoding</code></td><td><code class="literal">String</code></td><td>Encoding to use for read SQL files</td><td>none</td><td>No</td></tr><tr><td><code class="literal">keepformat</code></td><td><code class="literal">Boolean</code></td><td>Control whether the format of SQL will be preserved.
+                        Useful when loading packages and procedures.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">expandproperties</code></td><td><code class="literal">Boolean</code></td><td>Set to <code class="literal">false</code> to turn off property expansion in nested SQL,
+                        inline in the task or nested transactions.</td><td><code class="literal">true</code></td><td>No</td></tr><tr><td><code class="literal">errorproperty</code></td><td><code class="literal">String</code></td><td>The name of a property to set in the event of an error.</td><td>none</td><td>No</td></tr><tr><td><code class="literal">statementcountproperty</code></td><td><code class="literal">String</code></td><td>The name of a property to set to the number of statements executed successfully.</td><td>none</td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
         <p>You can also <a class="link" href="conditions.html#conditions.pdosqlexec" title="5.8.9 PDOSQLExec">use
             PDOSQLExecTask as condition</a></p>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp14102"></a>C.54.1 Example</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp14137"></a>C.54.1 Example</h3></div></div></div>
             
             <pre class="programlisting">&lt;pdosqlexec url="pgsql:host=localhost dbname=test"&gt;
   &lt;fileset dir="sqlfiles"&gt;
@@ -60,7 +62,7 @@
 &lt;/pdo&gt;</pre>
         </div>
 
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp14111"></a>C.54.2 Supported Nested Tags</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp14146"></a>C.54.2 Supported Nested Tags</h3></div></div></div>
             
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                     <p><code class="literal">transaction</code>
@@ -69,7 +71,7 @@
                         blocks of statements to be executed using the same PDO connection and commit
                         operation in between.</p>
 
-                    <div class="table"><a name="idp14118"></a><p class="formal-object-title"><span class="label">Table C.66: </span><span class="title">Attributes</span></p><div class="table-contents">
+                    <div class="table"><a name="idp14153"></a><p class="formal-object-title"><span class="label">Table C.66: </span><span class="title">Attributes</span></p><div class="table-contents">
                         
                         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">src</code></td><td><code class="literal">String</code></td><td>File with statements to be run as one transaction</td><td>n/a</td><td>No</td></tr></tbody></table>
                     </div></div><br class="table-break">
@@ -94,13 +96,14 @@
                         XML format, the other emits plain text. Custom formatters that extend
                         <code class="literal">Phing\Task\System\Pdo\PDOResultFormatter</code> can be specified.</p>
 
-                    <div class="table"><a name="idp14161"></a><p class="formal-object-title"><span class="label">Table C.67: </span><span class="title">Attributes</span></p><div class="table-contents">
+                    <div class="table"><a name="idp14196"></a><p class="formal-object-title"><span class="label">Table C.67: </span><span class="title">Attributes</span></p><div class="table-contents">
                         
                         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">type</code></td><td><code class="literal">String</code></td><td>Use a predefined formatter (either <code class="literal">xml</code>
                                         or <code class="literal">plain</code>). </td><td>n/a</td><td rowspan="2">One of these attributes is required.</td></tr><tr><td><code class="literal">classname</code></td><td><code class="literal">String</code></td><td>Name of a custom formatter class (must extend
                                         <code class="literal">Phing\Task\System\Pdo\PDOResultFormatter</code>).</td><td>n/a</td></tr><tr><td><code class="literal">usefile</code></td><td><code class="literal">Boolean</code></td><td>Boolean that determines whether output should be sent to
                                         a file.</td><td><code class="literal">true</code></td><td>No</td></tr><tr><td><code class="literal">outfile</code></td><td>File</td><td>Path to file in which to store result.</td><td>Depends on formatter</td><td>No</td></tr><tr><td><code class="literal">showheaders</code></td><td><code class="literal">Boolean</code></td><td>(only applies to plain formatter) Whether to show column
-                                        headers.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">coldelim</code></td><td><code class="literal">String</code></td><td>(only applies to plain formatter) The column
+                                        headers.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">showtrailers</code></td><td><code class="literal">Boolean</code></td><td>(only applies to plain formatter) Whether to show successful executed statement counter
+                                        trailers.</td><td><code class="literal">false</code></td><td>No</td></tr><tr><td><code class="literal">coldelim</code></td><td><code class="literal">String</code></td><td>(only applies to plain formatter) The column
                                         delimiter.</td><td>,</td><td>No</td></tr><tr><td><code class="literal">rowdelim</code></td><td><code class="literal">String</code></td><td>(only applies to plain formatter) The row
                                         delimiter.</td><td>\n</td><td>No</td></tr><tr><td><code class="literal">encoding</code></td><td><code class="literal">String</code></td><td>(only applies to XML formatter) The xml document
                                         encoding.</td><td>(PHP default)</td><td>No</td></tr><tr><td><code class="literal">formatoutput</code></td><td><code class="literal">Boolean</code></td><td>(only applies to XML formatter) Whether to format XML
