@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="TstampTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>TstampTask</title>
+    <para>Sets the <literal>DSTAMP</literal>, <literal>TSTAMP</literal>, and <literal>TODAY</literal>properties in the
+        current project. By default, the <literal>DSTAMP</literal> property is in the format <literal>"%Y%m%d"</literal>,
+        <literal>TSTAMP</literal> is in the format <literal>"%H%M"</literal>, and <literal>TODAY</literal> is in the
+        format <literal>"%B %d %Y"</literal>. Use the nested <literal>&lt;format&gt;</literal> element to specify a different
+        format.
+    </para>
+    <para>These properties can be used in the build-file, for instance, to create time-stamped filenames, or used to
+        replace placeholder tags inside documents to indicate, for example, the release date. The best place for this
+        task is probably in an initialization target.
+    </para>
+    <para>the magic property phing.tstamp.now can be used to specify a fixed date value in order to create reproducible
+        builds. Its value must be a number and is interpreted as seconds since the epoch (midnight 1970-01-01). With
+        phing.tstamp.now.iso you could also specify that value in DateTime compatible format. If you specify a value in
+        an invalid format an INFO message will be logged and the value will be ignored.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>prefix</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Prefix used for all properties set.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;tstamp/&gt;</programlisting>
+        <para>sets the standard DSTAMP, TSTAMP, and TODAY properties according to the default formats.</para>
+        <programlisting language="xml">&lt;tstamp&gt;
+    &lt;format property="DATE" pattern="%c" locale="nl_NL"/&gt;
+&lt;/tstamp&gt;
+        </programlisting>
+        <para>sets the standard properties as well as the property DATE with the date/time pattern "%c" using the Dutch
+            locale.
+        </para>
+        <programlisting language="xml">&lt;tstamp prefix="start"/&gt;</programlisting>
+        <para>sets three properties with the standard formats, prefixed with "start.": start.DSTAMP, start.TSTAMP, and
+            start.TODAY.
+        </para>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>format</literal>
+                </para>
+                <para>The <literal>Tstamp</literal> task supports a <literal>&lt;format&gt;</literal> nested element
+                    that allows a property to be set to the current date and time in a given format. The date/time
+                    patterns are as defined in the PHP <literal>strftime()</literal> function.
+                </para>
+            </listitem>
+        </itemizedlist>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <literal>property</literal>
+                        </entry>
+                        <entry>
+                            <literal role="type">String</literal>
+                        </entry>
+                        <entry>The property to receive the date/time string in the given pattern.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>pattern</literal>
+                        </entry>
+                        <entry>
+                            <literal role="type">String</literal>
+                        </entry>
+                        <entry>The date/time pattern to be used. The values are as defined by the PHP strftime()
+                            function.
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>locale</literal>
+                        </entry>
+                        <entry>
+                            <literal role="type">String</literal>
+                        </entry>
+                        <entry>The locale used to create date/time string. For more information see the PHP setlocale()
+                            function.
+                        </entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>timezone</literal>
+                        </entry>
+                        <entry>
+                            <literal role="type">String</literal>
+                        </entry>
+                        <entry>The timezone to use for displaying time.</entry>
+                        <entry>n/a</entry>
+                        <entry>No</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect2>
+</sect1>

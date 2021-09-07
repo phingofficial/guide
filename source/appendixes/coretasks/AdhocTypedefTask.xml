@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="AdhocTypedefTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>AdhocTypedefTask</title>
+    <para>The AdhocTypedefTask allows you to define a datatype within your build file.</para>
+    <para>
+        Note that you should use &lt;![CDATA[ ... ]]&gt; so that you don't have to quote entities within your
+        <literal>&lt;adhoc-type&gt;&lt;/adhoc-type&gt;</literal> tags.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>name</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Name of XML tag that will represent this datatype..</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Example</title>
+        <programlisting language="php">&lt;target name="main"
+            description="==&gt;test AdhocType"&gt;
+
+            &lt;adhoc-type name="dsn"&gt;&lt;![CDATA[
+            class CreoleDSN extends DataType {
+            private $url;
+
+            function setUrl($url) {
+            $this-&gt;url = $url;
+            }
+
+            function getUrl() {
+            return $this-&gt;url;
+            }
+            }
+            ]]&gt;&lt;/adhoc-type&gt;
+
+            &lt;!-- creole-sql task doesn't exist; just an example --&gt;
+            &lt;creole-sql file="test.sql"&gt;
+            &lt;dsn url="mysql://root@localhost/test"/&gt;
+            &lt;/creole-sql&gt;
+
+            &lt;/target&gt;
+        </programlisting>
+    </sect2>
+</sect1>

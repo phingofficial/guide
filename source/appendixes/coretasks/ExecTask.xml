@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ExecTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>ExecTask</title>
+    <para>Executes a shell command. You can use this to quickly add a new command to Phing.
+        However, if you want to use this regularly, you should think about writing a Task for it.
+    </para>
+    <para>
+        <emphasis>The command attribute is now deprecated.</emphasis>
+    </para>
+    <para>Where it was once possible to pipe the output of one program to be the input of another using the command
+        attribute: &lt;exec command="echo FLUSHALL | redis-cli"&gt; This must now be done using a combination of the
+        <emphasis role="bold">executable and line attributes</emphasis>, thus:
+        &lt;exec executable="bash" line="echo FLUSHALL | redis-cli"&gt;
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>command</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>NOTE: This attribute is deprecated. Please use executable with nested args.
+                        The command that is to be executed.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry morerows="1">One of the two</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>executable</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The command to execute without any command line arguments.</entry>
+                    <entry>n/a</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>dir</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The directory the command is to be executed in.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>output</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Where to direct stdout.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>error</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Where to direct stderr.</entry>
+                    <entry>Redirected to stdout, unless <literal>passthru</literal> is set to true.
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>os</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Only execute if the <xref xlink:href="#app.factsheet"/> property contains specified text.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>osfamily</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>OS family as used in the &lt;os&gt; condition.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>escape</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>By default, we escape shell metacharacters before executing. Setting this to false will
+                        disable this precaution.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>passthru</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to use PHP's passthru() function instead of exec().</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>logoutput</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to log returned output as MSG_INFO instead of MSG_VERBOSE.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>spawn</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to spawn unix programs to the background, redirecting stdout.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>returnProperty</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Property name to set return value to from exec() call.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>outputProperty</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Property name to set output value to from exec() call.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>checkreturn</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to check the return code of the program, throws a
+                        BuildException when returncode != 0.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>level</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Control the level at which status messages are reported. One of
+                        <literal>error</literal>, <literal>warning</literal>,
+                        <literal>info</literal>, <literal>verbose</literal>,
+                        <literal>debug</literal>.
+                    </entry>
+                    <entry>
+                        <literal>verbose</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>resolveexecutable</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>When this attribute is true, the name of the executable is resolved firstly against the
+                        project basedir and if that does not exist, against the execution directory if specified. On
+                        Unix systems, if you only want to allow execution of commands in the user's path, set this to
+                        false.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>searchpath</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>When this attribute is true, then system path environment variables will be searched when
+                        resolving the location of the executable.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- List the contents of "/home". --&gt;
+&lt;exec command="ls -l" dir="/home" passthru="yes" /&gt;
+
+&lt;!-- List the contents of "/home" using the executable attribute --&gt;
+&lt;exec executable="ls" passthru="yes"&gt;
+  &lt;arg value="-l"/&gt;
+  &lt;arg path="/home"/&gt;
+&lt;/&gt;
+
+&lt;!-- List the contents of "/home", but only if on Linux --&gt;
+&lt;exec executable="ls" passthru="yes" os="Linux"&gt;
+  &lt;arg value="-l"/&gt;
+  &lt;arg path="/home"/&gt;
+&lt;/&gt;
+
+&lt;!-- Demonstrate executable attribute and environment variables. --&gt;
+&lt;exec executable="php" outputProperty="outputProperty"&gt;
+    &lt;env key="HELLO" value="hello"/&gt;
+    &lt;env key="WORLD" value="world"/&gt;
+      &lt;arg value="-r"/&gt;
+    &lt;arg value="print getEnv('HELLO') . ' ' . getEnv('WORLD');"/&gt;
+&lt;/exec&gt;
+
+&lt;!-- Demonstrate piping outputs from one command to another using the executable attribute. --&gt;
+&lt;exec executable="bash"&gt;
+    &lt;arg value="-c"/&gt;
+    &lt;arg line='"java -jar test.jar page.xml | mysql -u user -p base"'/&gt;
+&lt;/exec&gt;
+
+&lt;!-- Restart some docker service --&gt;
+&lt;exec executable="docker"&gt;
+    &lt;arg line="--debug restart ${service.name}"/&gt;
+&lt;/exec&gt;
+
+&lt;!-- Start the configure process in "/tmp/php-src/php-8.0.8". --&gt;
+&lt;exec command="configure" dir="/tmp/php-src/php-8.0.8" /&gt;
+
+&lt;!-- List the contents of "/tmp" out to a file. --&gt;
+&lt;exec command="ls -l /tmp &gt; foo.out" escape="false" /&gt;</programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>arg</literal>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <literal>value</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>A single command-line argument; can contain space characters. To pass an
+                                        empty argument, enclose two double quotes in single quotes ('""').
+                                    </entry>
+                                    <entry>n/a</entry>
+                                    <entry morerows="3">One of these</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>file</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>The name of a file as a single command-line argument; will be replaced with
+                                        the absolute filename of the file.
+                                    </entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>path</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>A string that will be treated as a path-like string as a single command-line
+                                        argument; you can use ; or : as path separators and Phing will convert it to the
+                                        platform's local conventions.
+                                    </entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>line</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>A space-delimited list of command-line
+                                        arguments.
+                                    </entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>escape</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">Boolean</literal>
+                                    </entry>
+                                    <entry>Force escape for this attribute.</entry>
+                                    <entry>
+                                        <literal>false</literal>
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </para>
+                <para>
+                    <literal>env</literal>
+                    <para>It is possible to specify environment variables to pass to the system command via nested
+                        <literal>&lt;env&gt;</literal> elements.
+                    </para>
+                    <table>
+                        <title>Attributes</title>
+                        <tgroup cols="5">
+                            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                            <thead>
+                                <row>
+                                    <entry>Name</entry>
+                                    <entry>Type</entry>
+                                    <entry>Description</entry>
+                                    <entry>Default</entry>
+                                    <entry>Required</entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <literal>key</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>The name of the environment variable.</entry>
+                                    <entry>n/a</entry>
+                                    <entry>Yes</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>value</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>The literal value for the environment variable.</entry>
+                                    <entry>n/a</entry>
+                                    <entry morerows="2">One of these</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>file</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>The value for the environment variable. Will be replaced by the absolute
+                                        filename of the file by Phing.
+                                    </entry>
+                                    <entry>n/a</entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <literal>path</literal>
+                                    </entry>
+                                    <entry>
+                                        <literal role="type">String</literal>
+                                    </entry>
+                                    <entry>The value for a PATH like environment variable. You can use ; or : as
+                                        path separators and Phing will convert it to the platform's local conventions.
+                                    </entry>
+                                    <entry>n/a</entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

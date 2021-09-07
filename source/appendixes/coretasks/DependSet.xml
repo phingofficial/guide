@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="DependSet" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>DependSet</title>
+    <para>The dependset task compares a set of sources with a set of target files.
+        If any of the sources has been modified more recently than any of the target files,
+        all of the target files are removed.
+    </para>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;dependset&gt;
+    &lt;srcfilelist
+        dir   = "${dtd.dir}"
+        files = "paper.dtd,common.dtd"/&gt;
+    &lt;srcfilelist
+        dir   = "${xsl.dir}"
+        files = "common.xsl"/&gt;
+    &lt;srcfilelist
+        dir   = "${basedir}"
+        files = "build.xml"/&gt;
+    &lt;targetfileset
+        dir      = "${output.dir}"
+        includes = "**/*.html"/&gt;
+&lt;/dependset&gt;</programlisting>
+
+        <para>In this example derived HTML files in the ${output.dir} directory will be removed if any are
+            out-of-date with respect to:
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>the DTD of their source XML files</para>
+            </listitem>
+            <listitem>
+                <para>a common DTD (imported by the main DTD)</para>
+            </listitem>
+            <listitem>
+                <para>a subordinate XSLT stylesheet (imported by the main stylesheet), or</para>
+            </listitem>
+            <listitem>
+                <para>the buildfile</para>
+            </listitem>
+        </itemizedlist>
+        <para>If any of the sources in the above example does not exist, all target files will also be removed.
+            To ignore missing sources instead, use filesets instead of filelists for the sources.
+        </para>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">srcfileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">srcfilelist</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">targetfileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">targetfilelist</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

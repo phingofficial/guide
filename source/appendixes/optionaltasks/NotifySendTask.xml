@@ -4,7 +4,7 @@
 
 <sect1 role="taskdef" xml:id="NotifySendTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
         <title>NotifySendTask</title>
-        <para>This is a wrapper for <em>notify-send</em>, a Linux program that sends desktop notifications to a notification daemon.</para>
+        <para>This is a wrapper for <emphasis>notify-send</emphasis>, a Linux program that sends desktop notifications to a notification daemon.</para>
         <para>On Windows machines, <link xlink:href="http://vaskovsky.net/notify-send/">this port</link> may help.</para>
         <table>
             <title>Attributes</title>

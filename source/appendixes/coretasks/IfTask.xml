@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="IfTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>IfTask </title>
+    <para>Perform some tasks based on whether a given condition holds true or not.</para>
+    <para>This task doesn't have any attributes, the condition to test is specified by a nested
+        element - see the <link linkend="conditions">conditions</link> for a complete list of nested
+        elements.</para>
+    <para>Just like the <literal><link linkend="ConditionTask">&lt;condition&gt;</link></literal> task, only a single
+        condition can be specified - you combine them using <literal>&lt;and&gt;</literal> or
+        <literal>&lt;or&gt;</literal> conditions.</para>
+    <para>In addition to the condition, you can specify three different child elements,
+        <literal>&lt;elseif&gt;</literal> , <literal>&lt;then&gt;</literal> and
+        <literal>&lt;else&gt;</literal> . All three subelements are optional. Both
+        <literal>&lt;then&gt;</literal> and <literal>&lt;else&gt;</literal> must not be used more
+        than once inside the if task. Both are containers for Phing tasks.</para>
+    <para>The <literal>&lt;elseif&gt;</literal> behaves exactly like an <literal>&lt;if&gt;</literal>
+        except that it cannot contain the <literal>&lt;else&gt;</literal> element inside of it. You
+        may specify as may of these as you like, and the order they are specified is the order
+        they are evaluated in. If the condition on the <literal>&lt;if&gt;</literal> is false, then
+        the first <literal>&lt;elseif&gt;</literal> who's conditional evaluates to true will be
+        executed. The <literal>&lt;else&gt;</literal> will be executed only if the
+        <literal>&lt;if&gt;</literal> and all <literal>&lt;elseif&gt;</literal> conditions are
+        false.</para>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;if&gt;
+    &lt;equals arg1="${foo}" arg2="bar" /&gt;
+    &lt;then&gt;
+        &lt;echo message="The value of property foo is bar" /&gt;
+    &lt;/then&gt;
+    &lt;else&gt;
+        &lt;echo message="The value of property foo is not bar" /&gt;
+    &lt;/else&gt;
+&lt;/if&gt;</programlisting>
+        <programlisting language="xml">&lt;if&gt;
+    &lt;equals arg1="${foo}" arg2="bar" /&gt;
+    &lt;then&gt;
+        &lt;echo message="The value of property foo is 'bar'" /&gt;
+    &lt;/then&gt;
+
+    &lt;elseif&gt;
+        &lt;equals arg1="${foo}" arg2="foo" /&gt;
+        &lt;then&gt;
+            &lt;echo message="The value of property foo is 'foo'" /&gt;
+        &lt;/then&gt;
+    &lt;/elseif&gt;
+
+    &lt;else&gt;
+        &lt;echo message="The value of property foo is not 'foo' or 'bar'" /&gt;
+    &lt;/else&gt;
+&lt;/if&gt;</programlisting>
+    </sect2>
+</sect1>

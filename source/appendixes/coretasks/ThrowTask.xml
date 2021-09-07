@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ThrowTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>ThrowTask</title>
+    <para>Extension of build in <literal>FailTask</literal> that can throw an exception that is given by a reference.
+        This may be useful if you want to rethrow the exception that has been caught by a
+        <literal>TryCatchTask</literal> in the &lt;catch&gt; block.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>refid</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Id of the referenced exception.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <note>
+        <para>In addition, all attributes of the <literal>FailTask</literal> are supported.
+        </para>
+    </note>
+    <sect2>
+        <title>Example</title>
+        <programlisting language="xml">&lt;target name="tryCatchThrow"&gt;
+    &lt;trycatch property="foo" reference="bar"&gt;
+        &lt;try&gt;
+            &lt;fail&gt;Tada!&lt;/fail&gt;
+        &lt;/try&gt;
+
+        &lt;catch&gt;
+            &lt;echo&gt;In &lt;catch&gt;.&lt;/echo&gt;
+        &lt;/catch&gt;
+
+        &lt;finally&gt;
+            &lt;echo&gt;In &lt;finally&gt;.&lt;/echo&gt;
+        &lt;/finally&gt;
+    &lt;/trycatch&gt;
+
+    &lt;echo&gt;As property: ${foo}&lt;/echo&gt;
+    &lt;property name="baz" refid="bar" /&gt;
+    &lt;echo&gt;From reference: ${baz}&lt;/echo&gt;
+
+    &lt;echo&gt;Throw ...&lt;/echo&gt;
+    &lt;throw refid="bar" /&gt;
+
+&lt;/target&gt;
+        </programlisting>
+    </sect2>
+</sect1>

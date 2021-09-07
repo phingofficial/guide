@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="TryCatchTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>TryCatchTask</title>
+    <para>This task is a wrapper task that lets you run tasks(s) when another set of tasks fails, mirroring PHP's
+        <literal>try/catch</literal> functionality (with the addition of <literal>finally</literal> block)
+    </para>
+    <para>The tasks inside of the <literal>try</literal> block will always be run. If one of them throws a
+        BuildException, the following things can happen:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>If there is no <literal>catch</literal> block, the
+                exception will be passed to Phing.
+            </para>
+        </listitem>
+        <listitem>
+            <para>If the <literal>property</literal> attribute has been set a property of that name will contain the
+                message of the exception.
+            </para>
+        </listitem>
+        <listitem>
+            <para>If there is a <literal>catch</literal> block, the nested tasks will be run.
+            </para>
+        </listitem>
+    </itemizedlist>
+    <para>If a <literal>finally</literal> block is present, the nested tasks will be run regardless of whether the tasks
+        in the <literal>try</literal> block have thrown an exception or not.
+    </para>
+    <para>This task was inspired by <link xlink:href="http://ant-contrib.sourceforge.net/tasks/tasks/trycatch.html">
+        http://ant-contrib.sourceforge.net/tasks/tasks/trycatch.html</link>.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>property</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Name of a property that will receive the message of the exception that has been caught (if
+                        any)
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting>&lt;trycatch property="foo"&gt;
+    &lt;try&gt;
+        &lt;fail&gt;Tada!&lt;/fail&gt;
+    &lt;/try&gt;
+
+    &lt;catch&gt;
+        &lt;echo&gt;In catch.&lt;/echo&gt;
+    &lt;/catch&gt;
+
+    &lt;finally&gt;
+        &lt;echo&gt;In finally.&lt;/echo&gt;
+    &lt;/finally&gt;
+&lt;/trycatch&gt;
+
+&lt;echo&gt;As property: ${foo}&lt;/echo&gt;
+        </programlisting>
+    </sect2>
+
+</sect1>

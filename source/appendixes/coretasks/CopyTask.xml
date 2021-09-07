@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="CopyTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>CopyTask</title>
+    <para>Copies files or directories. Files are only copied if the source file is newer than the destination file, or
+        when the destination file does not exist. It is possible to explicitly overwrite existing files.
+    </para>
+    <para>
+        <literal>CopyTask</literal>
+        does not allow self copying, i.e. copying a file to the same name for security
+        reasons.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The source file.</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>tofile</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>
+                        <para>The destination the file is to be written to. <literal>tofile</literal> specifies a
+                            <literal>full</literal> filename. If you only want to specify a directory to copy to, use
+                            <literal>todir</literal>.
+                        </para>
+                        <para>Either this or the <literal>todir</literal> attribute is required.
+                        </para>
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>todir</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>todir</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The directory the file is to be copied to. The file will have the same name of the source
+                        file. If you want to specify a different name, use <literal>tofile</literal>. The directory must
+                        exist.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>tofile</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>overwrite</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Overwrite existing files even if the destination files are newer.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>tstamp or preservelastmodified</entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to <literal>true</literal>, the new file will have the same mtime as the old one.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>preservemode or preservepermissions</entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to <literal>true</literal>, the new file (and directory) will have the same
+                        permissions as the old one. The <literal>mode</literal> specified for directory
+                        creation will be ignored.
+                    </entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>includeemptydirs</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to <literal>true</literal>, also empty directories are copied.
+                    </entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>mode</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>Mode (octal) to create directories with.</entry>
+                    <entry>From umask</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>haltonerror</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to <literal>true</literal>, halts the build when errors are
+                        encountered.
+                    </entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>flatten</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Ignore the directory structure of the source files, and copy all files into the directory
+                        specified by the todir attribute. Note that you can achieve the same effect by using a
+                        flatten mapper.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>verbose</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to print the list of the copied file. Defaults to false.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>granularity</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The number of seconds leeway to give before deciding a file
+                        is out of date.
+                        This can also be useful if source and target files live on separate
+                        machines with clocks being out of sync.
+                    </entry>
+                    <entry>
+                        <literal>0</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <note>
+        <para>No automatic expansion of symbolic links</para>
+        <para>By default, <literal>CopyTask</literal> does not expand / dereference symbolic links, and will simply copy
+            the link itself. To enable dereferencing, set <literal>expandsymboliclinks</literal> to
+            <literal>true</literal> in the <literal>&lt;fileset&gt;</literal> tag.
+        </para>
+    </note>
+    <sect2>
+        <title>Examples</title>
+        <para>On the one hand, CopyTask can be used to copy file by file:</para>
+        <programlisting language="xml">&lt;copy file="somefile.txt" tofile="/tmp/anotherfile.bak"
+overwrite="true"/&gt;
+        </programlisting>
+        <para>Additionally, <literal>CopyTask</literal> supports Filesets, i.e. you can easily include/exclude one or
+            more files. For more information, see <xref xlink:href="#app.coretypes"/> -- pay particular attention to the
+            <literal>defaultexcludes</literal> attribute. <xref xlink:href="#app.coremappers"/> and
+            <xref xlink:href="#app.corefilters"/> are also supported by <literal>CopyTask</literal>, so you can do
+            almost everything that needs processing the content of the files or the filename.
+        </para>
+        <programlisting language="xml">&lt;copy todir="/tmp/backup" &gt;
+    &lt;fileset dir="."&gt;
+        &lt;include name="**/*.txt" /&gt;
+        &lt;include name="**/*.doc" /&gt;
+        &lt;include name="**/*.swx" /&gt;
+    &lt;/fileset&gt;
+&lt;filelist dir="." files="test.html"/&gt;
+&lt;/copy&gt;
+        </programlisting>
+        <programlisting language="xml">&lt;copy todir="build" &gt;
+    &lt;fileset defaultexcludes="false" expandsymboliclinks="true" dir="."&gt;
+        &lt;include name="**/*.php" /&gt;
+    &lt;/fileset&gt;
+&lt;/copy&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileList">filelist</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="DirSet">dirset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="app.corefilters">filterchain</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="app.coremappers">mapper</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

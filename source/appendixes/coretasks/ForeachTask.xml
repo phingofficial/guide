@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+            schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ForeachTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>ForeachTask </title>
+    <para>The <literal>foreach</literal> task iterates over a list, a list of
+            <literal>filesets</literal>, or both. If both, <literal>list</literal> and
+            <literal>filesets</literal>, are specified, the list will be evaluated first. Nested
+            <literal>filesets</literal> are evaluated in the order they appear in the
+        task.</para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry><literal>inheritall</literal></entry>
+                    <entry><literal role="type">Boolean</literal></entry>
+                    <entry>If <literal>true</literal>, pass all properties to the called target.</entry>
+                    <entry>false</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>inheritrefs</literal></entry>
+                    <entry><literal role="type">Boolean</literal></entry>
+                    <entry>If <literal>true</literal>, pass all references to the the called target.</entry>
+                    <entry>false</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>trim</literal></entry>
+                    <entry><literal role="type">Boolean</literal></entry>
+                    <entry>If <literal>true</literal>, any leading or trailing whitespace will be removed from
+                        the list item before it is passed to the requested target.</entry>
+                    <entry>false</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>list</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The list of values to process, with the delimiter character,
+                        indicated by the "delimiter" attribute, separating each value.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>target</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The target to call for each token, passing the token as the parameter
+                        with the name indicated by the "param" attribute.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry><literal>param</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The name of the parameter to pass the tokens in as to the
+                        target.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry><literal>absparam</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The name of the absolute pathparameter to pass the tokens in as to
+                        the target (used while processing nested filesets).</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>delimiter</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The delimiter string that separates the values in the "list"
+                        parameter. The default is ",".</entry>
+                    <entry>,</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry><literal>index</literal></entry>
+                    <entry><literal role="type">String</literal></entry>
+                    <entry>The name of the property containing the iteration count.</entry>
+                    <entry>index</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- loop through languages, and call buildlang task with setted param --&gt;
+&lt;property name="languages" value="en,fr,de" /&gt;
+&lt;foreach list="${languages}" param="lang" target="buildlang" /&gt;
+
+&lt;!-- loop through files, and call subtask task with set param and absparam --&gt;
+&lt;foreach param="filename" absparam="absfilename" target="subtask"&gt;
+  &lt;fileset dir="."&gt;
+    &lt;include name="*.php"/&gt;
+  &lt;/fileset&gt;
+&lt;/foreach&gt;</programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para><literal><link linkend="Path">path</link></literal></para>
+            </listitem>
+            <listitem>
+                <para><literal><link linkend="DirSet">dirset</link></literal></para>
+            </listitem>
+            <listitem>
+                <para><literal><link linkend="FileSet">fileset</link></literal></para>
+            </listitem>
+            <listitem>
+                <para><literal><link linkend="FileList">filelist</link></literal></para>
+            </listitem>
+            <listitem>
+                <para><literal><link linkend="app.coremappers">mapper</link></literal></para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

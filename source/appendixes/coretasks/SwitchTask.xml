@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SwitchTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>SwitchTask</title>
+    <para>Task definition for the phing task to switch on a particular value.</para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>value</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The value to switch on.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>caseinsensitive</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Should we do case insensitive comparisons?</entry>
+                    <entry>false</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <para>At least one <literal>&lt;case&gt;</literal> or <literal>&lt;default&gt;</literal> is required.
+        </para>
+        <para>
+            <literal>case</literal>
+        </para>
+        <para>An individual case to consider, if the value that is being switched on matches to value attribute of the
+            case, then the nested tasks will be executed.
+        </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <literal>value</literal>
+                        </entry>
+                        <entry>
+                            <literal role="type">String</literal>
+                        </entry>
+                        <entry>The value to match against the tasks value attribute.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+
+        <para>
+            <literal>default</literal>
+        </para>
+
+        <para>The default case for when no match is found. Must not appear more than once per task.</para>
+    </sect2>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;switch value="${foo}"&gt;
+    &lt;case value="bar"&gt;
+        &lt;echo message="The value of property foo is bar" /&gt;
+    &lt;/case&gt;
+    &lt;case value="baz"&gt;
+        &lt;echo message="The value of property foo is baz" /&gt;
+    &lt;/case&gt;
+    &lt;default&gt;
+        &lt;echo message="The value of property foo is not sensible" /&gt;
+    &lt;/default&gt;
+&lt;/switch&gt;
+        </programlisting>
+    </sect2>
+</sect1>

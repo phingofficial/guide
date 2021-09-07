@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PhingTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>PhingTask</title>
+    <para>This task calls another build file. You may specify the target that is to be called within the build file.
+        Additionally, the <literal>&lt;phing&gt;</literal> Tag may contain <literal>&lt;property&gt;</literal> Tags (see
+        <xref xlink:href="#PropertyTask"/>), <literal>&lt;fileset&gt;</literal> Tags (see<xref xlink:href="#FileSet"/>)
+        or <literal>&lt;reference&gt;</literal> Tags.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>inheritAll</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If true, pass all properties to the new phing project.</entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>inheritRefs</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If true, pass all references to the new phing project.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>dir</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The directory to use as a base directory for the new phing project. Default is the current
+                        project's basedir, unless inheritall has been set to <literal>false</literal>, in which case it
+                        doesn't have a default value. This will override the basedir setting of the called project.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>phingFile</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The build file to use. Defaults to "build.xml". This file is expected to be a filename
+                        relative to the dir attribute given.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>target</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The target of the new Phing project to execute. Default is the new project's default
+                        target.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>haltonfailure</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If true, fail the build process when the called build fails</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>output</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Filename to write the Phing output to. This is relative to the value of the dir attribute if
+                        it has been set or to the basedir of the current project otherwise.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>usenativebasedir</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to "true", the child build will use the same basedir as it would have used when run
+                        from the command line (i.e. the basedir one would expect when looking at the child build's
+                        buildfile).
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- Call target "xslttest" from buildfile "alternativebuildfile.xml" --&gt;
+&lt;phing phingfile="alternativebuild.xml" inheritRefs="true" target="xslttest" /&gt;
+
+&lt;!-- Do a more complex call --&gt;
+&lt;phing phingfile="somebuild.xml" target="sometarget"&gt;
+    &lt;property name="foo" value="bar" /&gt;
+    &lt;property name="anotherone" value="32" /&gt;
+&lt;/phing&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="PropertyTask">property</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>reference</literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+    <sect2>
+        <title>Base directory of the new project</title>
+        <para>The base directory of the new project is set dependent on the <literal>dir</literal> and the
+            <literal>inheritAll</literal> attribute. This is important to keep in mind or else you might run into bugs
+            in your <filename>build.xml</filename>'s. The following table shows when which value is used:
+        </para>
+        <table>
+            <title>How attributes are used</title>
+            <tgroup cols="3">
+                <colspec colname="name" colnum="1" colwidth="1*"/>
+                <colspec colname="type" colnum="2" colwidth="1*"/>
+                <colspec colname="description" colnum="3" colwidth="2*"/>
+                <thead>
+                    <row>
+                        <entry>
+                            <literal>dir</literal>
+                        </entry>
+                        <entry>
+                            <literal>inheritAll</literal>
+                        </entry>
+                        <entry>new project's basedir</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>value provided</entry>
+                        <entry>
+                            <literal>true</literal>
+                        </entry>
+                        <entry>value of <literal>dir</literal> attribute
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>value provided</entry>
+                        <entry>
+                            <literal>false</literal>
+                        </entry>
+                        <entry>value of <literal>dir</literal> attribute
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>omitted</literal>
+                        </entry>
+                        <entry>
+                            <literal>true</literal>
+                        </entry>
+                        <entry>basedir of calling task (the build file containing the <literal>&lt;phing&gt;</literal> call.
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>omitted</literal>
+                        </entry>
+                        <entry>
+                            <literal>false</literal>
+                        </entry>
+                        <entry>basedir attribute of the <literal>&lt;project&gt;</literal> element of the new project.
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </sect2>
+</sect1>
