@@ -65,6 +65,7 @@
     <xi:include href="optionaltasks/LiquibaseUpdateTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/MailTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/NotifySendTask.xml" parse="xml"/>
+    <xi:include href="optionaltasks/OpenTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PDOSQLExecTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPCPDTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPLocTask.xml" parse="xml"/>
