@@ -1,152 +1,232 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>C.98 VisualizerTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.optionaltasks.html" title="Appendix C. Optional tasks"><link rel="prev" href="UnzipTask.html" title="C.97 UnzipTask"><link rel="next" href="WikiPublishTask.html" title="C.99 WikiPublishTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">C.98 VisualizerTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="UnzipTask.html">Prev</a> </td><th width="60%" align="center">Appendix C. Optional tasks</th><td width="20%" align="right"> <a accesskey="n" href="WikiPublishTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="VisualizerTask"></a>C.98 VisualizerTask</h2></div></div></div>
+    
+    <p>
+        The <code class="literal">VisualizerTask</code> generates a graphical representation of your current buildfile. This
+        allows you to see all available targets but also the calls and dependencies among targets.
+    </p>
+    <p>
+        <code class="literal">VisualizerTask</code> is able to represent:
+    </p>
+    <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+            <p>
+                <a class="link" href="project-components-targets.html" title="5.4 Targets">Target's depends</a>
+            </p>
+        </li><li class="listitem">
+            <p>
+                <a class="link" href="RunTargetTask.html" title="B.56 RunTargetTask">RunTargetTask</a>
+            </p>
+        </li><li class="listitem">
+            <p>
+                <a class="link" href="PhingCallTask.html" title="B.40 PhingCallTask">PhingCallTask</a>
+            </p>
+        </li><li class="listitem">
+            <p>
+                <a class="link" href="ForeachTask.html" title="B.27 ForeachTask">ForeachTask</a>
+            </p>
+        </li></ul></div>
+    <div class="table"><a name="idp19365"></a><p class="formal-object-title"><span class="label">Table C.127: </span><span class="title">Basic attributes</span></p><div class="table-contents">
         
-        <p>The <code class="literal">VisualizerTask</code> generates a graphical representation of your current buildfile.
-            This allows you to see all available targets but also the calls and dependencies among targets.
+        <table class="table" summary="Basic attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
+                        <code class="literal">format</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>Diagram's format. Supported formats are: <code class="literal">png</code>, <code class="literal">svg</code>,
+                        <code class="literal">puml</code>
+                        and <code class="literal">eps</code>.
+                    </td><td>
+                        <code class="literal">png</code>
+                    </td><td>no</td></tr><tr><td>
+                        <code class="literal">destination</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>Location where the diagram will be saved. It could be a file or directory path.</td><td>Same location as current
+                        <code class="literal">buildfile</code>
+                    </td><td>no</td></tr><tr><td>
+                        <code class="literal">footer</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>A text to display at the bottom right of the diagram.</td><td>n/a</td><td>no</td></tr><tr><td>
+                        <code class="literal">showTitle</code>
+                    </td><td>
+                        <code class="literal">Bool</code>
+                    </td><td>Should the buildfile's title be displayed in diagram?</td><td><code class="literal">true</code></td><td>no</td></tr><tr><td>
+                        <code class="literal">showDescription</code>
+                    </td><td>
+                        <code class="literal">Bool</code>
+                    </td><td>Should the buildfile's description be displayed in diagram?</td><td><code class="literal">false</code></td><td>no</td></tr><tr><td>
+                        <code class="literal">direction</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>
+                        Use this to change the diagram's layout. Valid values are:
+                        <code class="literal">horizontal</code>
+                        and <code class="literal">vertical</code>.
+                    </td><td>
+                        <code class="literal">vertical</code>
+                    </td><td>no</td></tr><tr><td>
+                        <code class="literal">server</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>
+                        PlantUML server. Needed by all formats except <code class="literal">puml</code>.
+                    </td><td>http://www.plantuml.com/plantuml</td><td>no</td></tr></tbody></table>
+    </div></div><br class="table-break">
+    <p>
+        If you have network connectivity issues, you should try <code class="literal">puml</code> format. This format doesn't
+        require a PlantUML server (and therefore an internet connection) to generate a diagram.
+    </p>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19451"></a>C.98.1 Examples</h3></div></div></div>
+        
+        <p>Using <code class="literal">VisualizerTask</code> with default values:
         </p>
-        <p><code class="literal">VisualizerTask</code> is able to represent:</p>
+        <pre class="programlisting">&lt;visualizer/&gt;</pre>
+        <p>
+            Setting diagram's format to <code class="literal">svg</code> with <code class="literal">horizontal</code> arrows:
+        </p>
+        <pre class="programlisting">&lt;visualizer format="svg" direction="horizontal"/&gt;</pre>
+        <p>Save diagram into <code class="filename">resources/images/</code> directory:
+        </p>
+        <pre class="programlisting">&lt;visualizer destination="resources/images/"/&gt;</pre>
+        <p>Display buildfile's description and custom footer text:
+        </p>
+        <pre class="programlisting">&lt;visualizer showDescription="true" footer="© Copyright 2021"/&gt;</pre>
+    </div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19465"></a>C.98.2 Limitations</h3></div></div></div>
+        
         <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                <p><a class="link" href="project-components-targets.html" title="5.4 Targets">Target's depends</a></p>
-            </li><li class="listitem">
-                <p><a class="link" href="RunTargetTask.html" title="B.56 RunTargetTask">RunTargetTask</a></p>
-            </li><li class="listitem">
-                <p><a class="link" href="PhingCallTask.html" title="B.40 PhingCallTask">PhingCallTask</a></p>
-            </li><li class="listitem">
-                <p><a class="link" href="ForeachTask.html" title="B.27 ForeachTask">ForeachTask</a></p>
-            </li></ul></div>
-        <div class="table"><a name="idp19365"></a><p class="formal-object-title"><span class="label">Table C.127: </span><span class="title">Basic attributes</span></p><div class="table-contents">
-            
-            <table class="table" summary="Basic attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
-                            <code class="literal">format</code>
-                        </td><td>
-                            <code class="literal">String</code>
-                        </td><td>Diagram's format. Supported formats are: <code class="literal">png</code>, <code class="literal">svg</code>,
-                            <code class="literal">puml</code> and <code class="literal">eps</code>.
-                        </td><td>
-                            <code class="literal">png</code>
-                        </td><td>no</td></tr><tr><td>
-                            <code class="literal">destination</code>
-                        </td><td>
-                            <code class="literal">String</code>
-                        </td><td>Location where the diagram will be saved. It could be a file or directory path.</td><td>Same location as current
-                            <code class="literal">buildfile</code>
-                        </td><td>no</td></tr><tr><td>
-                            <code class="literal">server</code>
-                        </td><td>
-                            <code class="literal">String</code>
-                        </td><td>PlantUML server.</td><td>http://www.plantuml.com/plantuml</td><td>no</td></tr></tbody></table>
-        </div></div><br class="table-break">
-        <p>If you have network connectivity issues, you should try <code class="literal">puml</code> format. This format
-            doesn't needs Internet connection to generate a diagram.
-        </p>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19413"></a>C.98.1 Examples</h3></div></div></div>
-            
-            <p>Using <code class="literal">VisualizerTask</code> with default values:
-            </p>
-            <pre class="programlisting">&lt;visualizer/&gt;</pre>
-            <p>Setting diagram's format to <code class="literal">svg</code>:
-            </p>
-            <pre class="programlisting">&lt;visualizer format="svg"/&gt;</pre>
-            <p>Save diagram into <code class="filename">resources/images/</code> directory:
-            </p>
-            <pre class="programlisting">&lt;visualizer destination="resources/images/"/&gt;</pre>
-        </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19424"></a>C.98.2 Limitations</h3></div></div></div>
-            
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                    <p>Special target naming is not interpreted by <code class="literal">VisualizerTask</code>,
-                        targets' names are used <span class="emphasis"><em>as is</em></span>. Please read <a class="link" href="ImportTask.html#ImportTask-target-overriding" title="B.29.1 Target Overriding">Target Overriding
-                        </a> for more details.
-                    </p>
-                </li><li class="listitem">
-                    <p>
-                        As said before, <code class="literal">VisualizerTask</code> depends on a remote PlantUML server. Even if
-                        only buildfile's name and targets' names are sent to server, please be sure you are not sending
-                        any sensible information.
-                    </p>
-                </li><li class="listitem">
-                    <p>
-                        PlantUML limits image width and height to 4096 pixels. Overcoming this limitation will require
-                        to configure your own PlantUML server and to configure it according to
-                        <a class="ulink" href="http://plantuml.com/faq" target="_top">PlantUML FAQ</a> instructions.
-                    </p>
-                </li></ul></div>
-        </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19438"></a>C.98.3 Requirements</h3></div></div></div>
-            
-            <p>To work properly, <code class="literal">VisualizerTask</code> needs to have the following installed:
-            </p>
-            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                    <p>
-                        <a class="ulink" href="http://php.net/manual/en/book.simplexml.php" target="_top">SimpleXML
-                            extension</a>
-                    </p>
-                </li><li class="listitem">
-                    <p>
-                        <a class="ulink" href="http://php.net/manual/en/book.xsl.php" target="_top">XSL extension</a>
-                    </p>
-                </li><li class="listitem">
-                    <p>
-                        <a class="ulink" href="http://docs.guzzlephp.org/en/stable/" target="_top">Guzzle</a>
-                    </p>
-                </li><li class="listitem">
-                    <p>
-                        <a class="ulink" href="https://packagist.org/packages/jawira/plantuml-encoding" target="_top">
-                            jawira/plantuml-encoding
-                        </a>
-                    </p>
-                </li></ul></div>
-        </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19455"></a>C.98.4 Advanced HTTP configuration</h3></div></div></div>
-            
-            <p>
-                As said before <code class="literal">VisualizerTask</code> needs a remote server to generate the diagrams. In
-                order to configure the connection with remote server, several attributes and nested tags are available.
-            </p>
-            <p>
-                Because <code class="literal">VisualizerTask</code> relies on an internal Phing's library, these attributes and
-                nested tags are shared among these tasks: <a class="link" href="HttpGetTask.html" title="C.37 HttpGetTask">HttpGetTask</a>,
-                <a class="link" href="HttpRequestTask.html" title="C.38 HttpRequestTask">HttpRequestTask</a> and
-                <a class="link" href="VisualizerTask.html" title="C.98 VisualizerTask">VisualizerTask</a>.
-            </p>
-            <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19464"></a>HTTP attributes</h4></div></div></div>
-                
-                <p>Use the following attributes if your PlanUML server requires an authentication mechanism.</p>
-                <div class="table"><a name="idp19467"></a><p class="formal-object-title"><span class="label">Table C.128: </span><span class="title">Attributes</span></p><div class="table-contents">
-                    
-                    <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">authUser</code></td><td><code class="literal">String</code></td><td>The authentication user name</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">authPassword</code></td><td><code class="literal">String</code></td><td>The authentication password</td><td>n/a</td><td>No</td></tr><tr><td><code class="literal">authScheme</code></td><td><code class="literal">String</code></td><td>The authentication scheme</td><td>basic</td><td>No</td></tr></tbody></table>
-                </div></div><br class="table-break">
-            </div>
-            <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19507"></a>Supported Nested Tags</h4></div></div></div>
-                
-                <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
-                        <p><code class="literal">config</code></p>
-                        <p>Holds additional config data. See
-                            <a class="ulink" href="http://docs.guzzlephp.org/en/stable/request-options.html" target="_top">Guzzle documentation</a> for supported values.
-                        </p>
-                        <div class="table"><a name="idp19515"></a><p class="formal-object-title"><span class="label">Table C.129: </span><span class="title">Attributes</span></p><div class="table-contents">
-                            
-                            <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">name</code></td><td><code class="literal">String</code></td><td>Config parameter name</td><td>n/a</td><td>Yes</td></tr><tr><td><code class="literal">value</code></td><td>Mixed</td><td>Config value</td><td>n/a</td><td>Yes</td></tr></tbody></table>
-                        </div></div><br class="table-break">
-                    </li><li class="listitem">
-                        <p><code class="literal">header</code></p>
-                        <p> Holds additional header <code class="literal">name</code> and
-                            <code class="literal">value</code>.</p>
-                        <div class="table"><a name="idp19552"></a><p class="formal-object-title"><span class="label">Table C.130: </span><span class="title">Attributes</span></p><div class="table-contents">
-                            
-                            <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">name</code></td><td><code class="literal">String</code></td><td>Header name</td><td>n/a</td><td>Yes</td></tr><tr><td><code class="literal">value</code></td><td><code class="literal">String</code></td><td>Header value</td><td>n/a</td><td>Yes</td></tr></tbody></table>
-                        </div></div><br class="table-break">
-                    </li></ul></div>
-            </div>
-            <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19584"></a>Global configuration</h4></div></div></div>
-                
-                <p>
-                    In addition to configuring a particular instance of <code class="literal">Guzzle</code> via
-                    nested <code class="literal">&lt;config&gt;</code> tags it is also possible to set default
-                    configuration values for <a class="link" href="HttpGetTask.html" title="C.37 HttpGetTask">HttpGetTask</a> / <a class="link" href="HttpRequestTask.html" title="C.38 HttpRequestTask">HttpRequestTask</a>
-                    / <a class="link" href="VisualizerTask.html" title="C.98 VisualizerTask">VisualizerTask</a> by setting <code class="literal">phing.http.*</code>
-                    properties.
+                <p>Special target naming is not interpreted by <code class="literal">VisualizerTask</code>,
+                    targets' names are used <span class="emphasis"><em>as is</em></span>. Please read <a class="link" href="ImportTask.html#ImportTask-target-overriding" title="B.29.1 Target Overriding">Target Overriding
+                    </a> for more details.
                 </p>
-                <pre class="programlisting">
+            </li><li class="listitem">
+                <p>
+                    As said before, <code class="literal">VisualizerTask</code> depends on a remote PlantUML server. Even if
+                    only buildfile's name and targets' names are sent to server, please be sure you are not sending
+                    any sensible information.
+                </p>
+            </li><li class="listitem">
+                <p>
+                    PlantUML limits image width and height to 4096 pixels. Overcoming this limitation will require
+                    to configure your own PlantUML server and to configure it according to
+                    <a class="ulink" href="http://plantuml.com/faq" target="_top">PlantUML FAQ</a>
+                    instructions.
+                </p>
+            </li></ul></div>
+    </div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19479"></a>C.98.3 Requirements</h3></div></div></div>
+        
+        <p>To work properly, <code class="literal">VisualizerTask</code> needs to have the following installed:
+        </p>
+        <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                <p>
+                    <a class="ulink" href="http://php.net/manual/en/book.simplexml.php" target="_top">SimpleXML
+                        extension
+                    </a>
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <a class="ulink" href="http://php.net/manual/en/book.xsl.php" target="_top">XSL extension</a>
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <a class="ulink" href="http://docs.guzzlephp.org/en/stable/" target="_top">Guzzle</a>
+                </p>
+            </li><li class="listitem">
+                <p>
+                    <a class="ulink" href="https://packagist.org/packages/jawira/plantuml-client" target="_top">
+                        jawira/plantuml-client
+                    </a>
+                </p>
+            </li></ul></div>
+    </div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp19496"></a>C.98.4 Advanced HTTP configuration</h3></div></div></div>
+        
+        <p>
+            As said before <code class="literal">VisualizerTask</code> needs a remote server to generate the diagrams. In
+            order to configure the connection with remote server, several attributes and nested tags are available.
+        </p>
+        <p>
+            Because <code class="literal">VisualizerTask</code> relies on an internal Phing's library, these attributes and
+            nested tags are shared among these tasks: <a class="link" href="HttpGetTask.html" title="C.37 HttpGetTask">HttpGetTask</a>,
+            <a class="link" href="HttpRequestTask.html" title="C.38 HttpRequestTask">HttpRequestTask</a>
+            and
+            <a class="link" href="VisualizerTask.html" title="C.98 VisualizerTask">VisualizerTask</a>.
+        </p>
+        <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19505"></a>HTTP attributes</h4></div></div></div>
+            
+            <p>Use the following attributes if your PlanUML server requires an authentication mechanism.</p>
+            <div class="table"><a name="idp19508"></a><p class="formal-object-title"><span class="label">Table C.128: </span><span class="title">Attributes</span></p><div class="table-contents">
+                
+                <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
+                                <code class="literal">authUser</code>
+                            </td><td>
+                                <code class="literal">String</code>
+                            </td><td>The authentication user name</td><td>n/a</td><td>No</td></tr><tr><td>
+                                <code class="literal">authPassword</code>
+                            </td><td>
+                                <code class="literal">String</code>
+                            </td><td>The authentication password</td><td>n/a</td><td>No</td></tr><tr><td>
+                                <code class="literal">authScheme</code>
+                            </td><td>
+                                <code class="literal">String</code>
+                            </td><td>The authentication scheme</td><td>basic</td><td>No</td></tr></tbody></table>
+            </div></div><br class="table-break">
+        </div>
+        <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19548"></a>Supported Nested Tags</h4></div></div></div>
+            
+            <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
+                    <p>
+                        <code class="literal">config</code>
+                    </p>
+                    <p>Holds additional config data. See
+                        <a class="ulink" href="http://docs.guzzlephp.org/en/stable/request-options.html" target="_top">Guzzle
+                            documentation
+                        </a>
+                        for supported values.
+                    </p>
+                    <div class="table"><a name="idp19556"></a><p class="formal-object-title"><span class="label">Table C.129: </span><span class="title">Attributes</span></p><div class="table-contents">
+                        
+                        <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
+                                        <code class="literal">name</code>
+                                    </td><td>
+                                        <code class="literal">String</code>
+                                    </td><td>Config parameter name</td><td>n/a</td><td>Yes</td></tr><tr><td>
+                                        <code class="literal">value</code>
+                                    </td><td>Mixed</td><td>Config value</td><td>n/a</td><td>Yes</td></tr></tbody></table>
+                    </div></div><br class="table-break">
+                </li><li class="listitem">
+                    <p>
+                        <code class="literal">header</code>
+                    </p>
+                    <p>Holds additional header <code class="literal">name</code> and
+                        <code class="literal">value</code>.
+                    </p>
+                    <div class="table"><a name="idp19593"></a><p class="formal-object-title"><span class="label">Table C.130: </span><span class="title">Attributes</span></p><div class="table-contents">
+                        
+                        <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
+                                        <code class="literal">name</code>
+                                    </td><td>
+                                        <code class="literal">String</code>
+                                    </td><td>Header name</td><td>n/a</td><td>Yes</td></tr><tr><td>
+                                        <code class="literal">value</code>
+                                    </td><td>
+                                        <code class="literal">String</code>
+                                    </td><td>Header value</td><td>n/a</td><td>Yes</td></tr></tbody></table>
+                    </div></div><br class="table-break">
+                </li></ul></div>
+        </div>
+        <div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="idp19625"></a>Global configuration</h4></div></div></div>
+            
+            <p>
+                In addition to configuring a particular instance of <code class="literal">Guzzle</code> via
+                nested <code class="literal">&lt;config&gt;</code> tags it is also possible to set default
+                configuration values for <a class="link" href="HttpGetTask.html" title="C.37 HttpGetTask">HttpGetTask</a> /
+                <a class="link" href="HttpRequestTask.html" title="C.38 HttpRequestTask">HttpRequestTask</a>
+                / <a class="link" href="VisualizerTask.html" title="C.98 VisualizerTask">VisualizerTask</a> by setting
+                <code class="literal">phing.http.*</code>
+                properties.
+            </p>
+            <pre class="programlisting">
 &lt;property name="phing.http.proxy" value="socks5://localhost:1080/"/&gt;
 
 &lt;!-- This request will go through the default proxy --&gt;
@@ -157,6 +237,6 @@
     &lt;config name="proxy" value="http://foo:bar@proxy.example.org:3128/"/&gt;
     &lt;header name="user-agent" value="Phing VisualizerTask"/&gt;
 &lt;/visualizer&gt;</pre>
-            </div>
         </div>
-    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="UnzipTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.optionaltasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="WikiPublishTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">C.97 UnzipTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> C.99 WikiPublishTask</td></tr></table></div></body></html>
+    </div>
+</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="UnzipTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.optionaltasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="WikiPublishTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">C.97 UnzipTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> C.99 WikiPublishTask</td></tr></table></div></body></html>
