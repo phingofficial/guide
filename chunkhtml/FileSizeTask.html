@@ -1,14 +1,27 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>B.26 FileSizeTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretasks.html" title="Appendix B. Core tasks"><link rel="prev" href="FileHashTask.html" title="B.25 FileHashTask"><link rel="next" href="ForeachTask.html" title="B.27 ForeachTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.26 FileSizeTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="FileHashTask.html">Prev</a> </td><th width="60%" align="center">Appendix B. Core tasks</th><td width="20%" align="right"> <a accesskey="n" href="ForeachTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="FileSizeTask"></a>B.26 FileSizeTask</h2></div></div></div>
+    
+    <p>Stores the size of a specified file in a property. The file size can be returned in different units.</p>
+    <div class="table"><a name="idp4767"></a><p class="formal-object-title"><span class="label">Table B.28: </span><span class="title">Attributes</span></p><div class="table-contents">
         
-        <p>Stores the size of a specified file in a property. The file size can be returned in different units.</p>
-        <div class="table"><a name="idp4767"></a><p class="formal-object-title"><span class="label">Table B.28: </span><span class="title">Attributes</span></p><div class="table-contents">
-            
-            <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">file</code></td><td><code class="literal">String</code></td><td>Filename.</td><td>n/a</td><td>Yes</td></tr><tr><td><code class="literal">propertyname</code></td><td><code class="literal">String</code></td><td>Name of property where the file size is stored.</td><td>filesize</td><td>No</td></tr><tr><td><code class="literal">unit</code></td><td><code class="literal">String</code></td><td>
-                            <p>File size unit. Examples: <code class="literal">M</code>,
-                                <code class="literal">G</code>, <code class="literal">T</code>.</p>
-                        </td><td>B</td><td>No</td></tr></tbody></table>
-        </div></div><br class="table-break">
-        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+        <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
+                        <code class="literal">file</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>Filename.</td><td>n/a</td><td>Yes</td></tr><tr><td>
+                        <code class="literal">propertyname</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>Name of property where the file size is stored.</td><td>filesize</td><td>No</td></tr><tr><td>
+                        <code class="literal">unit</code>
+                    </td><td>
+                        <code class="literal">String</code>
+                    </td><td>
+                        <p>File size unit. Examples: <code class="literal">M</code>,
+                            <code class="literal">G</code>, <code class="literal">T</code>.
+                        </p>
+                    </td><td>B</td><td>No</td></tr></tbody></table>
+    </div></div><br class="table-break">
+    <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
     <p>
         File size can be written using IEC and SI suffixes, bytes are assumed when suffix is not specified.
         The following suffixes (case-insensitive) are supported:
@@ -39,17 +52,17 @@
                     </td><td>1000 gigabytes</td></tr></tbody></table>
     </div></div><br class="table-break">
 </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp4887"></a>B.26.1 Examples</h3></div></div></div>
-            
-            <pre class="programlisting">
-                &lt;filesize file="./backup.zip"/&gt;
-                &lt;echo&gt;Your backup size is ${filesize} Bytes&lt;/echo&gt;</pre>
-            <pre class="programlisting">
-                &lt;filesize file="./backup.zip" propertyname="backup.size"/&gt;
-                &lt;echo&gt;Your backup size is ${backup.size} Bytes&lt;/echo&gt;</pre>
-            <pre class="programlisting">
-                &lt;filesize file="./backup.zip" unit="M"/&gt;
-                &lt;echo&gt;Your backup size is ${filesize} Megabytes&lt;/echo&gt;</pre>
-        </div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp4887"></a>B.26.1 Examples</h3></div></div></div>
+        
+        <pre class="programlisting">&lt;filesize file="./backup.zip"/&gt;
+&lt;echo&gt;Your backup size is ${filesize} Bytes&lt;/echo&gt;
+        </pre>
+        <pre class="programlisting">&lt;filesize file="./backup.zip" propertyname="backup.size"/&gt;
+&lt;echo&gt;Your backup size is ${backup.size} Bytes&lt;/echo&gt;
+        </pre>
+        <pre class="programlisting">&lt;filesize file="./backup.zip" unit="M"/&gt;
+&lt;echo&gt;Your backup size is ${filesize} Megabytes&lt;/echo&gt;
+        </pre>
+    </div>
 
-    </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="FileHashTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.coretasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ForeachTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B.25 FileHashTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.27 ForeachTask </td></tr></table></div></body></html>
+</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="FileHashTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.coretasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ForeachTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B.25 FileHashTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.27 ForeachTask </td></tr></table></div></body></html>
