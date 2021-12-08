@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ReflexiveTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>ReflexiveTask</title>
+    <para>The <literal>ReflexiveTask</literal> performs operations on files. It is essentially a convenient way to
+        transform (using filter chains) files without copying them.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>A single file to be processed.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (unless &lt;fileset&gt; provided)</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;reflexive&gt;
+    &lt;fileset dir="."&gt;
+        &lt;include pattern="*.html"&gt;
+    &lt;/fileset&gt;
+    &lt;filterchain&gt;
+        &lt;replaceregexp&gt;
+            &lt;regexp pattern="\r(\n)" replace="\1"/&gt;
+        &lt;/replaceregexp&gt;
+    &lt;/filterchain&gt;
+&lt;/reflexive&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags:</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="app.corefilters">filterchain</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

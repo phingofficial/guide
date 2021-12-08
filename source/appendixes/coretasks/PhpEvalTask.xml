@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PhpEvalTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>PhpEvalTask</title>
+    <para>With the <literal>PhpEvalTask</literal>, you can set a property to the results of evaluating a PHP expression
+        or the result returned by a function/method call.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>function</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The name of the Property.</entry>
+                    <entry>n/a</entry>
+                    <entry morerows="1">One of these is required.</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>expression</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The expression to evaluate.</entry>
+                    <entry>n/a</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>class</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The static class which contains function.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>returnProperty</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The name of the property to set with result of expression or function call.
+                        <emphasis>Note:</emphasis> if this attribute is set, the expression must return a value.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>level</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Control the level at which php reports status messages. One of <literal>error</literal>,
+                        <literal>warning</literal>, <literal>info</literal>, <literal>verbose</literal>,
+                        <literal>debug</literal>.
+                    </entry>
+                    <entry>
+                        <literal>info</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;php function="crypt" returnProperty="enc_passwd"&gt;
+    &lt;param value="${auth.root_passwd}"/&gt;
+&lt;/php&gt;
+        </programlisting>
+        <programlisting language="xml">&lt;php expression="3 + 4" returnProperty="sum"/&gt;</programlisting>
+        <programlisting language="xml">&lt;php expression="echo 'test';"&gt;</programlisting>
+        <programlisting language="xml">&lt;php class="phing.Phing" function="start"&gt;
+    &lt;param value="-projecthelp"/&gt;
+    &lt;param value="-buildfile"/&gt;
+    &lt;param value="${phing.file}"/&gt;
+&lt;/php&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>param</literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

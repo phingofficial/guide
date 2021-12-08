@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="AvailableTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>AvailableTask </title>
+    <para>Available Task tests if a resource/file is set and sets a certain property to a
+        certain value if it exists.</para>
+    <para>Here, <literal>AvailableTask</literal> first checks for the existence of either file
+        or directory named <literal>test.txt</literal> in <literal>/tmp</literal>. Then, it
+        checks for the directory <literal>foo</literal> in <literal>/home</literal> and then for
+        the file or directory <literal>bar</literal> in <literal>/home/foo</literal>. If
+            <literal>/tmp/test.txt</literal> is found, the property
+            <literal>test_txt_exists</literal> is set to <literal>"Yes"</literal>, if
+            <literal>/home/foo</literal> is found and a directory,
+            <literal>properties.yetanother</literal> is set to <literal>"true"</literal>
+        (default). If <literal>/home/foo/bar</literal> exists, <literal>AvailableTask</literal>
+        will set <literal>foo.bar</literal> to <literal>"Well, yes"</literal>.
+        And last it checks if extension <literal>foo</literal> is loaded,
+            so the property <literal>foo.ext.loaded</literal> is set to <literal>"true"</literal> (default).
+    </para>
+    <para>
+        <emphasis role="bold">NB:</emphasis> the Available task can also be used as a condition, see
+        <link linkend="conditions">conditions</link>.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>property</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Name of the property that is to be set.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>value</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The value the property is to be set to.</entry>
+                    <entry>
+                        <literal>"true"</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>File/directory to check existence.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>resource</literal> or <literal>extension</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>resource</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Path of the resource to look for.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>file</literal> or <literal>extension</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>extension</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Name of the extension to look for.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>file</literal> or <literal>resource</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>type</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                        (file|dir)
+                    </entry>
+                    <entry>Determines if <literal>AvailableTask</literal> should look for a file
+                        or a directory at the position set by <literal>file</literal>. If empty,
+                        it checks for either file or directory.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>filepath</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The path to use when looking up <literal>file</literal>.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>followSymlinks</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>
+                        Whether to dereference symbolic links when looking up <literal>file</literal>.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;available file="/tmp/test.txt" property="test_txt_exists" value="Yes"/&gt;
+
+&lt;available file="/home/foo" type="dir" property="properties.yetanother" /&gt;
+
+&lt;available file="/home/foo/bar" property="foo.bar" value="Well, yes" /&gt;
+        </programlisting>
+    </sect2>
+
+</sect1>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SymlinkTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>SymlinkTask</title>
+    <para>Creates symlink(s) to a specified file / directory or a collection of files / directories.</para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>target</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>What you're trying to symlink from</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or nested FileSet)</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>link</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Where you'd like the symlink(s)</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>overwrite</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to override the symlink if it exists but points to a different location
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>relative</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to create relative symlinks</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Example</title>
+        <para>Single symlink</para>
+        <programlisting language="xml">&lt;symlink target="/path/to/original/file" link="/where/to/symlink" /&gt;
+        </programlisting>
+        <para>Using filesets</para>
+        <programlisting language="xml">&lt;symlink link="/where/to/symlink"&gt;
+    &lt;fileset dir="/some/directory"&gt;
+        &lt;include name="*" /&gt;
+    &lt;/fileset&gt;
+&lt;/symlink&gt;
+        </programlisting>
+        <para>In the fileset example, assuming the contents of "/some/directory" were:</para>
+        <itemizedlist>
+            <listitem>
+                <para>Somedir</para>
+            </listitem>
+            <listitem>
+                <para>somefile</para>
+            </listitem>
+        </itemizedlist>
+        <para>Then the contents of "/where/to/symlink" would be:</para>
+        <itemizedlist>
+            <listitem>
+                <para>Somedir -&gt; /some/directory/Somedir</para>
+            </listitem>
+            <listitem>
+                <para>somefile -&gt; /some/directory/somefile</para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+
+
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

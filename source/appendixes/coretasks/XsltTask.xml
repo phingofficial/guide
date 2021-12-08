@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="XsltTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>XsltTask</title>
+    <para>With <literal>XsltTask</literal>, you can run a XSLT transformation on an XML file.
+        Actually, <literal>XsltTask</literal> extends <literal>CopyTask</literal>, so you can
+        use all the elements allowed there.
+    </para>
+    <para>
+        <literal>XsltTask</literal> is implemented by means of the <literal>XsltFlter</literal> and hence relies on PHP5
+        XSLT support via (<literal>libxslt</literal>) which must be available in php5. The <literal>XsltTask</literal>
+        is equivalent to running command line <literal>xsltproc</literal> since that is a frontend for libxslt.
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>style</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The path where the Xslt file is located</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>resolvedocumentexternals</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to resolve entities in the XML document. (see <link
+                            xlink:href="http://www.php.net/manual/en/class.domdocument.php#domdocument.props.resolveexternals"
+                            role="extern">this link</link> for details)
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>resolvestylesheetexternals</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to resolve entities in the stylesheet.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>html</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to work on HTML or XML.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <para>
+        <literal>Note:</literal>
+        You can also use all the attributes available for<xref xlink:href="#CopyTask"/>.
+    </para>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- Transform docbook with an imaginary XSLT file --&gt;
+&lt;xslt todir="/srv/docs/phing" style="dbk2html.xslt" &gt;
+    &lt;fileset dir="."&gt;
+        &lt;include name="**/*.xml" /&gt;
+    &lt;/fileset&gt;
+&lt;/xslt&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="app.coremappers">mapper</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="app.corefilters">filterchain</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>param</literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+        <para>
+            <literal>Note:</literal>
+            You can use all the elements also available for<xref xlink:href="#CopyTask"/>.
+        </para>
+        <para>Additionally, you can use <literal>&lt;param&gt;</literal> tags with a <literal>name</literal> and a
+            <literal>expression</literal> (or <literal>value</literal> alias) attribute. These parameters are then
+            available from within the xsl style sheet.
+        </para>
+    </sect2>
+</sect1>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="TouchTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>TouchTask</title>
+    <para>The <literal>TouchTask</literal> works like the Unix <literal>touch</literal> command: It sets the
+        <literal>modtime</literal> of a file to a specific time. Default is the current time.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The file which time is to be changed.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes, or nested <literal>&lt;fileset&gt;</literal> tag
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>datetime</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">DateTime</literal>
+                    </entry>
+                    <entry>The date and time the mtime of the file is to be set to. The format is "MM/DD/YYYY HH:MM AM
+                        or PM"
+                    </entry>
+                    <entry>
+                        <literal>now</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>seconds</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
+                    <entry>
+                        <literal>now</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>millis</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The number of milliseconds since Midnight Jan 1 1970 (Unix epoch). Note: milliseconds are
+                        converted to seconds internally. When using this option the value must be greater than 1000.
+                    </entry>
+                    <entry>
+                        <literal>now</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>seconds</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The number of seconds since Midnight Jan 1 1970 (Unix epoch).</entry>
+                    <entry>
+                        <literal>now</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>mkdirs</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to create nonexistent parent directories when touching new files.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>verbose</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to log the creation of new files.</entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;touch file="README.txt" millis="102134111" /&gt;
+
+&lt;touch file="COPYING.lib" datetime="10/10/1999 09:31 AM" /&gt;
+        </programlisting>
+        <programlisting language="xml">&lt;target name="map"&gt;
+    &lt;touch file="${tmp.dir}/touchtest"/&gt;
+    &lt;touch&gt;
+        &lt;fileset file="${tmp.dir}/touchtest" /&gt;
+        &lt;mapper type="composite"&gt;
+            &lt;mapper type="glob" from="*" to="*foo" /&gt;
+            &lt;mapper type="glob" from="*" to="*bar" /&gt;
+        &lt;/mapper&gt;
+    &lt;/touch&gt;
+&lt;/target&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileList">filelist</link>
+                    </literal>
+                </para>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+                <para>
+                    <literal>
+                        <link linkend="Mapper">mapper</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

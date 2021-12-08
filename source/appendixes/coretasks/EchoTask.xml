@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="EchoTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>EchoTask</title>
+    <para>Echoes a message to the current loggers and listeners which means standard out unless overridden. A level can
+        be specified, which controls at what logging level the message is filtered at.
+    </para>
+    <para>The task can also echo to a file, in which case the option to append rather than overwrite the file is
+        available, and the level option is ignored
+    </para>
+    <para>Additionally, the task can echo the contents of a nested fileset element.</para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>msg</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The string that is to be send to the output.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>message</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Alias for <literal>msg</literal>.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The file to write the message to.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>append</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Append to an existing file?</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>level</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Control the level at which this message is reported. One of
+                        <literal>error</literal>, <literal>warning</literal>,
+                        <literal>info</literal>, <literal>verbose</literal>,
+                        <literal>debug</literal>.
+                    </entry>
+                    <entry>
+                        <literal>info</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;echo msg="Phing rocks!" /&gt;
+
+&lt;echo message="Binarycloud, too." /&gt;
+
+&lt;echo&gt;And don't forget Propel.&lt;/echo&gt;
+
+&lt;echo file="test.txt" append="false"&gt;This is a test message&lt;/echo&gt;
+        </programlisting>
+        <para>Echo a previously defined fileset element.</para>
+        <programlisting language="xml">&lt;fileset dir="./tests" id="test.files"&gt;
+    &lt;include name="**/*Test.php"/&gt;
+&lt;/fileset&gt;
+
+&lt;echo&gt;
+    &lt;fileset refid="test.files"/&gt;
+&lt;/echo&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

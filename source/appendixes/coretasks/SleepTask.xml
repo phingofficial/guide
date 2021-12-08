@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="SleepTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>SleepTask</title>
+    <para>A task for sleeping a short period of time, useful when a build or deployment process requires an interval
+        between tasks.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>hours</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>hours to to add to the sleep time</entry>
+                    <entry>0</entry>
+                    <entry>no</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>minutes</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>minutes to add to the sleep time</entry>
+                    <entry>0</entry>
+                    <entry>no</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>seconds</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>seconds to add to the sleep time</entry>
+                    <entry>0</entry>
+                    <entry>no</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>milliseconds</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>milliseconds to add to the sleep time</entry>
+                    <entry>0</entry>
+                    <entry>no</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>failonerror</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>flag controlling whether to break the build on an error.</entry>
+                    <entry>true</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Example</title>
+        <programlisting language="xml">&lt;sleep seconds="2"/&gt;</programlisting>
+    </sect2>
+</sect1>

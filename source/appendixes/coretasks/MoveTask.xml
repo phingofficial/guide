@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="MoveTask" xmlns="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude"
+       xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>MoveTask</title>
+    <para>Moves a file or directory to a new file or directory. By default, the destination file is overwritten if it
+        already exists. When overwrite is turned off, then files are only moved if the source file is newer than the
+        destination file, or when the destination file does not exist.
+    </para>
+    <para>Source files and directories are only deleted if the file or directory has been copied to the destination
+        successfully.
+    </para>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- The following will move the file "somefile.txt" to "/tmp" and
+change its filename to "anotherfile.bak". It will overwrite
+an existing file. --&gt;
+&lt;move file="somefile.txt" tofile="/tmp/anotherfile.bak" overwrite="true"/&gt;
+
+&lt;!-- This will move the "/tmp" directory to "/home/default/tmp",
+preserving the directory name. So the final name is
+"/home/default/tmp/tmp". Empty directories are also copied --&gt;
+&lt;move file="/tmp" todir="/home/default/tmp" includeemptydirs="true"/&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="taskattributes">
+        <title>Attributes and Nested Elements</title>
+        <para>For further documentation, see<xref xlink:href="#CopyTask"/>, since MoveTask only is a child of CopyTask
+            and inherits all attributes.
+        </para>
+    </sect2>
+</sect1>

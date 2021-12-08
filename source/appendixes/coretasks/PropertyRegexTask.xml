@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PropertyRegexTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>PropertyRegexTask</title>
+    <para>Performs regular expression operations on an subject string, and sets the results to a property.
+        There are two different operations that can be performed:
+        <itemizedlist>
+            <listitem>
+                <para>Replace - The matched regular expression is replaced with a substitution pattern</para>
+            </listitem>
+            <listitem>
+                <para>Match - Groupings within the regular expression are matched via a selection expression.</para>
+            </listitem>
+        </itemizedlist>
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>property</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The name of the property to set.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>override</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If the property is already set, should we change it's value. Can be <literal>true</literal>
+                        or <literal>false</literal>
+                    </entry>
+                    <entry>false</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>subject</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The subject to be processed</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>pattern</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The regular expression pattern which is matched in the subject.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>match</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>A pattern which indicates what match pattern you want in the returned value. This uses the
+                        substitution pattern syntax to indicate where to insert groupings created as a result of the
+                        regular expression match.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (unless a replace is specified)</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>replace</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>A regular expression substitition pattern, which will be used to replace the given regular
+                        expression in the subject.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (unless a match is specified)</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>casesensitive</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Should the match be case sensitive</entry>
+                    <entry>true</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>limit</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The maximum possible replacements for each pattern in each subject string. Defaults to -1 (no
+                        limit).
+                    </entry>
+                    <entry>-1</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>defaultValue</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Integer</literal>
+                    </entry>
+                    <entry>The value to set the output property to, if the subject string does not match the specific
+                        regular expression.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Match expressions</title>
+        <para>Expressions are matched in a the same syntax as a regular expression substitution pattern.</para>
+        <itemizedlist>
+            <listitem>
+                <para>$0 indicates the entire property name (default).</para>
+            </listitem>
+            <listitem>
+                <para>$1 indicates the first grouping</para>
+            </listitem>
+            <listitem>
+                <para>$2 indicates the second grouping</para>
+            </listitem>
+            <listitem>
+                <para>etc...</para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+    <sect2>
+        <title>Replace</title>
+        <para>It is important to note that when doing a "replace" operation, if the subject string does not match the
+            regular expression, then the property is not set. You can change this behavior by supplying the
+            "defaultValue" attribute. This attribute should contain the value to set the property to in this case.
+        </para>
+        <itemizedlist>
+            <listitem>
+                <para>$0 indicates the entire property name (default).</para>
+            </listitem>
+            <listitem>
+                <para>$1 indicates the first grouping</para>
+            </listitem>
+            <listitem>
+                <para>$2 indicates the second grouping</para>
+            </listitem>
+            <listitem>
+                <para>etc...</para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+    <sect2>
+        <title>Example</title>
+        <programlisting language="xml">&lt;propertyregex property="pack.name"
+    subject="package.ABC.name"
+    pattern="package\.([^.]*)\.name"
+    match="$1"
+    casesensitive="false"
+    defaultvalue="test1"/&gt;
+
+&lt;echo message="${pack.name}"/&gt;
+
+&lt;propertyregex property="pack.name"
+    override="true"
+    subject="package.ABC.name"
+    pattern="(package)\.[^.]*\.(name)"
+    replace="$1.DEF.$2"
+    casesensitive="false"
+    defaultvalue="test2"/&gt;
+
+&lt;echo message="${pack.name}"/&gt;
+        </programlisting>
+    </sect2>
+</sect1>

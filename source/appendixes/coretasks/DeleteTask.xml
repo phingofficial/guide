@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="DeleteTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>DeleteTask</title>
+    <para>Deletes a file or directory, or set of files defined by a fileset. See <xref xlink:href="#app.coretypes"/>
+        for information on Filesets.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>file</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The file that is to be deleted. You either have to specify this attribute,
+                        <literal>dir</literal>, or use a fileset.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>dir</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>dir</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The directory that is to be deleted. You either have to specify this attribute,
+                        <literal>file</literal>, or use a fileset.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>Yes (or <literal>file</literal>)
+                    </entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>verbose</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Used to force listing of all names of deleted files.</entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>quiet</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>
+                        <para>If the file does not exist, do not display a diagnostic message or modify the exit status
+                            to reflect an error. This means that if a file or directory cannot be deleted, then no error
+                            is reported.
+                        </para>
+                        <para>This setting emulates the -f option to the Unix<literal>rm</literal>command. Default is
+                            false meaning things are verbose
+                        </para>
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>failonerror</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If this attribute is set to <literal>true</literal>, DeleteTask will verbose on errors but
+                        the build process will not be stopped.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>includeemptydirs</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Determines if empty directories are also to be deleted.</entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;!-- Delete a specific file --&gt;
+&lt;delete file="/tmp/foo.bar" /&gt;
+
+&lt;!-- Delete a directory --&gt;
+&lt;delete dir="/tmp/darl" includeemptydirs="true" verbose="true" failonerror="true" /&gt;
+
+&lt;!-- Delete using a fileset --&gt;
+&lt;delete&gt;
+    &lt;fileset dir="/tmp"&gt;
+        &lt;include name="*.bar" /&gt;
+    &lt;/fileset&gt;
+&lt;/delete&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileSet">fileset</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="FileList">filelist</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="DirSet">dirset</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

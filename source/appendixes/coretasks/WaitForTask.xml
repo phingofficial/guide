@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="WaitForTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>WaitForTask</title>
+    <para>Wait for a condition to become true or a timeout, whichever comes first.</para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>MaxWait</literal>
+                    </entry>
+                    <entry>
+                        <literal>Integer</literal>
+                    </entry>
+                    <entry>Set the maximum length of time to wait in units</entry>
+                    <entry>3min</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>MaxWaitUnit</literal>
+                    </entry>
+                    <entry>
+                        <literal>String</literal>
+                    </entry>
+                    <entry>Set the max wait time unit. Must be one of "<literal>week</literal>",
+                        "<literal>day</literal>", "<literal>hour</literal>", "<literal>minute</literal>",
+                        "<literal>second</literal>", "<literal>millisecond</literal>"
+                    </entry>
+                    <entry>millisecond</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>CheckEvery</literal>
+                    </entry>
+                    <entry>
+                        <literal>Integer</literal>
+                    </entry>
+                    <entry>Set the time between each check</entry>
+                    <entry>500ms</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>CheckEveryUnit</literal>
+                    </entry>
+                    <entry>
+                        <literal>String</literal>
+                    </entry>
+                    <entry>Set the check every time unit. Must be one of
+                        "<literal>week</literal>", "<literal>day</literal>", "<literal>hour</literal>",
+                        "<literal>minute</literal>", "<literal>second</literal>", "<literal>millisecond</literal>"
+                    </entry>
+                    <entry>milliseconds</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>TimeoutProperty</literal>
+                    </entry>
+                    <entry>
+                        <literal>String</literal>
+                    </entry>
+                    <entry>Name of the property to set after a timeout.</entry>
+                    <entry>null</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <para>Wait for a maximum of ten seconds for the file "<filename>ready</filename>" to appear.
+        </para>
+        <programlisting language="xml">&lt;waitfor maxwaitunit="second" maxwait="10"&gt;
+    &lt;available file="ready"/&gt;
+&lt;/waitfor&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <para>All <link linkend="conditions">conditionals</link> including <literal>and</literal>,
+            <literal>or</literal>, <literal>not</literal> etc.
+        </para>
+    </sect2>
+</sect1>

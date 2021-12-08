@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="PhingCallTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>PhingCallTask</title>
+    <para>The PhingCallTask calls a target within the same Phing project.</para>
+    <para>A <literal>&lt;phingcall&gt;</literal> tag may contain <literal>&lt;property&gt;</literal> tags that define new
+        properties. These properties are only set if properties of the same name have not been set outside the
+        <literal>"phingcall"</literal> tag.
+    </para>
+    <para>When a target is invoked by <literal>phingcall</literal>, all of its dependent targets will also be called
+        within the context of any new parameters. For example. if the target "doSomethingElse" depended on the target
+        "init", then using <literal>phingcall</literal> to execute "doSomethingElse" will also execute "init". Note: the
+        top level tasks of a project will always be executed!
+    </para>
+
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type/Values</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>target</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The name of the target in the same project that is to be called.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>inheritAll</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If true, all</entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>inheritRefs</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <note>
+        <para>Local scope.</para>
+        <para>Every <literal>&lt;phingcall&gt;</literal> tag creates a new local scope. Thus, any properties or
+            other variables set inside that scope will cease to exist (or revert to their previous value) once the
+            <literal>&lt;phingcall&gt;</literal> tag completes.
+        </para>
+    </note>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;target name="foo"&gt;
+    &lt;phingcall target="bar"&gt;
+        &lt;property name="property1" value="aaaaa" /&gt;
+        &lt;property name="foo" value="baz" /&gt;
+    &lt;/phingcall&gt;
+&lt;/target&gt;
+        </programlisting>
+        <para>In the example above, the properties <literal>property1</literal> and <literal>foo</literal>
+            are defined and only accessible inside the called target.
+        </para>
+        <programlisting language="xml">&lt;target name="bar" depends="init"&gt;
+    &lt;echo message="prop is ${property1} ${foo}" /&gt;
+&lt;/target&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>property</literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>param</literal>
+                    (alias for property)
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

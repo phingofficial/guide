@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="DiagnosticsTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>Diagnostics</title>
+    <para>Runs phing's -diagnostics code inside phing itself.
+        This is good for debugging phing's configuration under an IDE.
+    </para>
+    <sect2>
+        <title>Example</title>
+        <programlisting language="xml">&lt;target name="diagnostics" description="diagnostics"&gt;
+    &lt;diagnostics/&gt;
+&lt;/target&gt;
+        </programlisting>
+    </sect2>
+</sect1>

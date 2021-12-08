@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="ConditionTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>ConditionTask</title>
+    <para>Sets a property if a certain condition holds true - this is a generalization of
+        <xref xlink:href="#AvailableTask"/>
+        and<xref xlink:href="#UpToDateTask"/>.
+    </para>
+    <para>If the condition holds true, the property value is set to true by default; otherwise, the property is not set.
+        You can set the value to something other than the default by specifying the <literal>value</literal> attribute.
+    </para>
+    <para>Conditions are specified as nested elements, you must specify exactly one condition - see
+        <link linkend="conditions">conditions</link> for a complete list of nested elements.
+    </para>
+    <table>
+        <title>Attributes</title>
+        <tgroup cols="5">
+            <colspec colname="name" colnum="1" colwidth="1.5*"/>
+            <colspec colname="type" colnum="2" colwidth="0.8*"/>
+            <colspec colname="description" colnum="3" colwidth="3.5*"/>
+            <colspec colname="default" colnum="4" colwidth="0.8*"/>
+            <colspec colname="required" colnum="5" colwidth="1.2*"/>
+            <thead>
+                <row>
+                    <entry>Name</entry>
+                    <entry>Type</entry>
+                    <entry>Description</entry>
+                    <entry>Default</entry>
+                    <entry>Required</entry>
+                </row>
+            </thead>
+            <tbody>
+                <row>
+                    <entry>
+                        <literal>property</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The name of the property to set.</entry>
+                    <entry>n/a</entry>
+                    <entry>Yes</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>value</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The value to set the property to. Defaults to "true".</entry>
+                    <entry>
+                        <literal>true</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>else</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>The value to set the property to if the condition evaluates to false. By default the property
+                        will remain unset.
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+            </tbody>
+        </tgroup>
+    </table>
+    <sect2>
+        <title>Examples</title>
+        <programlisting language="xml">&lt;condition property="isMacOrWindows"&gt;
+    &lt;or&gt;
+        &lt;os family="mac"/&gt;
+        &lt;os family="windows"/&gt;
+    &lt;/or&gt;
+&lt;/condition&gt;
+        </programlisting>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>Supported Nested Tags</title>
+        <itemizedlist>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="conditions.or">or</link>
+                    </literal>
+                </para>
+            </listitem>
+            <listitem>
+                <para>
+                    <literal>
+                        <link linkend="conditions.and">and</link>
+                    </literal>
+                </para>
+            </listitem>
+        </itemizedlist>
+    </sect2>
+</sect1>

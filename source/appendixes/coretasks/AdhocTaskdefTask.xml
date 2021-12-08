@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbookxi.rng"
+        schematypens="http://relaxng.org/ns/structure/1.0"?>
+
+<sect1 role="taskdef" xml:id="AdhocTaskdefTask" xmlns="http://docbook.org/ns/docbook"
+       xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+    <title>AdhocTaskdefTask</title>
+    <para>The AdhocTaskdefTask allows you to define a task within your build file.</para>
+    <para>
+        Note that you should use &lt;![CDATA[ ... ]]&gt; so that you don't have to quote entities within your
+        <literal>&lt;adhoc-task&gt;&lt;/adhoc-task&gt;</literal> tags.
+    </para>
+
+        <table>
+            <title>Attributes</title>
+            <tgroup cols="5">
+                <colspec colname="name" colnum="1" colwidth="1.5*"/>
+                <colspec colname="type" colnum="2" colwidth="0.8*"/>
+                <colspec colname="description" colnum="3" colwidth="3.5*"/>
+                <colspec colname="default" colnum="4" colwidth="0.8*"/>
+                <colspec colname="required" colnum="5" colwidth="1.2*"/>
+                <thead>
+                    <row>
+                        <entry>Name</entry>
+                        <entry>Type</entry>
+                        <entry>Description</entry>
+                        <entry>Default</entry>
+                        <entry>Required</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry><literal>name</literal></entry>
+                        <entry><literal role="type">String</literal></entry>
+                        <entry>Name of XML tag that will represent this task.</entry>
+                        <entry>n/a</entry>
+                        <entry>Yes</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <sect2>
+            <title>Examples</title>
+            <programlisting language="php">&lt;target name="main"
+    description="==&gt;test AdhocTask "&gt;
+
+    &lt;adhoc-task name="foo"&gt;&lt;![CDATA[
+        class FooTest extends Task {
+            private $bar;
+
+            function setBar($bar) {
+                $this-&gt;bar = $bar;
+            }
+
+            function main() {
+                $this-&gt;log("In FooTest: " . $this-&gt;bar);
+            }
+        }
+    ]]&gt;&lt;/adhoc-task&gt;
+
+    &lt;foo bar="B.L.I.N.G"/&gt;
+&lt;/target&gt;</programlisting>
+        </sect2>
+
+</sect1>
