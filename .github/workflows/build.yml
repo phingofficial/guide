@@ -27,7 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
-          tools: phing:3.0.0-rc2
+          tools: phing:3.0.0-RC3
 
       - name: Build documentation
         run: phing -debug
