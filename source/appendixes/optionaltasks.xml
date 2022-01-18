@@ -73,7 +73,6 @@
     <xi:include href="optionaltasks/PHPStanTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPUnitReport.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPUnitTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/PackageAsPathTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/ParallelTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PatchTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PharDataTask.xml" parse="xml"/>
@@ -116,7 +115,5 @@
     <xi:include href="optionaltasks/ZSDTPackTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/ZSDTValidateTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/ZendCodeAnalyzerTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/ZendGuardEncodeTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/ZendGuardLicenseTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/ZipTask.xml" parse="xml"/>
 </appendix>
