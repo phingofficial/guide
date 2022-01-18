@@ -9,7 +9,16 @@
         However, if you want to use this regularly, you should think about writing a Task for it.
     </para>
     <para>
-        <emphasis>The command attribute is now deprecated.</emphasis>
+        <emphasis>The <literal>command</literal> attribute is no longer supported.</emphasis>
+
+        You should now use a combination of the <emphasis>executable</emphasis> attribute and
+        <emphasis>arg</emphasis> nested elements:
+
+        <programlisting language="xml">&lt;exec command="echo foo"/&gt;
+&lt;!-- should become --&gt;
+&lt;exec executable="/bin/echo"&gt;
+    &lt;arg value="foo"/&gt;
+&lt;/exec&gt;</programlisting>
     </para>
     <para>Where it was once possible to pipe the output of one program to be the input of another using the command
         attribute: &lt;exec command="echo FLUSHALL | redis-cli"&gt; This must now be done using a combination of the
@@ -35,19 +44,6 @@
                 </row>
             </thead>
             <tbody>
-                <row>
-                    <entry>
-                        <literal>command</literal>
-                    </entry>
-                    <entry>
-                        <literal role="type">String</literal>
-                    </entry>
-                    <entry>NOTE: This attribute is deprecated. Please use executable with nested args.
-                        The command that is to be executed.
-                    </entry>
-                    <entry>n/a</entry>
-                    <entry morerows="1">One of the two</entry>
-                </row>
                 <row>
                     <entry>
                         <literal>executable</literal>
@@ -262,10 +258,7 @@
     </table>
     <sect2>
         <title>Examples</title>
-        <programlisting language="xml">&lt;!-- List the contents of "/home". --&gt;
-&lt;exec command="ls -l" dir="/home" passthru="yes" /&gt;
-
-&lt;!-- List the contents of "/home" using the executable attribute --&gt;
+        <programlisting language="xml">&lt;!-- List the contents of "/home" using the executable attribute --&gt;
 &lt;exec executable="ls" passthru="yes"&gt;
   &lt;arg value="-l"/&gt;
   &lt;arg path="/home"/&gt;
@@ -296,11 +289,10 @@
     &lt;arg line="--debug restart ${service.name}"/&gt;
 &lt;/exec&gt;
 
-&lt;!-- Start the configure process in "/tmp/php-src/php-8.0.8". --&gt;
-&lt;exec command="configure" dir="/tmp/php-src/php-8.0.8" /&gt;
-
 &lt;!-- List the contents of "/tmp" out to a file. --&gt;
-&lt;exec command="ls -l /tmp &gt; foo.out" escape="false" /&gt;</programlisting>
+&lt;exec executable="ls" escape="false">
+    &lt;arg line="-l /tmp &gt; foo.out"/&gt;
+&lt;/exec&gt;</programlisting>
     </sect2>
     <sect2 role="nestedtags">
         <title>Supported Nested Tags</title>
