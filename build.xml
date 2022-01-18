@@ -220,13 +220,13 @@
                         <include name="*"/>
                     </fileset>
                 </copy>
-                <exec executable="${xsltproc}" checkreturn="true" passthru="true" dir="./">
+                <exec executable="${xsltproc}" logoutput="true" checkreturn="true" passthru="true" dir="./">
                     <arg line="--xinclude -o '${output.dir}/${outdir}/' ${dbxsl.dir}/${xslformat}.xsl ${master.document}"/>
                 </exec>
                 <if>
                     <equals arg1="${flag.tidy}" arg2="1"/>
                     <then>
-                        <exec executable="${tidy}">
+                        <exec executable="${tidy}" logoutput="true">
                             <arg line="-m -utf8 ${output.dir}/${outdir}/index.html"/>
                         </exec>
                     </then>
@@ -277,10 +277,10 @@
                     <property name="dir" value="hlhtml"/>
                 </phingcall>
                 <!-- We first need to flatten the master file since Saxon doesn't handle XInclude -->
-                <exec executable="${xmllint}">
+                <exec executable="${xmllint}" logoutput="true" checkreturn="true">
                     <arg line="--xinclude ${master.document} > ${output.dir}/hlhtml/_flatten.xml"/>
                 </exec>
-                <exec dir="${output.dir}/hlhtml/" executable="${phing.dir}/scripts/hlsaxon" checkreturn="true">
+                <exec dir="${output.dir}/hlhtml/" executable="${phing.dir}/scripts/hlsaxon" logoutput="true" checkreturn="true">
                     <arg line="_flatten.xml ${phing.dir}/${dbxsl.dir}/hl-html.xsl"/>
                 </exec>
                 <delete file="${output.dir}/hlhtml/_flatten.xml"/> 
@@ -313,13 +313,13 @@
             <then>
 	       <phingcall target="_copy_fo_images"/>
                 <mkdir dir="${output.dir}/hlpdf"/>
-                <exec executable="${xmllint}">
+                <exec executable="${xmllint}" logoutput="true" checkreturn="true">
 		            <arg line="--xinclude ${master.document} > ${output.dir}/hlpdf/_flatten.xml"/>
 		        </exec>
-                <exec dir="${output.dir}/hlpdf/" executable="${phing.dir}/scripts/hlsaxon" checkreturn="true">
+                <exec dir="${output.dir}/hlpdf/" executable="${phing.dir}/scripts/hlsaxon" logoutput="true" checkreturn="true">
                     <arg line="-o manual.fo _flatten.xml ${phing.dir}/${dbxsl.dir}/hl-fo.xsl"/>
                 </exec>
-                <exec dir="${output.dir}/hlpdf/" executable="${fop}" checkreturn="true">
+                <exec dir="${output.dir}/hlpdf/" executable="${fop}" logoutput="true" checkreturn="true">
 		            <arg line="manual.fo -pdf manual.pdf"/>
                 </exec>
                 <delete file="${output.dir}/hlpdf/_flatten.xml"/>
@@ -346,7 +346,7 @@
             </not>
             <then>
                 <mkdir dir="${output.dir}/epub"/>
-                <exec executable="${dbtoepub}" checkreturn="true">
+                <exec executable="${dbtoepub}" logoutput="true" checkreturn="true">
                     <arg line="-o '${output.dir}/epub/manual.epub' -s ${phing.dir}/${dbxsl.dir}/epub.xsl -c ${phing.dir}/${css.style} ${phing.dir}/${master.document}"/>
                 </exec>
             </then>
