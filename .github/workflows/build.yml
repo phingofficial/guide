@@ -27,10 +27,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
-          tools: phing:3.0.0-alpha4
+          tools: phing:3.0.0-rc2
 
       - name: Build documentation
-        run: phing
+        run: phing -debug
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
