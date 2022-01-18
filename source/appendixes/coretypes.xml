@@ -324,14 +324,6 @@ the large, complex Bar project.
                 must have a <literal>name</literal> attribute that contains the pattern to
                 include/exclude.</para>
         </sect2>
-        <sect2 role="related">
-            <title>Related types</title>
-            <itemizedlist>
-                <listitem>
-                    <link linkend="PearPackageFileSet">pearpackagefileset</link>
-                </listitem>
-            </itemizedlist>
-        </sect2>
     </sect1>
     <sect1 role="typedef" xml:id="DirSet">
         <title>DirSet</title>
@@ -481,14 +473,6 @@ the large, complex Bar project.
             <para>The <literal>&lt;include></literal> and the <literal>&lt;exclude></literal> tags
                 must have a <literal>name</literal> attribute that contains the pattern to
                 include/exclude.</para>
-        </sect2>
-        <sect2 role="related">
-            <title>Related types</title>
-            <itemizedlist>
-                 <listitem>
-                      <link linkend="PearPackageFileSet">pearpackagefileset</link>
-                 </listitem>
-            </itemizedlist>
         </sect2>
     </sect1>
     <sect1 role="typedef" xml:id="PatternSet">

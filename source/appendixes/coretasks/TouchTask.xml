@@ -157,7 +157,7 @@
                 </para>
                 <para>
                     <literal>
-                        <link linkend="Mapper">mapper</link>
+                        <link linkend="app.coremappers">mapper</link>
                     </literal>
                 </para>
             </listitem>

@@ -117,7 +117,7 @@
         <title>Supported Nested Tags</title>
         <itemizedlist>
             <listitem>
-                <para><literal><link linkend="Path">path</link></literal></para>
+                <para><literal><link linkend="path">path</link></literal></para>
             </listitem>
             <listitem>
                 <para><literal><link linkend="DirSet">dirset</link></literal></para>

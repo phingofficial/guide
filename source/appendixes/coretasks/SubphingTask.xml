@@ -139,7 +139,7 @@
             <listitem>
                 <para>
                     <literal>
-                        <link linkend="Path">buildpath</link>
+                        <link linkend="path">buildpath</link>
                     </literal>
                 </para>
             </listitem>
