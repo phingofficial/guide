@@ -9,8 +9,6 @@
                 <literal>rst2html</literal>, <literal>rst2latex</literal>,
                 <literal>rst2man</literal>, <literal>rst2odt</literal>, <literal>rst2s5</literal>,
                 <literal>rst2xml</literal>.</para>
-        <para> Homepage: <link xlink:href="https://gitorious.org/phing/rsttask">https://gitorious.org/phing/rsttask</link>
-        </para>
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
