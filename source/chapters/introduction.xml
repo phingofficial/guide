@@ -96,15 +96,9 @@
             <listitem>
                 <para>Read this manual to understand <acronym>Phing</acronym> ;-)</para>
             </listitem>
-              <listitem>
-                <para>Go to <link xlink:href="http://phing.tigris.org"
-                        >http://phing.tigris.org</link> and subscribe to the <literal>Phing
-                        dev</literal> mailing list (this is usually a low volume, high quality
-                    mailing list)</para>
-            </listitem>
             <listitem>
-                <para>Visit the Phing <link xlink:href="http://www.phing.info/"
-                    >website (http://www.phing.info/)</link> and look for open bugs / tickets</para>
+                <para>Visit the Phing <link xlink:href="https://www.phing.info/"
+                    >website (https://www.phing.info/)</link></para>
             </listitem>
             <listitem>
                 <para>...and of course, start to actively participate in the development by forking
