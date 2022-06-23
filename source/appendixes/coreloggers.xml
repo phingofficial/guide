@@ -254,6 +254,13 @@ AnsiColorLogger.DEBUG_COLOR=01;34</programlisting>
     <sect1 role="loggerdef" xml:id="MonologListener">
         <title>MonologListener</title>
         <para>Listener which sends events to Monolog.</para>
+        <para>To use the MonologListener, start Phing with this command:
+            <literal>phing -listener "Phing\\Listener\\MonologListener"</literal>
+        </para>
+        <para>
+            Configuration is not (yet) implemented, but you could easily extend the existing MonologListener
+            with your own implementation. Or better yet, send us a PR :-)
+        </para>
     </sect1>
 
 </appendix>
