@@ -26,6 +26,9 @@
         </para>
         <warning><para>This task is highly experimental, and will only work on *nix machines
             that have the PHP <literal>pcntl</literal> extension installed.</para></warning>
+        <warning><para>In some cases, such as when running this task from the Phing's <literal>.phar</literal> bundle,
+            stability issues can occur. See <link xlink:href="https://github.com/phingofficial/guide/issues/51">this issue</link>
+            for more details.</para></warning>
         <table>
             <title>Attributes</title>
             <tgroup cols="5">
