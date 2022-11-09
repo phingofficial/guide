@@ -56,7 +56,6 @@
     <xi:include href="coretasks/PhpEvalTask.xml" parse="xml"/>
     <xi:include href="coretasks/PhpLintTask.xml" parse="xml"/>
     <xi:include href="coretasks/PropertyCopy.xml" parse="xml"/>
-    <xi:include href="coretasks/PropertyPromptTask.xml" parse="xml"/>
     <xi:include href="coretasks/PropertyRegexTask.xml" parse="xml"/>
     <xi:include href="coretasks/PropertySelector.xml" parse="xml"/>
     <xi:include href="coretasks/PropertyTask.xml" parse="xml"/>
