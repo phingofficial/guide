@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>B.67 TstampTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretasks.html" title="Appendix B. Core tasks"><link rel="prev" href="TryCatchTask.html" title="B.66 TryCatchTask"><link rel="next" href="TypedefTask.html" title="B.68 TypedefTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.67 TstampTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><th width="60%" align="center">Appendix B. Core tasks</th><td width="20%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="TstampTask"></a>B.67 TstampTask</h2></div></div></div>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>B.66 TstampTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretasks.html" title="Appendix B. Core tasks"><link rel="prev" href="TryCatchTask.html" title="B.65 TryCatchTask"><link rel="next" href="TypedefTask.html" title="B.67 TypedefTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.66 TstampTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><th width="60%" align="center">Appendix B. Core tasks</th><td width="20%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="TstampTask"></a>B.66 TstampTask</h2></div></div></div>
     
     <p>Sets the <code class="literal">DSTAMP</code>, <code class="literal">TSTAMP</code>, and <code class="literal">TODAY</code>properties in the
         current project. By default, the <code class="literal">DSTAMP</code> property is in the format <code class="literal">"%Y%m%d"</code>,
@@ -15,7 +15,7 @@
         phing.tstamp.now.iso you could also specify that value in DateTime compatible format. If you specify a value in
         an invalid format an INFO message will be logged and the value will be ignored.
     </p>
-    <div class="table"><a name="idp7766"></a><p class="formal-object-title"><span class="label">Table B.71: </span><span class="title">Attributes</span></p><div class="table-contents">
+    <div class="table"><a name="idp7701"></a><p class="formal-object-title"><span class="label">Table B.70: </span><span class="title">Attributes</span></p><div class="table-contents">
         
         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
                         <code class="literal">prefix</code>
@@ -23,7 +23,7 @@
                         <code class="literal">String</code>
                     </td><td>Prefix used for all properties set.</td><td>n/a</td><td>No</td></tr></tbody></table>
     </div></div><br class="table-break">
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7790"></a>B.67.1 Examples</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7725"></a>B.66.1 Examples</h3></div></div></div>
         
         <pre class="programlisting">&lt;tstamp/&gt;</pre>
         <p>sets the standard DSTAMP, TSTAMP, and TODAY properties according to the default formats.</p>
@@ -39,7 +39,7 @@
             start.TODAY.
         </p>
     </div>
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7798"></a>B.67.2 Supported Nested Tags</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7733"></a>B.66.2 Supported Nested Tags</h3></div></div></div>
         
         <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                 <p>
@@ -51,7 +51,7 @@
                 </p>
             </li></ul></div>
 
-        <div class="table"><a name="idp7808"></a><p class="formal-object-title"><span class="label">Table B.72: </span><span class="title">Attributes</span></p><div class="table-contents">
+        <div class="table"><a name="idp7743"></a><p class="formal-object-title"><span class="label">Table B.71: </span><span class="title">Attributes</span></p><div class="table-contents">
             
             <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
                             <code class="literal">property</code>
@@ -76,4 +76,4 @@
                         </td><td>The timezone to use for displaying time.</td><td>n/a</td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
     </div>
-</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.coretasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B.66 TryCatchTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.68 TypedefTask</td></tr></table></div></body></html>
+</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.coretasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B.65 TryCatchTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.67 TypedefTask</td></tr></table></div></body></html>
