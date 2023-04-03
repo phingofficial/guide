@@ -5,20 +5,21 @@
 <sect1 role="taskdef" xml:id="TstampTask" xmlns="http://docbook.org/ns/docbook"
        xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
     <title>TstampTask</title>
-    <para>Sets the <literal>DSTAMP</literal>, <literal>TSTAMP</literal>, and <literal>TODAY</literal>properties in the
-        current project. By default, the <literal>DSTAMP</literal> property is in the format <literal>"%Y%m%d"</literal>,
-        <literal>TSTAMP</literal> is in the format <literal>"%H%M"</literal>, and <literal>TODAY</literal> is in the
-        format <literal>"%B %d %Y"</literal>. Use the nested <literal>&lt;format&gt;</literal> element to specify a different
-        format.
+    <para>Sets the <literal>DSTAMP</literal>, <literal>TSTAMP</literal>, and <literal>TODAY</literal> properties in the
+        current project. By default, the <literal>DSTAMP</literal> property is in the format
+        <literal>"yyyyMMdd"</literal>, <literal>TSTAMP</literal> is in the format <literal>"HHmm"</literal>,
+        finally <literal>TODAY</literal> contains current locale-sensitive date, for example "March 13, 2023".
+        Use the nested <literal>&lt;format&gt;</literal> element to specify a different format.
     </para>
     <para>These properties can be used in the build-file, for instance, to create time-stamped filenames, or used to
         replace placeholder tags inside documents to indicate, for example, the release date. The best place for this
         task is probably in an initialization target.
     </para>
-    <para>the magic property phing.tstamp.now can be used to specify a fixed date value in order to create reproducible
-        builds. Its value must be a number and is interpreted as seconds since the epoch (midnight 1970-01-01). With
-        phing.tstamp.now.iso you could also specify that value in DateTime compatible format. If you specify a value in
-        an invalid format an INFO message will be logged and the value will be ignored.
+    <para>The magic property <literal>phing.tstamp.now</literal> can be used to specify a fixed date value in order to
+        create reproducible builds. Its value must be a number and is interpreted as seconds since the epoch (midnight
+        1970-01-01). With <literal>phing.tstamp.now.iso</literal> you could also specify that value in DateTime
+        compatible format. If you specify a value in an invalid format an INFO message will be logged and the value will
+        be ignored.
     </para>
     <table>
         <title>Attributes</title>
@@ -57,15 +58,15 @@
         <programlisting language="xml">&lt;tstamp/&gt;</programlisting>
         <para>sets the standard DSTAMP, TSTAMP, and TODAY properties according to the default formats.</para>
         <programlisting language="xml">&lt;tstamp&gt;
-    &lt;format property="DATE" pattern="%c" locale="nl_NL"/&gt;
-&lt;/tstamp&gt;
+            &lt;format property="DAY" pattern="EEEE" locale="nl_NL"/&gt;
+            &lt;/tstamp&gt;
         </programlisting>
-        <para>sets the standard properties as well as the property DATE with the date/time pattern "%c" using the Dutch
-            locale.
+        <para>sets the standard properties as well as the property <literal>DAY</literal> with the pattern "EEEE"
+            (day of the week) using the Dutch locale.
         </para>
         <programlisting language="xml">&lt;tstamp prefix="start"/&gt;</programlisting>
-        <para>sets three properties with the standard formats, prefixed with "start.": start.DSTAMP, start.TSTAMP, and
-            start.TODAY.
+        <para>sets three properties with the standard formats, prefixed with "start.": <literal>start.DSTAMP</literal>,
+            <literal>start.TSTAMP</literal>, and <literal>start.TODAY</literal>.
         </para>
     </sect2>
     <sect2 role="nestedtags">
@@ -76,8 +77,7 @@
                     <literal>format</literal>
                 </para>
                 <para>The <literal>Tstamp</literal> task supports a <literal>&lt;format&gt;</literal> nested element
-                    that allows a property to be set to the current date and time in a given format. The date/time
-                    patterns are as defined in the PHP <literal>strftime()</literal> function.
+                    that allows a property to be set to the current date and time in a given format.
                 </para>
             </listitem>
         </itemizedlist>
@@ -118,9 +118,7 @@
                         <entry>
                             <literal role="type">String</literal>
                         </entry>
-                        <entry>The date/time pattern to be used. The values are as defined by the PHP strftime()
-                            function.
-                        </entry>
+                        <entry>The date/time pattern to be used, pattern must follow ICU syntax.</entry>
                         <entry>n/a</entry>
                         <entry>Yes</entry>
                     </row>
@@ -131,8 +129,7 @@
                         <entry>
                             <literal role="type">String</literal>
                         </entry>
-                        <entry>The locale used to create date/time string. For more information see the PHP setlocale()
-                            function.
+                        <entry>The locale used to create date/time string.
                         </entry>
                         <entry>n/a</entry>
                         <entry>No</entry>
@@ -151,5 +148,239 @@
                 </tbody>
             </tgroup>
         </table>
+    </sect2>
+    <sect2 role="nestedtags">
+        <title>ICU syntax</title>
+        <para>@todo: The pattern characters from xxx table can be used in <literal>pattern</literal> attribute to build
+            custom
+            date/time strings.
+        </para>
+        <table>
+            <title>ICU syntax</title>
+            <tgroup cols="4">
+                <thead>
+                    <row>
+                        <entry>Symbol</entry>
+                        <entry>Meaning</entry>
+                        <entry>Pattern</entry>
+                        <entry>Example Output</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>
+                            <literal>y</literal>
+                        </entry>
+                        <entry>year</entry>
+                        <entry>
+                            <literal>yy</literal>
+                            <sbr/>
+                            <literal>y</literal>
+                            or
+                            <literal>yyyy</literal>
+                        </entry>
+                        <entry>
+                            96
+                            <sbr/>
+                            1996
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>M</literal>
+                        </entry>
+                        <entry>month in year</entry>
+                        <entry>
+                            <literal>M</literal>
+                            <sbr/>
+                            <literal>MM</literal>
+                            <sbr/>
+                            <literal>MMMM</literal>
+                        </entry>
+                        <entry>
+                            9
+                            <sbr/>
+                            09
+                            <sbr/>
+                            September
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>d</literal>
+                        </entry>
+                        <entry>day in month</entry>
+                        <entry>
+                            <literal>d</literal>
+                            <sbr/>
+                            <literal>dd</literal>
+                        </entry>
+                        <entry>
+                            2
+                            <sbr/>
+                            02
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>E</literal>
+                        </entry>
+                        <entry>day of week</entry>
+                        <entry>
+                            <literal>E</literal>,
+                            <literal>EE</literal>, or
+                            <literal>EEE</literal>
+                            <sbr/>
+                            <literal>EEEE</literal>
+                        </entry>
+                        <entry>
+                            Tue
+                            <sbr/>
+                            Tuesday
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>a</literal>
+                        </entry>
+                        <entry>AM or PM</entry>
+                        <entry>
+                            <literal>a</literal>,
+                            <literal>aa</literal>, or
+                            <literal>aaa</literal>
+                            <sbr/>
+                            <literal>aaaa</literal>
+                        </entry>
+                        <entry>
+                            PM [abbrev]
+                            <sbr/>
+                            PM [wide]
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>h</literal>
+                        </entry>
+                        <entry>hour in am/pm (1~12)</entry>
+                        <entry>
+                            <literal>h</literal>
+                            <sbr/>
+                            <literal>hh</literal>
+                        </entry>
+                        <entry>
+                            7
+                            <sbr/>
+                            07
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>H</literal>
+                        </entry>
+                        <entry>hour in day (0~23)</entry>
+                        <entry>
+                            <literal>H</literal>
+                            <sbr/>
+                            <literal>HH</literal>
+                        </entry>
+                        <entry>
+                            0
+                            <sbr/>
+                            00
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>m</literal>
+                        </entry>
+                        <entry>minute in hour</entry>
+                        <entry>
+                            <literal>m</literal>
+                            <sbr/>
+                            <literal>mm</literal>
+                        </entry>
+                        <entry>
+                            4
+                            <sbr/>
+                            04
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>s</literal>
+                        </entry>
+                        <entry>seconds in minute</entry>
+                        <entry>
+                            <literal>s</literal>
+                            <sbr/>
+                            <literal>ss</literal>
+                        </entry>
+                        <entry>
+                            5
+                            <sbr/>
+                            05
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>Z</literal>
+                        </entry>
+                        <entry>
+                            Time Zone: ISO8601 basic hms? / RFC 822
+                            <sbr/>
+                            Time Zone: long localized GMT (=OOOO)
+                            <sbr/>
+                            Time Zone: ISO8601 extended hms? (=XXXXX)
+                        </entry>
+                        <entry>
+                            <literal>Z</literal>,
+                            <literal>ZZ</literal>, or
+                            <literal>ZZZ</literal>
+                            <sbr/>
+                            <literal>ZZZZ</literal>
+                            <sbr/>
+                            <literal>ZZZZZ</literal>
+                        </entry>
+                        <entry>
+                            -0800
+                            <sbr/>
+                            GMT-08:00
+                            <sbr/>
+                            -08:00, -07:52:58, Z
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>'</literal>
+                        </entry>
+                        <entry>escape for text</entry>
+                        <entry>
+                            <literal>'</literal>
+                        </entry>
+                        <entry>
+                            (nothing)
+                        </entry>
+                    </row>
+                    <row>
+                        <entry>
+                            <literal>' '</literal>
+                        </entry>
+                        <entry>two single quotes produce one</entry>
+                        <entry>
+                            <literal>' '</literal>
+                        </entry>
+                        <entry>
+                            '
+                        </entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+        <note>
+            <para>ICU syntax was introduced in Phing 3, if you are using an older version then you must use
+                <link xlink:href="https://www.php.net/manual/en/function.strftime.php" role="extern">strftime</link>
+                format syntax.
+            </para>
+        </note>
     </sect2>
 </sect1>
