@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>D.4 FileSet</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretypes.html" title="Appendix D. Core Types"><link rel="prev" href="FileList.html" title="D.3 FileList"><link rel="next" href="DirSet.html" title="D.5 DirSet"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">D.4 FileSet</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="FileList.html">Prev</a> </td><th width="60%" align="center">Appendix D. Core Types</th><td width="20%" align="right"> <a accesskey="n" href="DirSet.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="FileSet"></a>D.4 FileSet</h2></div></div></div>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>D.4 FileSet</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretypes.html" title="Appendix D. Core Types"><link rel="prev" href="FileList.html" title="D.3 FileList"><link rel="next" href="DirSet.html" title="D.5 DirSet"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">D.4 FileSet</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="FileList.html">Prev</a> </td><th width="60%" align="center">Appendix D. Core Types</th><td width="20%" align="right"> <a accesskey="n" href="DirSet.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="FileSet"></a>D.4 FileSet</h2></div></div></div>
         
 
         <p> FileSets offer an easy and straightforward way to include files. The tag supports
@@ -9,7 +9,7 @@
             one asterisk (<code class="literal">*</code>) maps to a part of a file/directory name within a
             directory level. Two asterisks (<code class="literal">**</code>) may include above the "border" of
             the directory separator.</p>
-        <div class="table"><a name="idp20165"></a><p class="formal-object-title"><span class="label">Table D.3: </span><span class="title"> Attributes for the <code class="literal">&lt;fileset&gt;</code> tag </span></p><div class="table-contents">
+        <div class="table"><a name="idp20316"></a><p class="formal-object-title"><span class="label">Table D.3: </span><span class="title"> Attributes for the <code class="literal">&lt;fileset&gt;</code> tag </span></p><div class="table-contents">
             
             <table class="table" summary=" Attributes for the &lt;fileset&gt; tag " border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td><code class="literal">dir</code></td><td><code class="literal">String</code></td><td>The directory, the paths given in
                                 <code class="literal">include</code>/<code class="literal">exclude</code> are relative
@@ -52,7 +52,7 @@
                         files that are directly in the base directory of the file set.</p>
                 </li></ul></div>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20300"></a>D.4.2 Usage Examples</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20451"></a>D.4.2 Usage Examples</h3></div></div></div>
             
             <pre class="programlisting">&lt;fileset dir="/etc" &gt;
                 &lt;include name="httpd/**" /&gt;
@@ -75,7 +75,7 @@
 &lt;/target&gt;</pre>
             <p> This will exclude all files from a file named test. Each line of this file is taken to be an exclude pattern.</p>
         </div>
-        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20307"></a>D.4.3 Nested tags</h3></div></div></div>
+        <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20458"></a>D.4.3 Nested tags</h3></div></div></div>
             
             <p> The tags that are supported by <code class="literal">Fileset</code> are:</p>
             <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">

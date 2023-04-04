@@ -1,21 +1,22 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>B.66 TstampTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets V1.79.1"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretasks.html" title="Appendix B. Core tasks"><link rel="prev" href="TryCatchTask.html" title="B.65 TryCatchTask"><link rel="next" href="TypedefTask.html" title="B.67 TypedefTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.66 TstampTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><th width="60%" align="center">Appendix B. Core tasks</th><td width="20%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="TstampTask"></a>B.66 TstampTask</h2></div></div></div>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>B.66 TstampTask</title><link rel="stylesheet" type="text/css" href="book.css"><meta name="generator" content="DocBook XSL Stylesheets Vsnapshot"><link rel="home" href="index.html" title="Phing User Guide"><link rel="up" href="app.coretasks.html" title="Appendix B. Core tasks"><link rel="prev" href="TryCatchTask.html" title="B.65 TryCatchTask"><link rel="next" href="TypedefTask.html" title="B.67 TypedefTask"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B.66 TstampTask</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><th width="60%" align="center">Appendix B. Core tasks</th><td width="20%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="TstampTask"></a>B.66 TstampTask</h2></div></div></div>
     
-    <p>Sets the <code class="literal">DSTAMP</code>, <code class="literal">TSTAMP</code>, and <code class="literal">TODAY</code>properties in the
-        current project. By default, the <code class="literal">DSTAMP</code> property is in the format <code class="literal">"%Y%m%d"</code>,
-        <code class="literal">TSTAMP</code> is in the format <code class="literal">"%H%M"</code>, and <code class="literal">TODAY</code> is in the
-        format <code class="literal">"%B %d %Y"</code>. Use the nested <code class="literal">&lt;format&gt;</code> element to specify a different
-        format.
+    <p>Sets the <code class="literal">DSTAMP</code>, <code class="literal">TSTAMP</code>, and <code class="literal">TODAY</code> properties in the
+        current project. By default, the <code class="literal">DSTAMP</code> property is in the format
+        <code class="literal">"yyyyMMdd"</code>, <code class="literal">TSTAMP</code> is in the format <code class="literal">"HHmm"</code>,
+        finally <code class="literal">TODAY</code> contains locale-sensitive date, for example "March 13, 2023".
+        Use the nested <code class="literal">&lt;format&gt;</code> element to specify a different format.
     </p>
     <p>These properties can be used in the build-file, for instance, to create time-stamped filenames, or used to
         replace placeholder tags inside documents to indicate, for example, the release date. The best place for this
         task is probably in an initialization target.
     </p>
-    <p>the magic property phing.tstamp.now can be used to specify a fixed date value in order to create reproducible
-        builds. Its value must be a number and is interpreted as seconds since the epoch (midnight 1970-01-01). With
-        phing.tstamp.now.iso you could also specify that value in DateTime compatible format. If you specify a value in
-        an invalid format an INFO message will be logged and the value will be ignored.
+    <p>The magic property <code class="literal">phing.tstamp.now</code> can be used to specify a fixed date value in order to
+        create reproducible builds. Its value must be a number and is interpreted as seconds since the epoch (midnight
+        1970-01-01). With <code class="literal">phing.tstamp.now.iso</code> you could also specify that value in DateTime
+        compatible format. If you specify a value in an invalid format an INFO message will be logged and the value will
+        be ignored.
     </p>
-    <div class="table"><a name="idp7701"></a><p class="formal-object-title"><span class="label">Table B.70: </span><span class="title">Attributes</span></p><div class="table-contents">
+    <div class="table"><a name="idp7702"></a><p class="formal-object-title"><span class="label">Table B.70: </span><span class="title">Attributes</span></p><div class="table-contents">
         
         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
                         <code class="literal">prefix</code>
@@ -23,35 +24,33 @@
                         <code class="literal">String</code>
                     </td><td>Prefix used for all properties set.</td><td>n/a</td><td>No</td></tr></tbody></table>
     </div></div><br class="table-break">
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7725"></a>B.66.1 Examples</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7726"></a>B.66.1 Examples</h3></div></div></div>
         
         <pre class="programlisting">&lt;tstamp/&gt;</pre>
         <p>sets the standard DSTAMP, TSTAMP, and TODAY properties according to the default formats.</p>
         <pre class="programlisting">&lt;tstamp&gt;
-    &lt;format property="DATE" pattern="%c" locale="nl_NL"/&gt;
-&lt;/tstamp&gt;
-        </pre>
-        <p>sets the standard properties as well as the property DATE with the date/time pattern "%c" using the Dutch
-            locale.
+    &lt;format property="DAY" pattern="EEEE" locale="nl_NL"/&gt;
+&lt;/tstamp&gt;</pre>
+        <p>sets the standard properties as well as the property <code class="literal">DAY</code> with the pattern "EEEE"
+            (day of week) using the Dutch locale.
         </p>
         <pre class="programlisting">&lt;tstamp prefix="start"/&gt;</pre>
-        <p>sets three properties with the standard formats, prefixed with "start.": start.DSTAMP, start.TSTAMP, and
-            start.TODAY.
+        <p>sets three properties with the standard formats, prefixed with "start.": <code class="literal">start.DSTAMP</code>,
+            <code class="literal">start.TSTAMP</code>, and <code class="literal">start.TODAY</code>.
         </p>
     </div>
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7733"></a>B.66.2 Supported Nested Tags</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7738"></a>B.66.2 Supported Nested Tags</h3></div></div></div>
         
         <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                 <p>
                     <code class="literal">format</code>
                 </p>
                 <p>The <code class="literal">Tstamp</code> task supports a <code class="literal">&lt;format&gt;</code> nested element
-                    that allows a property to be set to the current date and time in a given format. The date/time
-                    patterns are as defined in the PHP <code class="literal">strftime()</code> function.
+                    that allows a property to be set to the current date and time in a given format.
                 </p>
             </li></ul></div>
 
-        <div class="table"><a name="idp7743"></a><p class="formal-object-title"><span class="label">Table B.71: </span><span class="title">Attributes</span></p><div class="table-contents">
+        <div class="table"><a name="idp7747"></a><p class="formal-object-title"><span class="label">Table B.71: </span><span class="title">Attributes</span></p><div class="table-contents">
             
             <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
                             <code class="literal">property</code>
@@ -61,19 +60,168 @@
                             <code class="literal">pattern</code>
                         </td><td>
                             <code class="literal">String</code>
-                        </td><td>The date/time pattern to be used. The values are as defined by the PHP strftime()
-                            function.
-                        </td><td>n/a</td><td>Yes</td></tr><tr><td>
+                        </td><td>The date/time pattern to be used, pattern must follow ICU syntax.</td><td>n/a</td><td>Yes</td></tr><tr><td>
                             <code class="literal">locale</code>
                         </td><td>
                             <code class="literal">String</code>
-                        </td><td>The locale used to create date/time string. For more information see the PHP setlocale()
-                            function.
+                        </td><td>The locale used to create date/time string.
                         </td><td>n/a</td><td>No</td></tr><tr><td>
                             <code class="literal">timezone</code>
                         </td><td>
                             <code class="literal">String</code>
                         </td><td>The timezone to use for displaying time.</td><td>n/a</td><td>No</td></tr></tbody></table>
         </div></div><br class="table-break">
+    </div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp7795"></a>B.66.3 ICU syntax</h3></div></div></div>
+        
+        <p>ICU syntax replaces string of characters with proper date and time data. Please refer to official ICU
+            documentation to see the complete <a class="ulink" href="https://unicode-org.github.io/icu/userguide/format_parse/datetime/#date-field-symbol-table" target="_top">
+                Date/Time Format Syntax</a> reference.
+        </p>
+        <div class="table"><a name="idp7799"></a><p class="formal-object-title"><span class="label">Table B.72: </span><span class="title">ICU syntax</span></p><div class="table-contents">
+            
+            <table class="table" summary="ICU syntax" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>Symbol</th><th>Meaning</th><th>Pattern</th><th>Example Output</th></tr></thead><tbody><tr><td>
+                            <code class="literal">y</code>
+                        </td><td>year</td><td>
+                            <code class="literal">yy</code>
+                            <br>
+                            <code class="literal">y</code>
+                            or
+                            <code class="literal">yyyy</code>
+                        </td><td>
+                            96
+                            <br>
+                            1996
+                        </td></tr><tr><td>
+                            <code class="literal">M</code>
+                        </td><td>month in year</td><td>
+                            <code class="literal">M</code>
+                            <br>
+                            <code class="literal">MM</code>
+                            <br>
+                            <code class="literal">MMMM</code>
+                        </td><td>
+                            9
+                            <br>
+                            09
+                            <br>
+                            September
+                        </td></tr><tr><td>
+                            <code class="literal">d</code>
+                        </td><td>day in month</td><td>
+                            <code class="literal">d</code>
+                            <br>
+                            <code class="literal">dd</code>
+                        </td><td>
+                            2
+                            <br>
+                            02
+                        </td></tr><tr><td>
+                            <code class="literal">E</code>
+                        </td><td>day of week</td><td>
+                            <code class="literal">E</code>,
+                            <code class="literal">EE</code>, or
+                            <code class="literal">EEE</code>
+                            <br>
+                            <code class="literal">EEEE</code>
+                        </td><td>
+                            Tue
+                            <br>
+                            Tuesday
+                        </td></tr><tr><td>
+                            <code class="literal">a</code>
+                        </td><td>AM or PM</td><td>
+                            <code class="literal">a</code>,
+                            <code class="literal">aa</code>, or
+                            <code class="literal">aaa</code>
+                            <br>
+                            <code class="literal">aaaa</code>
+                        </td><td>
+                            PM [abbrev]
+                            <br>
+                            PM [wide]
+                        </td></tr><tr><td>
+                            <code class="literal">h</code>
+                        </td><td>hour in am/pm (1~12)</td><td>
+                            <code class="literal">h</code>
+                            <br>
+                            <code class="literal">hh</code>
+                        </td><td>
+                            7
+                            <br>
+                            07
+                        </td></tr><tr><td>
+                            <code class="literal">H</code>
+                        </td><td>hour in day (0~23)</td><td>
+                            <code class="literal">H</code>
+                            <br>
+                            <code class="literal">HH</code>
+                        </td><td>
+                            0
+                            <br>
+                            00
+                        </td></tr><tr><td>
+                            <code class="literal">m</code>
+                        </td><td>minute in hour</td><td>
+                            <code class="literal">m</code>
+                            <br>
+                            <code class="literal">mm</code>
+                        </td><td>
+                            4
+                            <br>
+                            04
+                        </td></tr><tr><td>
+                            <code class="literal">s</code>
+                        </td><td>seconds in minute</td><td>
+                            <code class="literal">s</code>
+                            <br>
+                            <code class="literal">ss</code>
+                        </td><td>
+                            5
+                            <br>
+                            05
+                        </td></tr><tr><td>
+                            <code class="literal">Z</code>
+                        </td><td>
+                            Time Zone: ISO8601 basic hms? / RFC 822
+                            <br>
+                            Time Zone: long localized GMT (=OOOO)
+                            <br>
+                            Time Zone: ISO8601 extended hms? (=XXXXX)
+                        </td><td>
+                            <code class="literal">Z</code>,
+                            <code class="literal">ZZ</code>, or
+                            <code class="literal">ZZZ</code>
+                            <br>
+                            <code class="literal">ZZZZ</code>
+                            <br>
+                            <code class="literal">ZZZZZ</code>
+                        </td><td>
+                            -0800
+                            <br>
+                            GMT-08:00
+                            <br>
+                            -08:00, -07:52:58, Z
+                        </td></tr><tr><td>
+                            <code class="literal">'</code>
+                        </td><td>escape for text</td><td>
+                            <code class="literal">'</code>
+                        </td><td>
+                            (nothing)
+                        </td></tr><tr><td>
+                            <code class="literal">' '</code>
+                        </td><td>two single quotes produce one</td><td>
+                            <code class="literal">' '</code>
+                        </td><td>
+                            '
+                        </td></tr></tbody></table>
+        </div></div><br class="table-break">
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+            <p>ICU syntax was introduced in <span class="bold"><strong>Phing 3</strong></span>, if you are using an older
+                version then you must use
+                <a class="ulink" href="https://www.php.net/manual/en/function.strftime.php" target="_top">strftime</a>
+                format syntax.
+            </p>
+        </div>
     </div>
 </div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="TryCatchTask.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="app.coretasks.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="TypedefTask.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B.65 TryCatchTask </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> B.67 TypedefTask</td></tr></table></div></body></html>
