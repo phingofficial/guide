@@ -8,7 +8,7 @@
     <para>Sets the <literal>DSTAMP</literal>, <literal>TSTAMP</literal>, and <literal>TODAY</literal> properties in the
         current project. By default, the <literal>DSTAMP</literal> property is in the format
         <literal>"yyyyMMdd"</literal>, <literal>TSTAMP</literal> is in the format <literal>"HHmm"</literal>,
-        finally <literal>TODAY</literal> contains current locale-sensitive date, for example "March 13, 2023".
+        finally <literal>TODAY</literal> contains locale-sensitive date, for example "March 13, 2023".
         Use the nested <literal>&lt;format&gt;</literal> element to specify a different format.
     </para>
     <para>These properties can be used in the build-file, for instance, to create time-stamped filenames, or used to
@@ -58,11 +58,10 @@
         <programlisting language="xml">&lt;tstamp/&gt;</programlisting>
         <para>sets the standard DSTAMP, TSTAMP, and TODAY properties according to the default formats.</para>
         <programlisting language="xml">&lt;tstamp&gt;
-            &lt;format property="DAY" pattern="EEEE" locale="nl_NL"/&gt;
-            &lt;/tstamp&gt;
-        </programlisting>
+    &lt;format property="DAY" pattern="EEEE" locale="nl_NL"/&gt;
+&lt;/tstamp&gt;</programlisting>
         <para>sets the standard properties as well as the property <literal>DAY</literal> with the pattern "EEEE"
-            (day of the week) using the Dutch locale.
+            (day of week) using the Dutch locale.
         </para>
         <programlisting language="xml">&lt;tstamp prefix="start"/&gt;</programlisting>
         <para>sets three properties with the standard formats, prefixed with "start.": <literal>start.DSTAMP</literal>,
@@ -151,9 +150,11 @@
     </sect2>
     <sect2 role="nestedtags">
         <title>ICU syntax</title>
-        <para>@todo: The pattern characters from xxx table can be used in <literal>pattern</literal> attribute to build
-            custom
-            date/time strings.
+        <para>ICU syntax replaces string of characters with proper date and time data. Please refer to official ICU
+            documentation to see the complete <ulink
+                    url="https://unicode-org.github.io/icu/userguide/format_parse/datetime/#date-field-symbol-table"
+                    role="extern">
+                Date/Time Format Syntax</ulink> reference.
         </para>
         <table>
             <title>ICU syntax</title>
@@ -377,8 +378,9 @@
             </tgroup>
         </table>
         <note>
-            <para>ICU syntax was introduced in Phing 3, if you are using an older version then you must use
-                <link xlink:href="https://www.php.net/manual/en/function.strftime.php" role="extern">strftime</link>
+            <para>ICU syntax was introduced in <emphasis role="bold">Phing 3</emphasis>, if you are using an older
+                version then you must use
+                <ulink url="https://www.php.net/manual/en/function.strftime.php" role="extern">strftime</ulink>
                 format syntax.
             </para>
         </note>
