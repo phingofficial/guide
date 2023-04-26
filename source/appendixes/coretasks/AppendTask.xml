@@ -12,6 +12,12 @@
         <literal>${process.outputfile}</literal>. This is a real example from the build file used to generate this book!
     </para>
 
+    <note>
+        <para>By default, whitespace is stripped from text that is appended to a file (matching the way the Concat task works in Ant).
+            This is because adding a nested text element may introduce additional (ignorable) whitespace. If you want to override this behavior,
+            set the <literal>skipsanitize</literal> attribute to <literal>true</literal>.</para>
+    </note>
+
     <table>
         <title>Attributes</title>
         <tgroup cols="5">
@@ -131,6 +137,19 @@
                         The default is platform dependent. For Unix platforms, the default is "lf".
                         For DOS based systems (including Windows), the default is "crlf".
                         For Mac OS, the default is "cr".
+                    </entry>
+                    <entry>n/a</entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>skipsanitize</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>
+                        Specifies whether to skip sanitizing text (i.e., stripping spaces and newlines).
                     </entry>
                     <entry>n/a</entry>
                     <entry>No</entry>
