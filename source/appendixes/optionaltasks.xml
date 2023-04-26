@@ -67,8 +67,6 @@
     <xi:include href="optionaltasks/NotifySendTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/OpenTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PDOSQLExecTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/PHPCPDTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/PHPLocTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPMDTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPStanTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/PHPUnitReport.xml" parse="xml"/>
