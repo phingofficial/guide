@@ -46,6 +46,13 @@
                         <entry>false</entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>passthru</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to echo PHPStan's output on the console.</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
