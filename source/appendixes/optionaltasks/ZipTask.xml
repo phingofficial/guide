@@ -67,6 +67,14 @@
                         <entry><literal>false</literal></entry>
                         <entry>No</entry>
                     </row>
+                    <row>
+                        <entry><literal>savefileattributes</literal></entry>
+                        <entry><literal role="type">Boolean</literal></entry>
+                        <entry>Whether to save extra file attributes. (Extended Attributes on OS/2,
+                            uid/gid and file times on Unix)</entry>
+                        <entry><literal>false</literal></entry>
+                        <entry>No</entry>
+                    </row>
                 </tbody>
             </tgroup>
         </table>
