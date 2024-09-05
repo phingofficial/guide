@@ -283,16 +283,16 @@ the large, complex Bar project.
         <sect2>
             <title>Usage Examples</title>
             <programlisting language="xml">&lt;fileset dir="/etc" >
-                &lt;include name="httpd/**" />
-                &lt;include name="php.ini" />
-                &lt;/fileset>
+    &lt;include name="httpd/**" />
+    &lt;include name="php.ini" />
+&lt;/fileset>
 
-                &lt;fileset dir="/etc" >
-                &lt;patternset>
-                &lt;include name="**/*.php"/>
-                &lt;exclude name="**/*Test*"/>
-                &lt;/patternset>
-                &lt;/fileset></programlisting>
+&lt;fileset dir="/etc" >
+    &lt;patternset>
+        &lt;include name="**/*.php"/>
+        &lt;exclude name="**/*Test*"/>
+    &lt;/patternset>
+&lt;/fileset></programlisting>
             <para> This will include the apache configuration and PHP configuration file from
                 <literal>/etc</literal>.</para>
             <programlisting language="xml">&lt;fileset id="files" dir="${phing.dir}/etc">
