@@ -55,16 +55,16 @@
         <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp20186"></a>D.4.2 Usage Examples</h3></div></div></div>
             
             <pre class="programlisting">&lt;fileset dir="/etc" &gt;
-                &lt;include name="httpd/**" /&gt;
-                &lt;include name="php.ini" /&gt;
-                &lt;/fileset&gt;
+    &lt;include name="httpd/**" /&gt;
+    &lt;include name="php.ini" /&gt;
+&lt;/fileset&gt;
 
-                &lt;fileset dir="/etc" &gt;
-                &lt;patternset&gt;
-                &lt;include name="**/*.php"/&gt;
-                &lt;exclude name="**/*Test*"/&gt;
-                &lt;/patternset&gt;
-                &lt;/fileset&gt;</pre>
+&lt;fileset dir="/etc" &gt;
+    &lt;patternset&gt;
+        &lt;include name="**/*.php"/&gt;
+        &lt;exclude name="**/*Test*"/&gt;
+    &lt;/patternset&gt;
+&lt;/fileset&gt;</pre>
             <p> This will include the apache configuration and PHP configuration file from
                 <code class="literal">/etc</code>.</p>
             <pre class="programlisting">&lt;fileset id="files" dir="${phing.dir}/etc"&gt;
