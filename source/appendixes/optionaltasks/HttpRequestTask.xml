@@ -96,7 +96,7 @@
             <programlisting language="xml">&lt;http-request
    url="http://my-production.example.com/check-deployment.php"
    responseRegex="/Heartbeat/"
-   verbose"true"
+   verbose="true"
    observerEvents="connect, disconnect"/&gt;</programlisting>
             <para>Perform a HTTP request to the given URL and matching the response against the
                 given regex pattern. Enable detailed logging and log only the specified
@@ -108,7 +108,7 @@
                 of socket. Setting an additional header.</para>
             <programlisting language="xml">&lt;http-request
             url="http://my-production.example.com/check-deployment.php"
-            verbose"true"
+            verbose="true"
             method="POST"&gt;
               &lt;postparameter name="param1" value="value1" /&gt;
               &lt;postparameter name="param2" value="value2" /&gt;
