@@ -73,6 +73,17 @@
                 </row>
                 <row>
                     <entry>
+                        <literal>flags</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">String</literal>
+                    </entry>
+                    <entry>Regular expression flags</entry>
+                    <entry>n/a</entry>
+                    <entry>no</entry>
+                </row>
+                <row>
+                    <entry>
                         <literal>failonerror</literal>
                     </entry>
                     <entry>
