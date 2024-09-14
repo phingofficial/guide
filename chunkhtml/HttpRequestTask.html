@@ -19,7 +19,7 @@
             <pre class="programlisting">&lt;http-request
    url="http://my-production.example.com/check-deployment.php"
    responseRegex="/Heartbeat/"
-   verbose"true"
+   verbose="true"
    observerEvents="connect, disconnect"/&gt;</pre>
             <p>Perform a HTTP request to the given URL and matching the response against the
                 given regex pattern. Enable detailed logging and log only the specified
@@ -31,7 +31,7 @@
                 of socket. Setting an additional header.</p>
             <pre class="programlisting">&lt;http-request
             url="http://my-production.example.com/check-deployment.php"
-            verbose"true"
+            verbose="true"
             method="POST"&gt;
               &lt;postparameter name="param1" value="value1" /&gt;
               &lt;postparameter name="param2" value="value2" /&gt;
