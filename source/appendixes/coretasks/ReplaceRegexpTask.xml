@@ -71,6 +71,17 @@
                     <entry>n/a</entry>
                     <entry>Yes</entry>
                 </row>
+                <row>
+                    <entry>
+                        <literal>failonerror</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>If set to true, the task will fail on error</entry>
+                    <entry><literal>false</literal></entry>
+                    <entry>No</entry>
+                </row>
             </tbody>
         </tgroup>
     </table>
