@@ -263,4 +263,14 @@ AnsiColorLogger.DEBUG_COLOR=01;34</programlisting>
         </para>
     </sect1>
 
+    <sect1 role="loggerdef" xml:id="DisguiseLogger">
+        <title>DisguiseLogger</title>
+        <para>A logger which masks passwords in URI strings - i.e:
+            <literal>[echo] hide password from URI http://foo:*****@example.com/baz?one=two</literal>
+        </para>
+        <para>To use the DisguiseLogger, start Phing with this command:
+            <literal>phing -logger "Phing\\Listener\\DisguiseLogger"</literal>
+        </para>
+    </sect1>
+
 </appendix>
