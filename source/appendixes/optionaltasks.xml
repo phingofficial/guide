@@ -47,7 +47,6 @@
     <xi:include href="optionaltasks/HgRevertTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/HgTagTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/HgUpdateTask.xml" parse="xml"/>
-    <xi:include href="optionaltasks/HipchatTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/HttpGetTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/HttpRequestTask.xml" parse="xml"/>
     <xi:include href="optionaltasks/IniFileTask.xml" parse="xml"/>
