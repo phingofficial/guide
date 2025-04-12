@@ -6,7 +6,7 @@
         or <code class="literal">&lt;reference&gt;</code> Tags.
     </p>
 
-    <div class="table"><a name="idp5661"></a><p class="formal-object-title"><span class="label">Table B.41: </span><span class="title">Attributes</span></p><div class="table-contents">
+    <div class="table"><a name="id6996"></a><p class="formal-object-title"><span class="label">Table B.41: </span><span class="title">Attributes</span></p><div class="table-contents">
         
         <table class="table" summary="Attributes" border="1"><colgroup><col class="name"><col class="type"><col class="description"><col class="default"><col class="required"></colgroup><thead><tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th><th>Required</th></tr></thead><tbody><tr><td>
                         <code class="literal">inheritAll</code>
@@ -62,7 +62,7 @@
                         <code class="literal">false</code>
                     </td><td>No</td></tr></tbody></table>
     </div></div><br class="table-break">
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp5746"></a>B.40.1 Examples</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="id7081"></a>B.40.1 Examples</h3></div></div></div>
         
         <pre class="programlisting">&lt;!-- Call target "xslttest" from buildfile "alternativebuildfile.xml" --&gt;
 &lt;phing phingfile="alternativebuild.xml" inheritRefs="true" target="xslttest" /&gt;
@@ -74,7 +74,7 @@
 &lt;/phing&gt;
         </pre>
     </div>
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp5749"></a>B.40.2 Supported Nested Tags</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="id7084"></a>B.40.2 Supported Nested Tags</h3></div></div></div>
         
         <div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">
                 <p>
@@ -94,13 +94,13 @@
                 </p>
             </li></ul></div>
     </div>
-    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="idp5763"></a>B.40.3 Base directory of the new project</h3></div></div></div>
+    <div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="id7098"></a>B.40.3 Base directory of the new project</h3></div></div></div>
         
         <p>The base directory of the new project is set dependent on the <code class="literal">dir</code> and the
             <code class="literal">inheritAll</code> attribute. This is important to keep in mind or else you might run into bugs
             in your <code class="filename">build.xml</code>'s. The following table shows when which value is used:
         </p>
-        <div class="table"><a name="idp5769"></a><p class="formal-object-title"><span class="label">Table B.42: </span><span class="title">How attributes are used</span></p><div class="table-contents">
+        <div class="table"><a name="id7104"></a><p class="formal-object-title"><span class="label">Table B.42: </span><span class="title">How attributes are used</span></p><div class="table-contents">
             
             <table class="table" summary="How attributes are used" border="1"><colgroup><col class="name"><col class="type"><col class="description"></colgroup><thead><tr><th>
                             <code class="literal">dir</code>
