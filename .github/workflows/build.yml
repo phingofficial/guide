@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Set up JDK 11
+      - name: Set up Java
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
@@ -41,7 +41,7 @@ jobs:
         run: phing
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
