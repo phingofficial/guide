@@ -5,7 +5,12 @@
 <sect1 role="taskdef" xml:id="PropertyTask" xmlns="http://docbook.org/ns/docbook"
        xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
     <title>PropertyTask</title>
-    <para>With <literal>PropertyTask</literal>, you can define <literal>user</literal> properties in your build file.
+    <para>With <literal>PropertyTask</literal>, you can define properties in your build file.
+    </para>
+
+    <para>Properties set on the command line using <literal>-D</literal> are user properties. By default,
+        properties defined with this task are ordinary properties. Use <literal>userProperty="true"</literal>
+        to define a user property in the build file.
     </para>
 
     <table>
@@ -82,7 +87,27 @@
                     <entry>
                         <literal role="type">Boolean</literal>
                     </entry>
-                    <entry>Whether to force override of existing value.</entry>
+                    <entry>Whether to override an existing value. User properties, including properties set on
+                        the command line, are not overridden unless <literal>userProperty</literal> is also
+                        <literal>true</literal>.
+                    </entry>
+                    <entry>
+                        <literal>false</literal>
+                    </entry>
+                    <entry>No</entry>
+                </row>
+                <row>
+                    <entry>
+                        <literal>userProperty</literal>
+                    </entry>
+                    <entry>
+                        <literal role="type">Boolean</literal>
+                    </entry>
+                    <entry>Whether to define a user property. User properties cannot be changed by ordinary
+                        property assignments, even with <literal>override="true"</literal>. If both
+                        <literal>userProperty</literal> and <literal>override</literal> are <literal>true</literal>,
+                        an existing user property can be replaced, including one set on the command line.
+                    </entry>
                     <entry>
                         <literal>false</literal>
                     </entry>

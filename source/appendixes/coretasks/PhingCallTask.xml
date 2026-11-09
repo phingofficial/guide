@@ -7,8 +7,13 @@
     <title>PhingCallTask</title>
     <para>The PhingCallTask calls a target within the same Phing project.</para>
     <para>A <literal>&lt;phingcall&gt;</literal> tag may contain <literal>&lt;property&gt;</literal> tags that define new
-        properties. These properties are only set if properties of the same name have not been set outside the
-        <literal>"phingcall"</literal> tag.
+        properties in the called project. Nested properties are passed as user properties. They can replace
+        ordinary properties inherited from the calling project, but existing user properties are only replaced
+        when <literal>override="true"</literal> is specified on the nested property.
+    </para>
+    <para>Inside the called target, ordinary <literal>&lt;property&gt;</literal> assignments cannot change
+        user properties, even with <literal>override="true"</literal>. See <xref linkend="PropertyTask"/>
+        for the <literal>userProperty</literal> attribute and how it affects overriding.
     </para>
     <para>When a target is invoked by <literal>phingcall</literal>, all of its dependent targets will also be called
         within the context of any new parameters. For example. if the target "doSomethingElse" depended on the target
@@ -52,7 +57,9 @@
                     <entry>
                         <literal role="type">Boolean</literal>
                     </entry>
-                    <entry>If true, all</entry>
+                    <entry>If true, pass all properties to the called project. User properties, including those
+                        set on the command line, are passed even if this attribute is <literal>false</literal>.
+                    </entry>
                     <entry>
                         <literal>true</literal>
                     </entry>

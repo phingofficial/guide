@@ -36,7 +36,9 @@
                     <entry>
                         <literal role="type">Boolean</literal>
                     </entry>
-                    <entry>If true, pass all properties to the new phing project.</entry>
+                    <entry>If true, pass all properties to the new phing project. User properties, including those
+                        set on the command line, are passed even if this attribute is <literal>false</literal>.
+                    </entry>
                     <entry>
                         <literal>true</literal>
                     </entry>
