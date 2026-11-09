@@ -8,8 +8,8 @@
     <para>The PhingCallTask calls a target within the same Phing project.</para>
     <para>A <literal>&lt;phingcall&gt;</literal> tag may contain <literal>&lt;property&gt;</literal> tags that define new
         properties in the called project. Nested properties are passed as user properties. They can replace
-        ordinary properties inherited from the calling project, but existing user properties are only replaced
-        when <literal>override="true"</literal> is specified on the nested property.
+        ordinary properties inherited from the calling project. Properties set on the command line retain
+        their original values, even when <literal>override="true"</literal> is specified on the nested property.
     </para>
     <para>Inside the called target, ordinary <literal>&lt;property&gt;</literal> assignments cannot change
         user properties, even with <literal>override="true"</literal>. See <xref linkend="PropertyTask"/>
