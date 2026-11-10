@@ -14,9 +14,10 @@
         Phing's design and inner workings.</para>
     <sect1>
         <title> Extension Possibilities </title>
-        <para>There are three main areas where Phing can be extended: <xref
+        <para>Phing can be extended through <xref
                 xlink:href="#sect.ext.tasks"/>, <xref xlink:href="#sect.ext.types" xlink:title="Types"/>, <xref
-                xlink:href="#sect.ext.mappers" xlink:title="Mappers"/>. The following sections discuss these
+                xlink:href="#sect.ext.mappers" xlink:title="Mappers"/>, and <xref
+                linkend="sect.ext.listeners"/>. The following sections discuss these
             options.</para>
 
         <sect2 xml:id="sect.ext.tasks" xreflabel="Tasks">
@@ -1032,5 +1033,127 @@ class DOSMapper implements FileNameMapper {
     &lt;alluppercase value="THIS IS ALL UPPER CASE"/>
 &lt;/condition>
 </programlisting>
+    </sect1>
+    <sect1 xml:id="sect.ext.listeners" xreflabel="Loggers and Listeners">
+        <title>Writing Loggers and Listeners</title>
+        <para>Use a listener to record build events or a logger to customize build output.
+            These examples use the Phing 3 interfaces.</para>
+        <para>A listener implements <literal>Phing\Listener\BuildListener</literal> and receives events
+            when a build, target, or task starts and finishes, and whenever a message is logged.
+            A logger implements <literal>Phing\Listener\BuildLogger</literal>, which extends the listener
+            interface with methods for configuring the output streams, message level, and Emacs mode.
+            See <xref linkend="app.coreloggers"/> for Phing's built-in loggers and listeners.</para>
+
+        <sect2>
+            <title>Creating a Listener</title>
+            <para>A listener must implement all seven methods of the <literal>BuildListener</literal>
+                interface. Leave methods empty for events you do not need. Each method receives a
+                <literal>Phing\Listener\BuildEvent</literal> object, which provides access to the project
+                and, where applicable, the target, task, message, priority, or exception.</para>
+            <para>This listener appends the date and build result to a file. Save it as
+                <filename>BuildStatusListener.php</filename> in your project directory:</para>
+            <programlisting language="php"><![CDATA[<?php
+
+use Phing\Listener\BuildEvent;
+use Phing\Listener\BuildListener;
+
+class BuildStatusListener implements BuildListener
+{
+    public function buildStarted(BuildEvent $event)
+    {
+    }
+
+    public function buildFinished(BuildEvent $event)
+    {
+        $status = $event->getException() === null ? 'SUCCESS' : 'FAILED';
+        $line = date('c') . ' ' . $status . PHP_EOL;
+
+        if (file_put_contents(__DIR__ . '/build-status.log', $line, FILE_APPEND | LOCK_EX) === false) {
+            throw new RuntimeException('Unable to write build-status.log');
+        }
+    }
+
+    public function targetStarted(BuildEvent $event)
+    {
+    }
+
+    public function targetFinished(BuildEvent $event)
+    {
+    }
+
+    public function taskStarted(BuildEvent $event)
+    {
+    }
+
+    public function taskFinished(BuildEvent $event)
+    {
+    }
+
+    public function messageLogged(BuildEvent $event)
+    {
+    }
+}
+]]></programlisting>
+            <para>The <literal>getException()</literal> method returns the build exception on failure,
+                or <literal>null</literal> on success. Give the listener write access to its directory
+                so it can create and update <filename>build-status.log</filename>.</para>
+            <para>Run the listener from your project directory:</para>
+            <screen>phing -listener BuildStatusListener</screen>
+            <para>The <literal>-listener</literal> option adds a listener alongside the normal build
+                logger. Repeat the option to register additional listeners.</para>
+            <note>
+                <para>Do not call <literal>Project::log()</literal> or <literal>Task::log()</literal>
+                    from <literal>messageLogged()</literal>. Those calls generate another message event
+                    and invoke the listener again. Write to a separate file or stream instead.</para>
+            </note>
+        </sect2>
+
+        <sect2>
+            <title>Creating a Logger</title>
+            <para>To customize build output, extend <literal>Phing\Listener\DefaultLogger</literal>.
+                The parent class provides the listener methods, output streams, and message filtering.
+                Override the methods for the behavior you want to change.</para>
+            <para>This logger adds a prefix to each message the default logger prints. Save it as
+                <filename>PrefixedLogger.php</filename> in your project directory:</para>
+            <programlisting language="php"><![CDATA[<?php
+
+use Phing\Io\OutputStream;
+use Phing\Listener\DefaultLogger;
+
+class PrefixedLogger extends DefaultLogger
+{
+    protected function printMessage($message, OutputStream $stream, $priority)
+    {
+        parent::printMessage('[build] ' . $message, $stream, $priority);
+    }
+}
+]]></programlisting>
+            <para>To select the logger, run:</para>
+            <screen>phing -logger PrefixedLogger</screen>
+            <para>The <literal>-logger</literal> option replaces the normal build logger. Combine it
+                with <literal>-listener</literal> to use both examples in the same build:</para>
+            <screen>phing -logger PrefixedLogger -listener BuildStatusListener</screen>
+            <para>The call to <literal>parent::printMessage()</literal> uses the supplied stream to
+                preserve the default logger's output routing, including <literal>-logfile</literal>.
+                The inherited event methods apply the message level you select with
+                <literal>-quiet</literal>, <literal>-verbose</literal>, or <literal>-debug</literal>.</para>
+            <para>If you implement <literal>BuildLogger</literal> directly, you must also implement
+                <literal>setMessageOutputLevel()</literal>, <literal>setOutputStream()</literal>,
+                <literal>setErrorStream()</literal>, and <literal>setEmacsMode()</literal>. Phing calls
+                these methods to configure the logger before the build starts. Ignore messages whose
+                priority exceeds the configured message level.</para>
+        </sect2>
+
+        <sect2>
+            <title>Loading Your Classes</title>
+            <para>These examples use classes without a namespace and assume that the current
+                directory is on PHP's <literal>include_path</literal>. If you store the classes
+                elsewhere, make them available through the <literal>include_path</literal> or an
+                autoloader registered before Phing starts. For a namespaced class, pass the fully
+                qualified class name, for example <literal>'MyApp\Build\PrefixedLogger'</literal>.</para>
+            <para>Phing creates command-line loggers and listeners before executing the build file.
+                Make their classes available at startup and provide constructors that Phing can call
+                without arguments.</para>
+        </sect2>
     </sect1>
 </chapter>
